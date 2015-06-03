@@ -1,0 +1,7 @@
+# OS generated files
+._*
+
+# Latex generated files
+*.aux
+*Notes.bib
+*.log
