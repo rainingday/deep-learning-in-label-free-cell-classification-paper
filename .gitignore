@@ -7,4 +7,5 @@
 *.bbl
 *.blg
 *.log
+*.tex.orig
 *.synctex.gz
