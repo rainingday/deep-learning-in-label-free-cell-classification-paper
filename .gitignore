@@ -4,5 +4,7 @@
 # Latex generated files
 *.aux
 *Notes.bib
+*.bbl
+*.blg
 *.log
 *.synctex.gz
