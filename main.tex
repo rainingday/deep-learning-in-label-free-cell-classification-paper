@@ -217,7 +217,10 @@ Neural network is a bio-inspired learning algorithm that works well in classific
 
 Each layer performs a linear combination on its inputs and performs soft threshold operation on the sum. The output of the node $j$ in layer $l+1$, denoted by $z_j^{(l+1)}$ is generated from inputs $x_1$, $x_2$, \ldots, $x_N$, as
 \begin{equation}
-z_j^{(l+1)} = \h(a_j^{(l+1)}) = \h(\sum_{i=0}^{N_l} \omega_{ji}^{(l)} x_i^{(l)})\quad i =0,\dotsc,N_l;\quad j=1,\dotsc,N_{l+1};\quad l=1,\dotsc,L-1
+\begin{split}
+& z_j^{(l+1)} = \h(a_j^{(l+1)}) = \h(\sum_{i=0}^{N_l} \omega_{ji}^{(l)} x_i^{(l)})\\
+& i =0,\dotsc,N_l;\quad j=1,\dotsc,N_{l+1};\quad l=1,\dotsc,L-1
+\end{split}
 \end{equation}
 Here $a_j^{(l+1)}$ is the linear combination of inputs, $\omega_{ji}^{(l)}$ are the weights of the linear combination. The summation runs over $N_l$, the total number of nodes in the previous hidden layer, and $L$ is the total number of hidden layers. The function $\h(\cdot)$ is called the activation or hypothesis function and is usually a soft threshold implemented using a logistic sigmoid function $\h(a)=1/(1+\exp(-a))$ or a hyperbolic tangent function. The constant term in the summation, $x_0^{(l)}$, is called the bias.
 
@@ -291,13 +294,15 @@ Free-space laser pulses were linearly polarized with quarter- and half-wave plat
 Unlike in conventional heterodyne detection, which uses a narrow band continous-wave beam as the local oscillator, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband chirped optical pulse. 
 
 The input optical signal is split into two arms of the Michaelson Interferometry at the beam splitter. The one in sample arm, $E_s(t)\exp(i\omega_s t)$, passes through the object, and then, is combined with the other one from the reference arm $E_{LO}(t)\exp(i\omega_{LO} t)$. $E_s(t)$ and $E_LO(t)$ are the electric field amplitudes of the sample and reference sources, and $\omega_s$ and $\omega_{LO}$ are the optical frequencies of sample and reference fields, respectively. Not only the electric field amplitude after passing through semitransparent objects, $E_s^\prime(t)$, will be modulated by the optical attenuation and scattering in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t)$, inducted by refractive index change along the interrogation beam. Thus the combined electrical field is
-\begin{equation}
-E_{total}(t) = E_s^\prime(t) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace + E_{LO}(t) \exp(i\omega_{LO} t)
-\end{equation}
+\begin{multline}
+E_{total}(t) = E_s^\prime(t) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace\\
++ E_{LO}(t) \exp(i\omega_{LO} t)
+\end{multline}
 In our case, $E_{LO}(t)$, as a local oscillator (LO), is same as $E_s(t)$ but with reduced power. After time stretch, the frequency components in $\omega_s$ and $\omega_{LO}$, are mapped into time. That is, electric field detected at time t is one-to-one mapped from frequency domain,
-\begin{equation}
-E_{total}(t) = E_s^\prime(t_p,\omega_s) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace + E_{LO}(t_p,\omega_{LO}) \exp(i\omega_{LO} t)
-\end{equation}
+\begin{multline}
+E_{total}(t) = E_s^\prime(t_p,\omega_s) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace\\
++ E_{LO}(t_p,\omega_{LO}) \exp(i\omega_{LO} t)
+\end{multline}
 where $t_p$ corresponds to the $p$-th incoming pulse. Note that $E_s(t_p,\omega_s)$ can be simplified as $E(\omega_s)$ when pulse shape (magnitude of each wavelength) is stable from pulse to pulse.
 
 $\omega_s$ detected at $t$, is mixed with local oscillator $\omega_{LO}$ at $t$, which is a copy of $\omega_s(t)$ within the same pulse but delayed by $\Delta\tau$,
@@ -306,26 +311,33 @@ $\omega_s$ detected at $t$, is mixed with local oscillator $\omega_{LO}$ at $t$,
 \end{equation}
 where $\Delta\tau = 2 \Delta L/c$ is the delay mismatch in Michaelson interferometry and $\Delta L$ is the length mismatch in the two arms. Define $t_i$ as the relative time within each pulse,
 \begin{equation}
-E_{LO}(t_p,\omega_{LO}) = E_{LO}(t_p,\omega_{LO}(t_i)) = E_s(t_p,\omega_s(t_i-\Delta\tau))
+\begin{split}
+E_{LO}(t_p,\omega_{LO}) &= E_{LO}(t_p,\omega_{LO}(t_i)) \\
+&= E_s(t_p,\omega_s(t_i-\Delta\tau))
+\end{split}
 \end{equation}
 Since the difference in arrival times at the photodetector after time stretch between each frequency component of reference and sample signals is same as the delay difference in interferometry arms, $\Delta\tau$, the beating frequency or modulation frequency of the interference fringes is
-\begin{align*}
-\omega_f& = \omega_s(t_i ) - \omega_{LO}(t_i ) = \omega_s(t_i ) - \omega_s(t_i-\Delta\tau)\\& \approxeq \frac{2\pi c}{\lambda_c^2} (\lambda(t_i) - \lambda(t_i-\Delta\tau)) = \frac{2\pi c}{\lambda_c^2} \cdot \frac{\Delta\tau}{\beta L_f} = \frac{4\pi\Delta L}{\lambda_c^2 \beta L_f}
-\end{align*}
+\begin{align}
+\omega_f & = \omega_s(t_i ) - \omega_{LO}(t_i ) = \omega_s(t_i ) - \omega_s(t_i-\Delta\tau)\\
+& \approxeq \frac{2\pi c}{\lambda_c^2} (\lambda(t_i) - \lambda(t_i-\Delta\tau))\\
+& = \frac{2\pi c}{\lambda_c^2} \cdot \frac{\Delta\tau}{\beta L_f} = \frac{4\pi\Delta L}{\lambda_c^2 \beta L_f}
+\end{align}
 
 where $\lambda_c$ is the central wavelength, $\beta$ is the group velocity dispersion, and $L_f$ the length of dispersive fiber. Thus the energy flux absorbed at the photodetector, is proportional to the product of the sum of the electric fields
 \begin{multline}
 I_{PD}(t) \propto \lvert E_s^\prime(t_p,t_i) \rvert^2 + \lvert E_s(t_p,t_i-\Delta\tau) \rvert^2\\
-+ 2 \operatorname{Re}\lbrace E_s^\prime(t_p,t_i) \cdot E_s^*(t_p,t_i-\Delta\tau) \cdot \exp[i(\omega_f t + \Delta\varphi(x,t))] \rbrace
++ 2 \operatorname{Re}\lbrace E_s^\prime(t_p,t_i) \cdot E_s^*(t_p,t_i-\Delta\tau)\\
+\cdot \exp[i(\omega_f t + \Delta\varphi(x,t))] \rbrace
 \end{multline}
 where the asterisk signifies complex conjugation, and $\operatorname{Re}$ is the real part. Note that high frequency terms are averaged over time as it is far beyond the photodetector response time. 
 
 Thus the time stretched temporal waveforms corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}. One is $\rvert E_s^\prime(t_p,t_i) \lvert^2 + \rvert E_s(t_p,t_i-\Delta\tau) \lvert^2$, a temporal envelope of the time-stretched optical pulse usually at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object as in brightfield microscopy. It provides information about optical loss, i.e. light attenuation, absorption, and scattering caused by surface roughness, granularity, and inner cell organelle complexity. The other feature is $I_PD^{(f)} = 2 \operatorname{Re}\lbrace E_s^\prime(t_p,t_i) \cdot E_s^*(t_p,t_i-\Delta\tau) \cdot \exp[i(\omega_f t + \Delta\varphi(x,t))] \rbrace$, a fast oscillating fringe, caused by the interference of the linearly chirped pulses multiplexed between the sample and reference arms in the Michelson interferometer.
 
 The second feature, $I_{PD}^{(f)}$, containing only spectral features modulated at $\omega_f$ is separated by a band-pass filter to extract the object phase shift, $\Delta\varphi(x,t)$. The instantaneous phase of this feature can be readily retrieved from its analytic representation given by Hilbert transform, $\hilbert$:
-\begin{equation}
-\angle I_{PD}^{(f)} = \omega_f t + \Delta\varphi(x,t) = \arg[I_{PD}^{(f)} (t_p,t_i ) + j \cdot \hilbert(I_{PD}^{(f)}(t_p,t_i))]
-\end{equation}
+\begin{align}
+\angle I_{PD}^{(f)} &= \omega_f t + \Delta\varphi(x,t) \\
+&= \arg[I_{PD}^{(f)} (t_p,t_i ) + j \cdot \hilbert(I_{PD}^{(f)}(t_p,t_i))]
+\end{align}
 Here $\arg$ means the argument of a complex number. A one-dimensional phase unwrapping algorithm followed by background phase removal gives the object phase shift, 
 \begin{equation}
 \Delta\varphi(x,t) = \unwrap(\angle I_{PD}^{(f)}) - \omega_f t
