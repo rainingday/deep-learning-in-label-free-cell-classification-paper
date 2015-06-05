@@ -155,21 +155,21 @@ Among different features, size measurement is particularly important as it is us
 \hline
 Feature Name	 &Description	 &Category\\ \hline
 Diameter-RB	 &Diameter along the interrogation rainbow. It is insensitive to flow rate fluctuation. For higher accuracy, it is calibrated by the spatial nonuniform distribution of rainbow wavelengths. 	 &Morphology\\ \hline
-Diameter-FL	 &Diameter along the flow direction. It is sensitive to flow rate fluctuation but can be a candidate parameter for monitoring flow speed and channel condition.	 &Morphology\\ \hline
-Tight Area	 &Total number of pixels in the segmented region in the phase shift image	 &Morphology\\ \hline
+Diameter-FL	 &Diameter along the flow direction. It is sensitive to flow rate fluctuation, but can be a candidate parameter for monitoring flow speed and channel condition.	 &Morphology\\ \hline
+Tight Area	 &Total number of pixels in the segmented region in the phase image	 &Morphology\\ \hline
 Perimeter	 &Total number of pixels around the boundary of each segmented region	 &Morphology\\ \hline
 Circularity	 &$4\pi \text{Area} / \text{Perimeter}^2$  &Morphology\\ \hline
 Major Axis 	 &Considering the cell as elliptical in lateral imaging plane, the length of the major axis of the ellipse with a normalized second central moment same as the cell.	 &Morphology\\ \hline
-Orientation	 &Angle between the flow direction and the major axis of the elliptical shape	 &Morphology\\ \hline
+Orientation	 &Angle between the flow direction and the major axis of the cell elliptical shape	 &Morphology\\ \hline
 Loose Area	 &Total number of pixels in the expanded segmented region for measurement of the pixel intensities	 &Morphology\\ \hline
-Median Radius	 &The median distance of any pixel in the object to the closest pixel outside of the object. [MeasureObjectSizeShape]	 &Morphology\\ \hline
-OPD-1	 &Integrated optical path length shift within the entire segmented area, namely the cell. Calibrated by the power distribution within different wavelength components of the incident laser pulses.	 &Phase\\ \hline
-OPD-2	 &Integrated optical path length within the entire segmented area, namely the cell. On top of OPD-1, calibrated by the waveforms when cell is absent within the \SI{1}{\micro\second} detection window.	 &Phase\\ \hline
-Refractive index	 &The refractive index difference compared to buffer solution, which is calculated based on OPD and size measurement (see detail in appendix). Refractive index difference in cell is proportional to protein concentration.	 &Phase\\ \hline
-Attenuation-1	 &Integrated attenuation coefficient assuming the detection is DC-coupled and the attenuation is mainly caused by transmitted light gets absorbed within the 20nm bandwidth. Calibrated by the waveforms when cell is absent within the \SI{1}{\micro\second} detection window.	 &Optical Loss\\ \hline
-Attenuation-2	 &Integrated opacity assuming the detection is AC-coupled and the attenuation is mainly caused by transmitted light gets absorbed within the 20nm bandwidth. Calibrated by the waveforms when cell is absent within the \SI{1}{\micro\second} detection window.  &Optical Loss\\ \hline
-Scattering-1	 &Integrated scattering coefficient assuming the detection is DC-coupled and the attenuation is mainly caused by transmitted light scatters from the surface of the cell and granular cellular components. Calibrated by the waveforms when cell is absent within the \SI{1}{\micro\second} detection window.	 &Optical Loss\\ \hline
-Scattering-2	 &Integrated opacity assuming the detection is AC-coupled and the attenuation is mainly caused by transmitted light scatters from the surface of the cell and granular cellular components. Calibrated by the waveforms when cell is absent within the \SI{1}{\micro\second} detection window.	 &Optical Loss\\ 
+Median Radius	 &The median distance of any pixel in the object to the closest pixel outside of the object.	 &Morphology\\ \hline
+OPD-1	 &Integrated optical path length difference within the entire segmented area, namely the cell, calibrated by the power distribution within different wavelength components of the incident laser pulses.	 &Optical Phase\\ \hline
+OPD-2	 &Integrated optical path length difference within the entire segmented area, namely the cell. In addition to the calibration of OPD-1, it is calibrated by the pulse-to-pulse fluctuations within a \SI{1}{\micro\second} detection window.	 &Optical Phase\\ \hline
+Refractive index	 &The mean refractive index difference between the object and the surrounding liquid (buffer solution), which is calculated based on OPD-2 and size measurement (see detail in Methods). Refractive index difference for cells is proportional to their protein concentration.	 &Optical Phase\\ \hline
+Absorption-1	 &Mean attenuation coefficient within the entire segmented area, namely the cell. It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI{1}{\micro\second} detection window. This parameter corresponds to an absorptive model for the cell.	 &Optical Loss\\ \hline
+Absorption-2	 &Mean absolute attenuation coefficient within the entire segmented area, namely the cell. It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI{1}{\micro\second} detection window. This parameter corresponds to an absorptive model for the cell.	 &Optical Loss\\ \hline
+Scattering-1	 &Mean optical loss within the entire segmented area, namely the cell. It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI{1}{\micro\second} detection window. This parameter corresponds to a scattering model for the cell.	 &Optical Loss\\ \hline
+Scattering-2	 &Mean absolute optical loss within the entire segmented area, namely the cell. It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI{1}{\micro\second} detection window. This parameter corresponds to a scattering model for the cell.	 &Optical Loss\\
 \hline
 \end{tabular}
 \end{table*}
