@@ -327,6 +327,19 @@ Here $\arg$ means the argument of a complex number. A one-dimensional phase unwr
 \end{equation}
 The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$.
 
+\subsection{Correction and Calibration for Phase Extraction}
+There are two other major effects that may alter the phase extraction based on Hilbert Transform, that is, the inbalanced power distribution at the beam splitter in the Michaelson Interferometry, and the attenuation inbalance caused by microfluidic channel.
+
+In addtional, since biological cells are semi-transparent, not only optical intensity will be altered by absorption and scattering when illumination light passes through the cells, but optical phase will also be influenced by the refractive index difference in the sample arm caused by the cells.
+When taking the inbalanced power distribution at the beam splitter, the light splits into the two arms of the Michaelson Interferometry can be expressed as: 
+\begin{equation}
+Sample arm: E_s(t) = \sqrt{r}E_i(t)\exp(i\omega_{s} t)
+\end{equation}
+\begin{equation}
+Reference arm: E_{LO}(t) = sqrt{1-r}E_i(t)\exp(i\omega_{LO} t)
+\end{equation}
+where $r$ is the reflectivity of the beam splitter. $E_s(t)$, $E_LO(t)$, $\omega_s$ and $\omega_{LO}$ are same as what mentioned above. 
+
 \subsection{Image Reconstruction}
 
 We reconstruct both quantitative brightfield and phase-contrast images simultaneously from single-shot frequency-multiplexed interferometric measurements. The envelope and phase of the time-domain signal $I_PD (t_i,t_d)$ was firstly mapped into series of spatial information $I_{PD}(t_i,x_j)$, forming a line scanning brightfield image and phase contrast image, illuminated by the optical pulse at time $t_i$ (Fig.~\ref{fig:2DImage}b). This is because within each optical pulse, the spatial information is mapped one-to-one into spectral domain, $x_j \rightarrow \lambda_j$, and spectrum is stretch in time, $\lambda_j \rightarrow t_d^{(i)}$, where $t_d^{(i)}$ is the relative group delay time of each frequency component within a pulse with respect to the central wavelength. These line-scan images based on $I_{PD}(t_1,x)$, $I_{PD} (t_2,x)$, $I_{PD} (t_3,x)$, \ldots were then cascaded into a two dimensional image corresponding to $I_{PD}(y,x)$, where the second dimension $y$ is the spatial mapping of time elapse based on object flow speed. 
