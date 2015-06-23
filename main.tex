@@ -293,7 +293,7 @@ $\omega_s$ detected at $t$, is mixed with local oscillator $\omega_{LO}$ at $t$,
 \omega_{LO}(t) = \omega_s(t-\Delta\tau)
 \end{equation}
 where $\Delta\tau = 2 \Delta L/c$ is the delay mismatch in Michaelson interferometry and $\Delta L$ is the length mismatch in the two arms. Define $t_i$ as the relative time within each pulse,
-\begin{equation}
+\begin{equation} \label{eq:sandLO}
 \begin{split}
 E_{LO}(t_p,\omega_{LO}) &= E_{LO}(t_p,\omega_{LO}(t_i)) \\
 &= E_s(t_p,\omega_s(t_i-\Delta\tau))
@@ -327,18 +327,68 @@ Here $\arg$ means the argument of a complex number. A one-dimensional phase unwr
 \end{equation}
 The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$.
 
-\subsection{Correction and Calibration for Phase Extraction}
-There are two other major effects that may alter the phase extraction based on Hilbert Transform, that is, the inbalanced power distribution at the beam splitter in the Michaelson Interferometry, and the attenuation inbalance caused by microfluidic channel.
 
-In addtional, since biological cells are semi-transparent, not only optical intensity will be altered by absorption and scattering when illumination light passes through the cells, but optical phase will also be influenced by the refractive index difference in the sample arm caused by the cells.
-When taking the inbalanced power distribution at the beam splitter, the light splits into the two arms of the Michaelson Interferometry can be expressed as: 
+
+\subsection{Correction and Calibration for Phase Extraction}
+
+There are two other major effects that may alter the quantitative phase extraction based on Hilbert Transform, that is, the inbalanced power distribution at the beam splitter in the Michaelson Interferometry, and the attenuation inbalance caused by microfluidic channel.
+When taking the inbalanced power distribution at the beam splitter into consideration, the light splits into the two arms of the Michaelson Interferometry can be expressed as: 
 \begin{equation}
-Sample arm: E_s(t) = \sqrt{r}E_i(t)\exp(i\omega_{s} t)
+\begin{split}
+&\text{Into the sample arm:} \\
+&\quad E_s(t) = rE_i(t)\exp(i\omega_{s} t)  \\
+&\text{Into the reference arm:} \\
+&\quad E_{LO}(t) = \sqrt{1-r^2}E_i(t)\exp(i\omega_{LO} t) 
+\end{split}
 \end{equation}
+where $r$ is the reflectance at the beam-splitter. $E_s(t)$, $E_{LO}(t)$, $\omega_s$ and $\omega_{LO}$ are same as what mentioned above. Since biological cells are semi-transparent, optical intensity in the sample arm will be altered not only by the absorption and scattering caused by imaged objects, but also by that of the microfluidic channel. The complex fields of the light combining at the beam splitter become 
 \begin{equation}
-Reference arm: E_{LO}(t) = sqrt{1-r}E_i(t)\exp(i\omega_{LO} t)
+\begin{split}
+&\text{From the sample arm:}\\
+&\quad E_s(t) = \alpha_s \alpha_c(x,t) r E_i(t) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
+&\quad\quad\quad\quad + 2k(\lambda)L_0] \rbrace\\
+&\text{From the reference arm:} \\
+&\quad E_{LO}(t) = \sqrt{1-r^2} E_i(t)\exp(i\omega_{LO} t + 2k(\lambda)L_0)
+\end{split}
 \end{equation}
-where $r$ is the reflectivity of the beam splitter. $E_s(t)$, $E_LO(t)$, $\omega_s$ and $\omega_{LO}$ are same as what mentioned above. 
+where $\alpha_s$ is 1 - absorption coefficient of the surrounding buffer solutions and microfluidic channel, and $\alpha_c(x,t)$ is 1 - absorption coefficient of cells at location $x$. The total amplitude at each wavelength after recombining becomes
+\begin{equation}
+\begin{split}
+E_{total}(t) &= \alpha_s \alpha_c(x,t) r E_i(t_p,\omega_s) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
+&\quad+ 2k(\lambda)L_0] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\exp(i\omega_{LO} t + 2k(\lambda)L_0) \\
+&= E_i(t_p,\omega_{s}) \exp[i\omega_{LO} t 2k(\lambda)L_0] \lbrace \sqrt{1-r^2} \\
+&\quad+ \alpha_s \alpha_c(x,t) r \exp [i\Delta\varphi(x,t)] \rbrace
+\end{split}
+\end{equation}
+assuming $E_{LO}(t_p,\omega_{LO}) \approx E_s(t_p,\omega_s)$ according to equation \ref{eq:sandLO}. The intensity envelop is
+\begin{equation}
+\begin{split}
+I_{total}(t) = E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2 \\
+&+ 2r\sqrt{1-r^2} alpha_s \alpha_c cos[i\Delta\varphi(x,t)] \rbrace
+\end{split}
+\end{equation}
+Thus we can clearly get the intensity envelop under two scenarios would be
+\begin{equation}
+I_{total}^{(env)}(t) = \begin{cases}
+E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2], \\
+\quad\quad \text{empty frames}.\\
+E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2], \\
+\quad\quad \text{frames when cell is present}.
+  \end{cases}
+\end{equation}
+The unit net change of intensity envelop when cell comes in is
+\begin{equation}
+\Delta I_{total}^{(envelop)}(t) =
+% \frac{E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2] - E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2]}{E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2]}\\
+ \frac{\alpha_s^2 r^2 [\alpha_c^2(x,t) - 1]}{1 - r^2 + \alpha_s^2 r^2}
+\end{equation}
+%Define $r^\prime = \frac{r}{}$, then the equation above can be written as
+%\begin{equation}
+%\Delta I_{total}^{(envelop)}(t) = \frac{(1-r^\prime)^2 (\alpha_c (x,t)^2 - 1)}{r^{\prime 2} + (1 - r^\prime)^2}
+%\end{equation}
+The ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
+
+
 
 \subsection{Image Reconstruction}
 
