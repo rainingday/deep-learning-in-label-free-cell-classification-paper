@@ -331,8 +331,9 @@ The unwrapping algorithm used in our processing acts when the absolute phase dif
 
 \subsection{Correction and Calibration for Phase Extraction}
 
-There are two other major effects that may alter the quantitative phase extraction based on Hilbert Transform, that is, the inbalanced power distribution at the beam splitter in the Michaelson Interferometry, and the attenuation inbalance caused by microfluidic channel.
-When taking the inbalanced power distribution at the beam splitter into consideration, the light splits into the two arms of the Michaelson Interferometry can be expressed as: 
+For high-throughput quantitative imaging, we have to do a phase correction when applying Hilbert Transform because the intensity variation induced by the passing cells adds up low frequency components to the spectrum in detection domain. Most cells with clinical or industrial interests have a diameter about 3~40 µm when suspended in fluid. Given the field of view of the interrogation rainbow is 120 µm, cells are coming at a speed of 2 m/s, the instantaneous intensity change induced by single cell in each laser pulse is about 0.5~9.0 ns, which will bring in frequency components below 1.5 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform is robust in this scenario to separate the two frequency terms for optical loss and phase. 
+
+Two other major effects need to be calibrated since they may alter the quantitative phase extraction based on Hilbert Transform: the inbalanced power distribution at the beam splitter in the Michaelson Interferometry, and the attenuation inbalance caused by microfluidic channel. When taking the inbalanced power distribution at the beam splitter into consideration, the light splits into the two arms of the Michaelson Interferometry can be expressed as: 
 \begin{equation}
 \begin{split}
 &\text{Into the sample arm:} \\
@@ -364,12 +365,12 @@ assuming $E_{LO}(t_p,\omega_{LO}) \approx E_s(t_p,\omega_s)$ according to equati
 \begin{equation}
 \begin{split}
 I_{total}(t) = E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2 \\
-&+ 2r\sqrt{1-r^2} alpha_s \alpha_c cos[i\Delta\varphi(x,t)] \rbrace
+&+ 2r\sqrt{1-r^2} \alpha_s \alpha_c cos[i\Delta\varphi(x,t)] \rbrace
 \end{split}
 \end{equation}
 Thus we can clearly get the intensity envelop under two scenarios would be
 \begin{equation}
-I_{total}^{(env)}(t) = \begin{cases}
+I_{env}(t) = \begin{cases}
 E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2], \\
 \quad\quad \text{empty frames}.\\
 E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2], \\
@@ -378,15 +379,20 @@ E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2], \\
 \end{equation}
 The unit net change of intensity envelop when cell comes in is
 \begin{equation}
-\Delta I_{total}^{(envelop)}(t) =
-% \frac{E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2] - E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2]}{E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2]}\\
+\Delta I_{env}(t) =
  \frac{\alpha_s^2 r^2 [\alpha_c^2(x,t) - 1]}{1 - r^2 + \alpha_s^2 r^2}
 \end{equation}
-%Define $r^\prime = \frac{r}{}$, then the equation above can be written as
-%\begin{equation}
-%\Delta I_{total}^{(envelop)}(t) = \frac{(1-r^\prime)^2 (\alpha_c (x,t)^2 - 1)}{r^{\prime 2} + (1 - r^\prime)^2}
-%\end{equation}
-The ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
+
+Define $r^\prime=\frac{r\alpha_s}{\sqrt{1-r^2+r^2\alpha_s^2}}$, the ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
+\begin{equation}
+\begin{split}
+\beta = \frac{I_intf}{I_env} &= \frac{2 \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^2}}{r\alpha_s} + \frac{\alpha_c^2(x,t) \alpha_s r}{\sqrt{1-r^2}}} \\
+&= \frac{2 \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^{\prime2}}}{r^\prime} + \frac{\alpha_c^2(x,t) r^\prime}{\sqrt{1-r^{\prime2}}}}
+\end{split}
+\end{equation}
+Thus the absorption by buffer solution and microfluidic channel does not influence the measurement of cell absorption in our quatitative phase imaging. 
+
+Since the absorption of cells at 1550 nm is much higher than visible wavelength \cite{roggan1999optical}, the relative amplitude ratio of the cell-induced intensity variation to that in interference is much higher than phase microscopy working in visible wavelength. This fact facilitates us to obtain high signal-to-noise ratio quantitative absorption mapping while doing phase imaging for semi-transparent cells. 
 
 
 
