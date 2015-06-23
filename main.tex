@@ -293,7 +293,7 @@ $\omega_s$ detected at $t$, is mixed with local oscillator $\omega_{LO}$ at $t$,
 \omega_{LO}(t) = \omega_s(t-\Delta\tau)
 \end{equation}
 where $\Delta\tau = 2 \Delta L/c$ is the delay mismatch in Michaelson interferometry and $\Delta L$ is the length mismatch in the two arms. Define $t_i$ as the relative time within each pulse,
-\begin{equation} \label{eq:sandLO}
+\begin{equation}\label{eq:sandLO}
 \begin{split}
 E_{LO}(t_p,\omega_{LO}) &= E_{LO}(t_p,\omega_{LO}(t_i)) \\
 &= E_s(t_p,\omega_s(t_i-\Delta\tau))
@@ -356,15 +356,16 @@ where $\alpha_s$ is 1 - absorption coefficient of the surrounding buffer solutio
 \begin{equation}
 \begin{split}
 E_{total}(t) &= \alpha_s \alpha_c(x,t) r E_i(t_p,\omega_s) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
-&\quad+ 2k(\lambda)L_0] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\exp(i\omega_{LO} t + 2k(\lambda)L_0) \\
+&\quad+ 2k(\lambda)L_0] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\\
+&\quad \cdot \exp(i\omega_{LO} t + 2k(\lambda)L_0) \\
 &= E_i(t_p,\omega_{s}) \exp[i\omega_{LO} t 2k(\lambda)L_0] \lbrace \sqrt{1-r^2} \\
 &\quad+ \alpha_s \alpha_c(x,t) r \exp [i\Delta\varphi(x,t)] \rbrace
 \end{split}
 \end{equation}
-assuming $E_{LO}(t_p,\omega_{LO}) \approx E_s(t_p,\omega_s)$ according to equation \ref{eq:sandLO}. The intensity envelop is
+assuming $E_{LO}(t_p,\omega_{LO}) \approx E_s(t_p,\omega_s)$ according to equation~\ref{eq:sandLO}. The intensity envelop is
 \begin{equation}
 \begin{split}
-I_{total}(t) = E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2 \\
+I_{total}(t) &= E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2 \\
 &+ 2r\sqrt{1-r^2} \alpha_s \alpha_c cos[i\Delta\varphi(x,t)] \rbrace
 \end{split}
 \end{equation}
@@ -382,12 +383,12 @@ The unit net change of intensity envelop when cell comes in is
 \Delta I_{env}(t) =
  \frac{\alpha_s^2 r^2 [\alpha_c^2(x,t) - 1]}{1 - r^2 + \alpha_s^2 r^2}
 \end{equation}
-
-Define $r^\prime=\frac{r\alpha_s}{\sqrt{1-r^2+r^2\alpha_s^2}}$, the ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
+Define $r^\prime=\frac{r\alpha_s}{\sqrt{1-r^2+r^2\alpha_s^2}}$. Then the ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
 \begin{equation}
 \begin{split}
-\beta = \frac{I_intf}{I_env} &= \frac{2 \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^2}}{r\alpha_s} + \frac{\alpha_c^2(x,t) \alpha_s r}{\sqrt{1-r^2}}} \\
-&= \frac{2 \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^{\prime2}}}{r^\prime} + \frac{\alpha_c^2(x,t) r^\prime}{\sqrt{1-r^{\prime2}}}}
+\beta &= \frac{I_{intf}}{I_{env}} \\
+&= \frac{2 \alpha_s \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^2}}{r} + \frac{\alpha_c^2(x,t) \alpha_s^2 r}{\sqrt{1-r^2}}} 
+= \frac{2 \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^{\prime2}}}{r^\prime} + \frac{\alpha_c^2(x,t) r^\prime}{\sqrt{1-r^{\prime2}}}}
 \end{split}
 \end{equation}
 Thus the absorption by buffer solution and microfluidic channel does not influence the measurement of cell absorption in our quatitative phase imaging. 
