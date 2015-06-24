@@ -33,6 +33,7 @@
 \usepackage{amssymb, amsmath}
 \usepackage{esdiff} % use this package for derivative and partial derivate commands of \diff{}{} and \diffp{}{}
 \usepackage{siunitx}
+\usepackage{multirow}
 \DeclareSIUnit\cells{cells}
 
 \DeclareMathOperator{\hilbert}{\mathcal{H}} % To define additional named operators
@@ -422,6 +423,37 @@ The combined absorption and scattering coefficients (attenuation coefficient) of
 \Delta I = \frac{I_{PD}(t_i,t_d)}{I_{PD}(t_{background},t_d)}
 \end{equation}
 where $t_{background}$ corresponds to a measurement (an interrogation time) that there is no cell in the field of view, and only the background pulse shape is captured. 
+
+
+\subsection{System performance and resolvable points}
+\begin{table*}
+\caption{\label{tbl:Resolution} Deterministic Factors in TS-QPI}
+\begin{tabular}{|p{0.11\textwidth}|p{0.11\textwidth}|p{0.07\textwidth}|p{0.05\textwidth}|p{0.07\textwidth}|p{0.38\textwidth}|p{0.10\textwidth}|}
+ \hline
+ System catagory   &Component  &Lateral resolution    &Field of View    & OPD resolution  
+ &NUmber of resovable points	 &Resolution\\  \hline
+\multicolumn{1}{ |p{0.08\textwidth}  }{\multirow{3}{*}{Optical} } &
+\multicolumn{1}{ |p{0.11\textwidth}| }{Laser} & &*  & & & \\ \cline{2-7}
+\multicolumn{1}{ |p{0.08\textwidth}  }{} &
+\multicolumn{1}{ |p{0.11\textwidth}| }{Diffraction gratings} &* &*  & &$N_{grating} = \frac{\Delta\lambda}{\delta\lambda_{grating}} =\Delta\lambda /(\lambda \cdot \frac{d}{m\cdot2w_0})$ & 42\\ \cline{2-7}
+\multicolumn{1}{ |p{0.08\textwidth}  }{system}         &
+\multicolumn{1}{ |p{0.11\textwidth}| }{Lenses and mirrors} &* &* &* & $N_{Abbe} = \frac{FOV}{\delta x_{diffraction}} =\frac{FOV}{(\frac{\lambda + \Delta \lambda/2}{2 \cdot NA})} $ & 65    \\ \cline{1-7}
+\multicolumn{1}{ |p{0.08\textwidth}  }{\multirow{1}{*}{Time Stretch} } &
+\multicolumn{1}{ |p{0.11\textwidth}| }{Group Velocity Dispersion} &* & & &$N_{DFT}=\frac{\Delta\lambda}{\delta\lambda}=\frac{\Delta\lambda}{\lambda\cdot\sqrt{\frac{2}{Dz\cdot c}}}$ &179 \\ \cline{1-7}
+\multicolumn{1}{ |p{0.08\textwidth}  }{\multirow{3}{*}{Electronic} } &
+\multicolumn{1}{ |p{0.11\textwidth}| }{Photodetector Bandwidth} &* & & &$N_{PD}=\frac{\Delta t}{\delta t}=\frac{D\cdot\Delta\lambda}{0.35/B}$ &465 \\ \cline{2-7}
+\multicolumn{1}{ |p{0.08\textwidth}  }{back-end} &
+\multicolumn{1}{ |p{0.11\textwidth}| }{ADC Sampling Rate} &* & &* &$N_{ADC}=Dz\Delta\lambda f_{ADC}$ &1366 \\ \cline{2-7}
+\multicolumn{1}{ |p{0.08\textwidth} }{}       &
+\multicolumn{1}{ |p{0.11\textwidth}| }{ENOB} & & &* &$2^{ENOB}$ &$\frac{1}{2}sin(4\pi \Delta L/\lambda)=2^{-n}$ \\ \cline{1-7}
+\end{tabular}
+\end{table*}
+
+Pulse to pulse intensity and phase fluactuation is small. Therefore it is not limiting factor for resolvable points. Decide frame rate and shutter speed. 
+
+ Limited by the smallest resovable wavelength difference. Define m as the order of the diffraction, $w_0$ as the beam width, $\lambda$ as the central wavelength, $\Delta\lambda$ as the optical bandwidth, $d$ as the groove spacing. 
+
+Field of view is decided by the width of the interrogation rainbow when hitting the target. Lateral resolution is limited by diffraction limit of the objective lens. Define $NA$ as the numerical apeture of the objective lens and FOV as the field of view, 
 
 \subsection{Big data analytics pipeline}
 
