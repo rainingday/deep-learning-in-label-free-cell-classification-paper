@@ -332,7 +332,7 @@ The unwrapping algorithm used in our processing acts when the absolute phase dif
 
 \subsection{Correction and Calibration of Phase Extraction}
 
-To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells in low frequency components of the spectrum in electrical detection domain. Most cells of interest in clinical or industrial applictaions have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform remains robust in this scenario to separate the two frequency terms for optical loss and phase. 
+To perform combined quantitative optical phase and loss imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells as the low frequency components of the spectrum in electrical detection domain. Most cells of interest in clinical or industrial applictaions have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform remains robust in this scenario to separate the two frequency terms for optical loss and phase. 
 
 In addition, two other major effects need to be calibrated since they may alter the quantitative phase extraction based on Hilbert transformation: the inbalanced power split ratio at the beam splitter of the Michaelson Interferometer and the attenuation inbalance of the two arms of the interferometer caused by the microfluidic channel. When taking the inbalanced power distribution at the beam splitter into consideration, the light split into the two arms of the Michaelson interferometer can be expressed as
 \begin{equation}
@@ -348,7 +348,7 @@ where $r$ is the reflectance at the beam-splitter. $E_s(t)$, $E_{LO}(t)$, $\omeg
 \begin{split}
 &\text{From the sample arm:}\\
 &\quad E_s(t) = \alpha_s \alpha_c(x,t) r E_i(t) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
-&\quad\quad\quad\quad + 2k(\lambda)L_0] \rbrace\\
+&\quad\quad\quad\quad + 2k(\lambda)(L_0+\Delta L)] \rbrace\\
 &\text{From the reference arm:} \\
 &\quad E_{LO}(t) = \sqrt{1-r^2} E_i(t)\exp(i\omega_{LO} t + 2k(\lambda)L_0)
 \end{split}
@@ -357,7 +357,7 @@ where $\alpha_s$ is 1 - absorption coefficient of the surrounding buffer solutio
 \begin{equation}
 \begin{split}
 E_{total}(t) &= \alpha_s \alpha_c(x,t) r E_i(t_p,\omega_s) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
-&\quad+ 2k(\lambda)L_0] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\\
+&\quad+ 2k(\lambda)(L_0+\Delta L)] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\\
 &\quad \cdot \exp(i\omega_{LO} t + 2k(\lambda)L_0) \\
 &= E_i(t_p,\omega_{s}) \exp[i\omega_{LO} t 2k(\lambda)L_0] \lbrace \sqrt{1-r^2} \\
 &\quad+ \alpha_s \alpha_c(x,t) r \exp [i\Delta\varphi(x,t)] \rbrace
