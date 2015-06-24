@@ -33,6 +33,7 @@
 \usepackage{amssymb, amsmath}
 \usepackage{esdiff} % use this package for derivative and partial derivate commands of \diff{}{} and \diffp{}{}
 \usepackage{siunitx}
+\usepackage{multirow}
 \DeclareSIUnit\cells{cells}
 
 \DeclareMathOperator{\hilbert}{\mathcal{H}} % To define additional named operators
@@ -422,6 +423,44 @@ The combined absorption and scattering coefficients (attenuation coefficient) of
 \Delta I = \frac{I_{PD}(t_i,t_d)}{I_{PD}(t_{background},t_d)}
 \end{equation}
 where $t_{background}$ corresponds to a measurement (an interrogation time) that there is no cell in the field of view, and only the background pulse shape is captured. 
+
+
+\subsection{System performance and resolvable points}
+\begin{table*}
+\caption{\label{tbl:Resolution} Deterministic Factors in TS-QPI}
+\begin{tabular}{|m{0.15\textwidth}|m{0.15\textwidth}|m{0.45\textwidth}|m{0.10\textwidth}|}
+ \hline
+ System catagory   &Component  &Number of resovable points &Lateral resolution    \\  \hline
+\multicolumn{1}{ |m{0.15\textwidth}  }{\multirow{2}{*}{Optical system} } &
+\multicolumn{1}{ |m{0.15\textwidth}| }{Diffraction gratings} & \begin{equation} N_{grating} = \frac{\Delta\lambda}{\delta\lambda_{grating}} =\Delta\lambda /(\lambda \cdot \frac{d}{m\cdot2w_0})\end{equation} where m is the order of the diffraction, $w_0$ is the beam width, $\lambda$ as the central wavelength, and $d$ is the groove spacing. &$\SI{3.09}{\micro\meter}$ \\ \cline{2-4}
+\multicolumn{1}{ |m{0.15\textwidth}  }{}         &
+\multicolumn{1}{ |m{0.15\textwidth}| }{Lenses and mirrors} & \begin{equation} N_{Abbe} = \frac{FOV}{\delta x_{diffraction}} =\frac{FOV}{(\frac{\lambda + \Delta \lambda/2}{2 \cdot NA})} \end{equation} where $FOV$ is field of view, $NA$ is numerical aperture of the objective lens. &$\SI{2.00}{\micro\meter}$   \\ \cline{1-4}
+\multicolumn{1}{ |m{0.15\textwidth}  }{\multirow{1}{*}{Time Stretch} } &
+\multicolumn{1}{ |m{0.15\textwidth}| }{Group delay dispersion} &\begin{equation}N_{DFT}=\frac{\Delta\lambda}{\delta\lambda}=\frac{\Delta\lambda}{\lambda\cdot\sqrt{\frac{2}{DL_f\cdot c}}}\end{equation} where $D$ is the group velocity dispersion, $L_f$ is the dispersion fiber length. &$\SI{0.73}{\micro\meter}$ \\ \cline{1-4}
+\multicolumn{1}{ |m{0.15\textwidth}  }{\multirow{2}{*}{Electronic back-end} } &
+\multicolumn{1}{ |m{0.15\textwidth}| }{Photodetector bandwidth} &\begin{equation}N_{PD}=\frac{\Delta t}{\delta t}=\frac{DL_f\cdot\Delta\lambda}{0.35/B}\end{equation} where $B$ is the bandwidth of the photodetector. &$\SI{0.28}{\micro\meter}$ \\ \cline{2-4}
+\multicolumn{1}{ |m{0.15\textwidth}  }{} &
+\multicolumn{1}{ |m{0.15\textwidth}| }{ADC sampling rate} &\begin{equation}N_{ADC}=DL_f\Delta\lambda f_{ADC}\end{equation} where $f_{ADC}$ is the sampling rate of digitizer. &$\SI{0.10}{\micro\meter}$ \\
+\cline{1-4}
+\end{tabular}
+\end{table*}
+
+
+field of view: Optical Bandwidth $\Delta\lambda$
+Pulse to pulse intensity and phase fluactuation is small. Therefore it is not limiting factor for resolvable points. Decide frame rate and shutter speed. 
+
+ Limited by the smallest resovable wavelength difference. Define m as the order of the diffraction, $w_0$ as the beam width, $\lambda$ as the central wavelength, $\Delta\lambda$ as the optical bandwidth, $d$ as the groove spacing. 
+
+Field of view is decided by the width of the interrogation rainbow when hitting the target. Lateral resolution is limited by diffraction limit of the objective lens. Define $NA$ as the numerical apeture of the objective lens and FOV as the field of view, 
+
+Lateral resoluiton is limited by spectral resolution in amplified dispersive Fourier transform, photodetector rise-time and analog-to-digital converter bandwidth.
+
+The axial resolution for optical path length measurement is limited by the effective number of bits (ENOB) of the digitizer: 
+\begin{equation}
+\frac{1}{2}sin(4\pi \Delta L/\lambda)=2^{-N}
+\end{equation}
+where $N$ is the ENOB of the digitizer, $\lambda$ is the central wavelength of light, and $\Delta L$ is the minimum detectable optical path length. In our system, ENOB of the analog-to-digital converter is 5. Thus OPD resolution is $7.9 nm$, corresponding to refractive index difference about $1^{-3}$ for cellular level measurements.
+
 
 \subsection{Big data analytics pipeline}
 
