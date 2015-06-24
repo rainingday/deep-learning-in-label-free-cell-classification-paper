@@ -278,7 +278,7 @@ Free-space laser pulses were linearly polarized with quarter- and half-wave plat
 Unlike in conventional heterodyne detection, which uses a narrow band continous-wave beam as the local oscillator, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband chirped optical pulse \cite{buckley2013coherent, devore2014coherent}. 
 
 The input optical signal is split into two arms of the Michaelson Interferometry at the beam splitter. The one in sample arm, $E_s(t)\exp(i\omega_s t)$, passes through the object, and then, is combined with the other one from the reference arm $E_{LO}(t)\exp(i\omega_{LO} t)$. $E_s(t)$ and $E_LO(t)$ are the electric field amplitudes of the sample and reference sources, and $\omega_s$ and $\omega_{LO}$ are the optical frequencies of sample and reference fields, respectively. Not only the electric field amplitude after passing through semitransparent objects, $E_s^\prime(t)$, will be modulated by the optical absorption and scattering in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t)$, inducted by refractive index change along the interrogation beam. Thus the combined electrical field is
-\begin{multline}
+\begin{multline}\label{eq:totalElecField}
 E_{total}(t) = E_s^\prime(t) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace\\
 + E_{LO}(t) \exp(i\omega_{LO} t)
 \end{multline}
@@ -330,9 +330,9 @@ The unwrapping algorithm used in our processing acts when the absolute phase dif
 
 
 
-\subsection{Correction and Calibration of Phase Extraction}
+\subsection{Correction and Calibration in Phase Extraction}
 
-To perform combined quantitative optical phase and loss imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells as the low frequency components of the spectrum in electrical detection domain. Most cells of interest in clinical or industrial applictaions have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform remains robust in this scenario to separate the two frequency terms for optical loss and phase. 
+To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells in low frequency components of the spectrum in electrical detection domain. Most cells of interest in clinical or industrial applictaions have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform remains robust in this scenario to separate the two frequency terms for optical loss and phase. 
 
 In addition, two other major effects need to be calibrated since they may alter the quantitative phase extraction based on Hilbert transformation: the inbalanced power split ratio at the beam splitter of the Michaelson Interferometer and the attenuation inbalance of the two arms of the interferometer caused by the microfluidic channel. When taking the inbalanced power distribution at the beam splitter into consideration, the light split into the two arms of the Michaelson interferometer can be expressed as
 \begin{equation}
@@ -343,53 +343,53 @@ In addition, two other major effects need to be calibrated since they may alter 
 &\quad E_{LO}(t) = \sqrt{1-r^2}E_i(t)\exp(i\omega_{LO} t) 
 \end{split}
 \end{equation}
-where $r$ is the reflectance at the beam-splitter. $E_s(t)$, $E_{LO}(t)$, $\omega_s$ and $\omega_{LO}$ are same as what mentioned above. Since biological cells are semi-transparent, optical intensity in the sample arm will be altered not only by the absorption and scattering caused by imaged objects, but also by that of the microfluidic channel. The complex fields of the light combining at the beam splitter become 
+where $r$ is the reflectance at the beam-splitter, and $E_s(t)$, $E_{LO}(t)$, $\omega_s$, and $\omega_{LO}$ are same as what mentioned in Equation \ref{eq:totalElecField}. Since biological cells are semi-transparent, optical intensity in the sample arm will be altered not only by the absorption and scattering of imaged cells, but also by that of the microfluidic channel. The complex fields of the light combining at the beam splitter become
 \begin{equation}
 \begin{split}
 &\text{From the sample arm:}\\
-&\quad E_s(t) = \alpha_s \alpha_c(x,t) r E_i(t) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
-&\quad\quad\quad\quad + 2k(\lambda)(L_0+\Delta L)] \rbrace\\
+&\quad E_s(t) = T_s T_c(x,t) r E_i(t) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
+&\quad\quad\quad\quad + 2k(\lambda)L_0] \rbrace\\
 &\text{From the reference arm:} \\
 &\quad E_{LO}(t) = \sqrt{1-r^2} E_i(t)\exp(i\omega_{LO} t + 2k(\lambda)L_0)
 \end{split}
 \end{equation}
-where $\alpha_s$ is 1 - absorption coefficient of the surrounding buffer solutions and microfluidic channel, and $\alpha_c(x,t)$ is 1 - absorption coefficient of cells at location $x$. The total amplitude at each wavelength after recombining becomes
+where $T_s$ is transmittance of the surrounding buffer solutions and microfluidic channel, $T_c(x,t)$ is transmittance of cells at location $x$ along the rainbow, $k(\lambda)$ is the wavenumber at wavelength $\lambda$, and . The total electric field at each wavelength after two arms of the interferometer recombine at the beamsplitter becomes
 \begin{equation}
 \begin{split}
-E_{total}(t) &= \alpha_s \alpha_c(x,t) r E_i(t_p,\omega_s) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
-&\quad+ 2k(\lambda)(L_0+\Delta L)] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\\
+E_{total}(t) &= T_s T_c(x,t) r E_i(t_p,\omega_s) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
+&\quad+ 2k(\lambda)L_0] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\\
 &\quad \cdot \exp(i\omega_{LO} t + 2k(\lambda)L_0) \\
 &= E_i(t_p,\omega_{s}) \exp[i\omega_{LO} t 2k(\lambda)L_0] \lbrace \sqrt{1-r^2} \\
-&\quad+ \alpha_s \alpha_c(x,t) r \exp [i\Delta\varphi(x,t)] \rbrace
+&\quad+ T_s T_c(x,t) r \exp [i\Delta\varphi(x,t)] \rbrace
 \end{split}
 \end{equation}
 assuming $E_{LO}(t_p,\omega_{LO}) \approx E_s(t_p,\omega_s)$ according to equation~\ref{eq:sandLO}. The intensity envelop is
 \begin{equation}
 \begin{split}
-I_{total}(t) &= E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2 \\
-&+ 2r\sqrt{1-r^2} \alpha_s \alpha_c cos[i\Delta\varphi(x,t)] \rbrace
+I_{total}(t) &= E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + T_s^2 T_c^2(x,t) r^2 \\
+&+ 2r\sqrt{1-r^2} T_s T_c cos[i\Delta\varphi(x,t)] \rbrace
 \end{split}
 \end{equation}
 Thus we can clearly get the intensity envelop under two scenarios would be
 \begin{equation}
 I_{env}(t) = \begin{cases}
-E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 r^2], \\
+E_i^2(t_p,\omega_{s}) [(1-r^2) + T_s^2 r^2], \\
 \quad\quad \text{empty frames}.\\
-E_i^2(t_p,\omega_{s}) [(1-r^2) + \alpha_s^2 \alpha_c^2(x,t) r^2], \\
+E_i^2(t_p,\omega_{s}) [(1-r^2) + T_s^2 T_c^2(x,t) r^2], \\
 \quad\quad \text{frames when cell is present}.
   \end{cases}
 \end{equation}
 The unit net change of intensity envelop when cell comes in is
 \begin{equation}
 \Delta I_{env}(t) =
- \frac{\alpha_s^2 r^2 [\alpha_c^2(x,t) - 1]}{1 - r^2 + \alpha_s^2 r^2}
+ \frac{T_s^2 r^2 [T_c^2(x,t) - 1]}{1 - r^2 + T_s^2 r^2}
 \end{equation}
-Define $r^\prime=\frac{r\alpha_s}{\sqrt{1-r^2+r^2\alpha_s^2}}$. Then the ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
+Define $r^\prime=\frac{rT_s}{\sqrt{1-r^2+r^2T_s^2}}$. Then the ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
 \begin{equation}
 \begin{split}
 \beta &= \frac{I_{intf}}{I_{env}} \\
-&= \frac{2 \alpha_s \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^2}}{r} + \frac{\alpha_c^2(x,t) \alpha_s^2 r}{\sqrt{1-r^2}}} 
-= \frac{2 \alpha_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^{\prime2}}}{r^\prime} + \frac{\alpha_c^2(x,t) r^\prime}{\sqrt{1-r^{\prime2}}}}
+&= \frac{2 T_s T_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^2}}{r} + \frac{T_c^2(x,t) T_s^2 r}{\sqrt{1-r^2}}} 
+= \frac{2 T_c cos[i\Delta\varphi(x,t)]}{\frac{\sqrt{1-r^{\prime2}}}{r^\prime} + \frac{T_c^2(x,t) r^\prime}{\sqrt{1-r^{\prime2}}}}
 \end{split}
 \end{equation}
 Thus the absorption by buffer solution and microfluidic channel does not influence the measurement of cell absorption in our quatitative phase imaging. 
