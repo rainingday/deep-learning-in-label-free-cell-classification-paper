@@ -116,7 +116,7 @@ In addition to classification accuracy, another critical specification of a flow
 Recently, our group has developed a label-free imaging flow-cytometry technique based coherent optical implementation of the photonic time stretch concept \cite{mahjoubfar2013label}. The instrument overcomes the trade-off between sensitivity and speed by using Amplified Time-stretch Dispersive Fourier Transform (ADFT) \cite{goda2013dispersive, solli2009optical, goda2009theory}. In time stretched imaging \cite{goda2009serial}, the object's spatial information is encoded in a spectrum of laser pulses within a pulse duration of sub-nanoseconds (Fig.~\ref{fig:Setup}). Each pulse representing one frame of the camera is then stretched in time so that it can be digitized in real-time by an electronic analog-to-digital converter. The ultra-fast pulse illumination freezes the motion of high-speed cells or particles in flow to achieve blur-free imaging. Detection sensitivity is challenged by the low number of photons collected during the ultra-short shutter time (optical pulse width) and the drop in the peak optical power resulting from the time stretch. This issue is solved in time stretch imaging by implementing a low noise-figure Raman amplifier within the dispersive device that performs time stretching \cite{goda2009serial,mahjoubfar2013label,mahjoubfar2013optically}. In the coherent version of the instrument utilized here, the time stretch imaging is combined with spectral interferometry to measure quantitative phase images in real-time and at high throughput \cite{mahjoubfar2014label}. Integrated with a microfluidic channel, coherent time stretch imaging system in this work captures 36 million quantitative phase and intensity images of individual cells every second in flow rates as high as 10 meters per second with a throughput up to 100,000 cells per second as a high-speed imaging flow cytometer.
 
 \begin{figure*}
-\includegraphics[scale=0.3]{FigureSetup.jpg}
+\includegraphics[scale=0.2]{FigureSetup.jpg}
 \caption{\label{fig:Setup} Time stretch quantitative phase imaging (TS-QPI) and analytics system; A mode-locked laser followed by a nonlinear fiber, an erbium doped fiber amplifier (EDFA), and a wavelength-division multiplexing (WDM) filter generate and shape a train of broadband optical pulses. Box 1: The pulse train is spatially dispersed into a train of rainbow flashes illuminating the target as line scans. The spatial features of the target are encoded into the spectrum of the broadband optical pulses each representing a one-dimensional frame. The ultra-short optical pulse illumination freezes the motion of cells during high speed flow to achieve blur-free imaging with a throughput of 100,000 cells/s (limited by the flow channel). The phase shift at each location within the field of view is embedded into the spectral interference patterns using by a Michelson interferometer. Box 2: The interferogram pulses were then stretched in time so that spatial information could be mapped into time through time-stretch dispersive Fourier transform (TS-DFT), and then captured by a single pixel photodetector and an analog-to-digital converter (ADC). The loss of sensitivity at high shutter speed is compensated by stimulated Raman amplification during time stretch. Box 3: (a) Pulse synchronization; the time-domain signal carrying serially captured rainbow pulses is transformed into a series of one-dimensional spatial maps, which are used for forming line images. (b) The biomass density of a cell leads to a spatially varying optical phase shift. When a rainbow flash passes through the cells, the changes in refractive index at difference locations will cause phase walk-off at interrogation wavelengths. Hilbert transformation and phase unwrapping are used to generate the spatial information of phase shift. (c) Decoding the phase shift in each pulse at each wavelength and remapping it into a pixel reveals the protein concentration distribution within cells. The optical loss induced by the cells, embedded in the pulse intensity variations, is obtained from the amplitude of the slowly varying envelope of the spectral interferograms. Thus, quantitative optical phase shift and intensity loss images are captured simultaneously. Both images are calibrated based on the regions where the cells are absent. Cell features describing morphology, granularity, biomass, etc are extracted from the images. (d) These biophysical features are used in a machine learning algorithm for high-accuracy label-free classification of the cells.}
 \end{figure*}
 
@@ -132,7 +132,7 @@ The application of time stretch quantitative phase imaging (TS-QPI) to imaging f
 High speed phase contrast imaging was achieved with high sensitivity using an amplified time-stretch system that creates a low-noise distributed Raman amplifier within dispersive fiber with a net optical image gain of approximately 15 dB. The photodetected time-stretched pulses, each representing one line-scan, are converted to analytic signals using Hilbert transformation \cite{king2009hilbert} and the phase component is extracted. Since the phase varies over a wide range (much larger than $2 \pi$ radians), an unwrapping algorithm is used to obtain the continuous phase profile. The phase profile contains an increasing term with time, corresponding to the fringe (beat) frequency and the phase shift induced by the cell. By eliminating the background phase component, the cell-induced phase shift is extracted, from which a 2D phase image is constructed (Fig.~\ref{fig:2DImage}).
 
 \begin{figure*}
-\includegraphics[scale=0.15]{Figure2DImage.jpg}
+\includegraphics[scale=0.2]{Figure2DImage.jpg}
 \caption{\label{fig:2DImage} Quantitative phase and optical loss images of \textit{OT-II} (blue) and \textit{SW-480} (green box) cells. The optical loss images of the cells are affected by the attenuation of multiplexed wavelength components passing through the cells. The attenuation itself is governed by the absorption of the light in cells as well as the scattering from the surface of the cells and from the internal cell organelles. The optical loss image is derived from the low frequency features of the pulse interferograms. The optical phase image is extracted from the analytic form of the high frequency features of the pulse interferograms using Hilbert Transformation, followed by a phase unwrapping algorithm. Details of these derivations can be found in Section \ref{scn:Methods}. Also, Videos 1 and 2 show measurements of cell-induced optical path length difference by TS-QPI at four different points along the rainbow for \textit{OT-II} and \textit{SW-480}, respectively.}
 \end{figure*}
 
@@ -186,7 +186,7 @@ Scattering-2	 &Mean absolute optical loss within the entire segmented area (cell
 We used hyper-dimensional scatter plots as a tool for high content cell analysis. To demonstrate application in circulating cancer cell (CTC) detection, we used a white blood cell line (\textit{OT-II} hybridoma T cell) and a cancer cell line (\textit{SW-480} epithelial colon cancer). Fig.~\ref{fig:OTSWScatter} shows the 3D scatter plot based on size, protein concentration, and attenuation of a large number of \textit{OT-II} (black dots) and \textit{SW-480} (red dots) cells. The attenuation is a parameter describing the optical intensity loss caused by cell absorption (Absorption-1 feature in Table \ref{tbl:Features}). The 2D projections on the three orthogonal planes are also shown. It is clear that certain pairs of features are better able to differentiate the two populations.
 
 \begin{figure*}
-\includegraphics[scale=0.15]{FigureOTSWScatter.jpg}
+\includegraphics[scale=0.2]{FigureOTSWScatter.jpg}
 \caption{\label{fig:OTSWScatter} Three-dimensional scatter plot based on size, protein concentration, and attenuation of \textit{OT-II} and \textit{SW-480} cells measured by TS-QPI; The green and blue dots are two-dimensional (2-D) projections of cell data points on the planes containing only two of the biophysical parameters. The cell protein concentration corresponds to the mean refractive index difference of the cell (Refractive index feature in Table \ref{tbl:Features}). The attenuation is a parameter describing the optical intensity loss caused by cell absorption (Absorption-1 feature in Table \ref{tbl:Features}). Comparison of 2-D scatter plots reveals that additional biophysical parameters (in this case protein concentration) serve to classify the cell types more accurately.}
 \end{figure*}
 
@@ -234,7 +234,7 @@ In our work, we use single layer perceptron with AUC as the cost function and ge
 We have performed PCA on the 16 dimensional data set acquired by our time stretch QPI system. This maps the data from the physical feature space to the PCA space. Fig.~\ref{fig:PCA} shows the percent of the variance in data explained by each component (lower chart). The key observation is that most of the variance can be accounted for by the first two principle components. The upper portion of the plot shows the AUC for binary classification using each of the principle components. Interestingly, the first component with the highest explained variance is not necessarily the most important component for classification. This is not surprising since PCA components are optimized to the variance of data but not to the data labels. Therefore, apriori intuition about the physical significance of the features in the case here, is superior to PCA in eliminating dimensions that do not provide high value in classification. Nevertheless, in situations where physical intuition about meaning of features does not exist, PCA is a valuable tool. A second observation is that principle components that have low explained variance do have some value in classification. 
 
 \begin{figure*}
-\includegraphics[scale=0.2]{FigurePCA.jpg}
+\includegraphics[scale=0.18]{FigurePCA.jpg}
 \caption{\label{fig:PCA} Principal component analysis (PCA); Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification.}
 \end{figure*}
 
@@ -442,41 +442,37 @@ The combined absorption and scattering coefficients (attenuation coefficient) of
 where $t_{background}$ corresponds to a measurement (an interrogation time) that there is no cell in the field of view, and only the background pulse shape is captured. 
 
 
+
 \subsection{System performance and resolvable points}
+
+Lateral resoluiton of time stretch camera is decided by the limiting factors among diffraction limit of objective lens, resovability of the diffraction grating pairs, spectral resolution in amplified dispersive Fourier transform, photodetector rise-time and bandwidth, and the sampling rate of back-end digitizer. Details of the deterministic limiting factors for lateral resolution and evaluation of current TS-QPI system can be found in Table~\ref{tbl:Resolution}.
+
 \begin{table*}
 \caption{\label{tbl:Resolution} Deterministic Factors in TS-QPI}
-\begin{tabular}{|m{0.15\textwidth}|m{0.15\textwidth}|m{0.45\textwidth}|m{0.10\textwidth}|}
+\begin{tabular}{|m{0.16\textwidth}|m{0.15\textwidth}|m{0.45\textwidth}|m{0.10\textwidth}|}
  \hline
  System catagory   &Component  &Number of resovable points &Lateral resolution    \\  \hline
-\multicolumn{1}{ |m{0.15\textwidth}  }{\multirow{2}{*}{Optical system} } &
+\multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{2}{*}{Optical system} } &
 \multicolumn{1}{ |m{0.15\textwidth}| }{Diffraction gratings} & \begin{equation} N_{grating} = \frac{\Delta\lambda}{\delta\lambda_{grating}} =\Delta\lambda /(\lambda \cdot \frac{d}{m\cdot2w_0})\end{equation} where $\Delta\lambda$ is the optical bandwidth, $\lambda$ as the central wavelength, m is the order of the diffraction, $w_0$ is the beam width, and $d$ is the groove spacing. &$\SI{3.09}{\micro\meter}$ \\ \cline{2-4}
 \multicolumn{1}{ |m{0.15\textwidth}  }{}         &
 \multicolumn{1}{ |m{0.15\textwidth}| }{Lenses and mirrors} & \begin{equation} N_{Abbe} = \frac{FOV}{\delta x_{diffraction}} =\frac{FOV}{(\frac{\lambda + \Delta \lambda/2}{2 \cdot NA})} \end{equation} where $FOV$ is field of view, $NA$ is numerical aperture of the objective lens. &$\SI{2.00}{\micro\meter}$   \\ \cline{1-4}
-\multicolumn{1}{ |m{0.15\textwidth}  }{\multirow{1}{*}{Time Stretch} } &
+\multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{1}{*}{Time Stretch} } &
 \multicolumn{1}{ |m{0.15\textwidth}| }{Group delay dispersion} &\begin{equation}N_{DFT}=\frac{\Delta\lambda}{\delta\lambda}=\frac{\Delta\lambda}{\lambda\cdot\sqrt{\frac{2}{DL_f\cdot c}}}\end{equation} where $D$ is the group velocity dispersion, $L_f$ is the dispersion fiber length. &$\SI{0.73}{\micro\meter}$ \\ \cline{1-4}
-\multicolumn{1}{ |m{0.15\textwidth}  }{\multirow{2}{*}{Electronic back-end} } &
-\multicolumn{1}{ |m{0.15\textwidth}| }{Photodetector bandwidth} &\begin{equation}N_{PD}=\frac{\Delta t}{\delta t}=\frac{DL_f\cdot\Delta\lambda}{0.35/B}\end{equation} where $B$ is the bandwidth of the photodetector. &$\SI{0.28}{\micro\meter}$ \\ \cline{2-4}
+\multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{2}{*}{Electronic back-end} } &
+\multicolumn{1}{ |m{0.15\textwidth}| }{Photodetector bandwidth} &\begin{equation}N_{PD}=\frac{\Delta t}{\delta t}=\frac{DL_f\Delta\lambda}{0.35/B}\end{equation} where $B$ is the bandwidth of the photodetector. &$\SI{0.28}{\micro\meter}$ \\ \cline{2-4}
 \multicolumn{1}{ |m{0.15\textwidth}  }{} &
 \multicolumn{1}{ |m{0.15\textwidth}| }{ADC sampling rate} &\begin{equation}N_{ADC}=DL_f\Delta\lambda f_{ADC}\end{equation} where $f_{ADC}$ is the sampling rate of digitizer. &$\SI{0.10}{\micro\meter}$ \\
 \cline{1-4}
 \end{tabular}
 \end{table*}
 
+Field of view (FOV) is the area covered by the interrogation rainbow when the rainbow pulses hit the imaging plane. The beam width of rainbow pulses is mainly decided by the optical bandwidth selected from the laser source, $\Delta\lambda$, the numerical apeture of objective lens, $NA$, as well as the dimensions and blaze angles of the diffraction gratings.
 
-field of view: Optical Bandwidth $\Delta\lambda$
-Pulse to pulse intensity and phase fluactuation is small. Therefore it is not limiting factor for resolvable points. Decide frame rate and shutter speed. 
-
- Limited by the smallest resovable wavelength difference. Define m as the order of the diffraction, $w_0$ as the beam width, $\lambda$ as the central wavelength, $\Delta\lambda$ as the optical bandwidth, $d$ as the groove spacing. 
-
-Field of view is decided by the width of the interrogation rainbow when hitting the target. Lateral resolution is limited by diffraction limit of the objective lens. Define $NA$ as the numerical apeture of the objective lens and FOV as the field of view, 
-
-Lateral resoluiton is limited by spectral resolution in amplified dispersive Fourier transform, photodetector rise-time and analog-to-digital converter bandwidth.
-
-The axial resolution for optical path length measurement is limited by the effective number of bits (ENOB) of the digitizer: 
+The resolution of phase measurement along axial direction is determined by the effective number of bits (ENOB) of the digitizer and affected by the noise of laser source. Since pulse to pulse intensity and phase fluactuation is small, noise from laser source is not the limiting factor for our phase measurement. Supposing the ENOB of the digitizer is $N$, the minimum detectable optical path length difference, $\Delta L$ can be estimated as
 \begin{equation}
 \frac{1}{2}sin(4\pi \Delta L/\lambda)=2^{-N}
 \end{equation}
-where $N$ is the ENOB of the digitizer, $\lambda$ is the central wavelength of light, and $\Delta L$ is the minimum detectable optical path length. In our system, ENOB of the analog-to-digital converter is 5. Thus OPD resolution is $7.9 nm$, corresponding to refractive index difference about $1^{-3}$ for cellular level measurements.
+where $\lambda$ is the central wavelength of light. In our system, ENOB of the analog-to-digital converter is $5$. Thus OPD resolution along the axial direction is $\SI{7.9}{\nano\meter}$, corresponding to refractive index difference down to the level of $0.001$ for cellular level measurements.
 
 
 \subsection{Big data analytics pipeline}
@@ -597,7 +593,7 @@ Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with argini
 
 % If you have acknowledgments, this puts in the proper section head.
 \begin{acknowledgments}
-This work was partially supported by NantWorks, LLC, Culver City, California.
+This work was partially supported by NantWorks, LLC, Culver City, California. Ian K. Blaby was supported by the Office of Science (Biological and Environmental Research), U.S. Department of Energy (grant no. DE–FC02–02ER63421) to Sabeeha Merchant.
 \end{acknowledgments}
 
 % Create the reference section using BibTeX:
