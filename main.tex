@@ -293,7 +293,7 @@ where $T_b$ is the power transmission ratio of the beam-splitter. Optical intens
 \begin{split}
 &\text{From the sample arm:}\\
 &\quad \tilde{E}_s(\omega, t_p) = T_s(\omega) T_c(x,t_p + t_d) \sqrt{T_b(\omega) R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
-&\quad\quad\quad \cdot \exp \Big\lbrace i\Big[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)\Big] \Big\rbrace\\
+&\quad\quad\quad \cdot \exp \Big\lbrace i\Big[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t_p)\Big] \Big\rbrace\\
 &\text{From the reference arm:} \\
 &\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
 &\quad\quad\quad \cdot \exp(- i \frac{\omega}{c}\cdot 2L)
@@ -303,12 +303,12 @@ where $L_0$ is the length of reference arm, and $\Delta L$ is the arm length mis
 The total electric field at each wavelength after two arms of the interferometer recombine at the beam splitter becomes
 \begin{equation} \label{eq:totalElecField}
 \begin{split}
-\tilde{E}_o(\omega, t_p) &= \sqrt{T_s(\omega) R_m(\omega)} T_c(x, t_p) T_b(\omega) \tilde{E}_{in}(\omega, t_p) \\
-&\quad \cdot \exp \Big\lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \Big\rbrace \\
+\tilde{E}_o(\omega, t_p) &= T_s(\omega) T_c(x, t_p) T_b(\omega) \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
+&\quad \cdot \exp \Big\lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t_p)] \Big\rbrace \\
 &\quad - [1-T_b(\omega)] \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L] \\
 &= \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp(- i \frac{2\omega L}{c}) \\
-&\quad \cdot \Big\lbrace \sqrt{T_s(\omega)} T_c(x, t_p) T_b(\omega) exp \lbrace i[-2\frac{\omega}{c}\Delta L  \\
-&\quad - \Delta\varphi(x,t)] \rbrace - [1-T_b(\omega)] \Big\rbrace.
+&\quad \cdot \Big\lbrace T_s(\omega) T_c(x, t_p) T_b(\omega) exp \lbrace i[-2\frac{\omega}{c}\Delta L  \\
+&\quad - \Delta\varphi(x,t_p)] \rbrace - [1-T_b(\omega)] \Big\rbrace.
 \end{split}
 \end{equation}
 Based on the spectral encoding setup, we know spatial information has been encoded into spectrum,
@@ -319,9 +319,9 @@ T_c(x,t_p + t_d) &\Rightarrow T_c(\omega,t_p + t_d)\\
 The intensity envelop then becomes
 \begin{equation} \label{eq:totalIntensity}
 \begin{split}
-\tilde{I}_o(\omega, t_p) &\propto \Big\lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 T_s(\omega)\Big\rbrace R_m(\omega) \\
+\tilde{I}_o(\omega, t_p) &\propto \Big\lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 T_s(\omega)^2\Big\rbrace R_m(\omega) \\
 & \cdot \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 - 2 [1-T_b(\omega)] T_c(\omega, t_p) T_b(\omega) R_m(\omega) \\
-& \cdot \sqrt{T_s(\omega)} \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
+& \cdot T_s(\omega) \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
 \end{split}
 \end{equation}
 
@@ -338,12 +338,12 @@ During time stretch, each frequency component $\omega$, or $\lambda$ will be one
 where $I_b (\lambda, t_p)$ is the background / baseband intensity, and $I_i (\lambda, t_p)$ is the interference / intermediate envelop:
 \begin{align} \label{eq:totalIntensityTwoTerms}
 \begin{split}
-I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b(\lambda)^2 T_c(\lambda, t_p)^2 T_s(\lambda)\Big\rbrace \\
+I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b(\lambda)^2 T_c(\lambda, t_p)^2 T_s(\lambda)^2\Big\rbrace \\
 &\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}\\
 \begin{split}
 I_i (\lambda, t_p) &= - 2 [1-T_b(\lambda)] T_c(\lambda, t_p) T_b(\lambda) R_m(\lambda)\\
-& \cdot \sqrt{T_s(\lambda)} \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
+& \cdot T_s(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}
 \end{align}
 
@@ -382,7 +382,7 @@ where \text{vetcat} means vertical concatenation. Each $\tilde{I}_{o}(t_i^{(n)},
 
 Thus the time stretched temporal waveforms corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}. One is $I_b (t_i^{(n)}, t_p^{(m)})$, a temporal envelope of the time-stretched optical pulse usually at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object as in brightfield microscopy. It provides information about optical loss, i.e. light absorption and scattering caused by surface roughness, granularity, and inner cell organelle complexity. 
 
-The second feature in Eq.~\ref{eq:afterDCF},
+The second feature in Eq.~\ref{eq:afterDCF}
 \begin{equation}
 I_i (t_i^{(n)}, t_p^{(m)})cos\Big[\frac{4\pi D L_f\Delta L}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)})\Big]
 \end{equation}
