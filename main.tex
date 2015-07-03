@@ -277,33 +277,66 @@ Free-space laser pulses were linearly polarized with quarter- and half-wave plat
 \subsection{Coherent Detection and Phase Extraction}
 
 Unlike in conventional heterodyne detection, which uses a narrow band continuous-wave beam as the local oscillator, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband chirped optical pulse \cite{buckley2013coherent, devore2014coherent}. 
-%
-Since the wavelength are mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrow-band optical pulse wave. As the envelope of the optical pulse wave varies slowly in time compared to the mismatch period between the reference arm and sample arm, we use slowly varying envelope approximation (SVEA) for the assumption. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, 
-%\begin{equation}
-%E_i = \operatorname{Re} \lbrace \tilde{E}_{in}(t) \exp[i \omega_{in}(t) t] \rbrace
-%\end{equation}
-is split into two arms of the Michaelson interferometer at the beam splitter. Here $\omega$ is the optical frequency of the input signal, which is corresponding to the spatial location being interrogated by the optical pulse at this frequency. The one in sample arm passes through the object,
-%\begin{equation}
-%E_s = \operatorname{Re} \lbrace \tilde{E}_s(t) \exp(i\omega_s(t) t) \rbrace
-%\end{equation}
+
+Since the wavelength are mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrow-band optical pulse wave. As the envelope of the optical pulse wave varies slowly in time compared to the mismatch period between the reference arm and sample arm, we use slowly varying envelope approximation (SVEA) for the assumption. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, is split into two arms of the Michaelson interferometer at the beam splitter. Here, $\omega$ is the optical frequency of the input signal, which is corresponding to the spatial location being interrogated by the optical pulse at this frequency. Each $t_p$ specifies the time of each rainbow flash when it reaches the beam splitter. The light split into the two arms of the Michaelson interferometer can be expressed as
 \begin{equation}
-\tilde{E}_s(\omega, t_p) = \sqrt{T_b} \tilde{E}_in(\omega, t_p)
+\begin{split}
+&\text{Into the sample arm:} \\
+&\quad \tilde{E}_s(\omega, t_p) = \sqrt{T_b} \tilde{E}_in(\omega, t_p)  \\
+&\text{Into the reference arm:} \\
+&\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b} \tilde{E}_{in}(\omega, t_p)
+\end{split}
 \end{equation}
- and then, is combined with the other one from the reference arm. Here, the electric field complex envelope of the sample signal is $\tilde{E}_s(t) = \sqrt{T_b} \tilde{E}_{in}(t)$ for a beam splitter with $T_b$ power transmission ratio and $1 - T_b$ power reflection ratio. The portion of the input signal going into the reference arm to act as the local oscillator is
+where $T_b$ is the power transmission ratio of the beam-splitter. Optical intensity in the sample arm will be altered by the absorption and scattering of imaged cells, as well as that of the microfluidic channel and buffer solution. Not only the electric field amplitude after passing through semitransparent objects will be modulated by the optical absorption and scattering in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t)$, inducted by refractive index change from the object along the interrogation beam. The complex fields of the light waves coming back to the beam splitter become
 \begin{equation}
-E_{LO} = \operatorname{Re} \lbrace \tilde{E}_{LO}(t) \exp(i\omega_{LO} t) \rbrace
+\begin{split}
+&\text{From the sample arm:}\\
+&\quad \tilde{E}_s(\omega, t_p) = \sqrt{T_s(\omega) T_c(x,t_p) T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_in(\omega, t_p) \exp \lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \rbrace\\
+&\text{From the reference arm:} \\
+&\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L]
+\end{split}
 \end{equation}
-where, $\tilde{E}_{LO}(t) = i\sqrt{1 - T_b} \tilde{E}_{in}(t)$ is the electric field complex envelope into the reference arm, and $\omega_{LO} = \omega_{in}(t)$ is the optical frequency of the reference field. Not only the electric field amplitude after passing through semitransparent objects will be modulated by the optical absorption and scattering in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t)$, inducted by refractive index change from the object along the interrogation beam:
-\begin{equation}
-E_s^\prime(t) = \operatorname{Re} \lbrace \tilde{E}_s^\prime(t) \exp(i\omega_s(t) t) \rbrace
+where $T_s$ is transmittance of the surrounding buffer solutions and microfluidic channel, $T_c(x,t)$ is transmittance of cells at location $x$ along the rainbow at time $t$ in the field of view,; $L_0$ is the length of reference arm, and $\Delta L$ is the arm length mismatch between two arms. The total electric field at each wavelength after two arms of the interferometer recombine at the beam splitter becomes
+\begin{equation} \label{eq:totalElecField}
+\begin{split}
+E_o(\omega, t_p) &= \sqrt{T_s(\omega) R_m(\omega)} T_c(x, t_p) T_b(\omega) \tilde{E}_in(\omega, t_p) \exp \lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \rbrace + 
+- [1-T_b(\omega)] \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L] \\
+&= \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp(- i \frac{2\omega L}{c}) \lbrace \sqrt{T_s(\omega)} T_c(x, t_p) T_b(\omega) exp[i(-2\frac{\omega}{c}\Delta L  \\
+&\quad - \Delta\varphi(x,t))] - [1-T_b(\omega)] \rbrace.
+\end{split}
 \end{equation}
-Here, $E_s^\prime(t)$ is the electric field returned from the sample arm into the beam splitter, and $E_s$
-Thus the combined electrical field is
-\begin{multline}\label{eq:totalElecField}
-E_{total}(t) = E_s^\prime(t) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace \exp(i \omega )\\
-+ E_{LO}(t) \exp(i\omega_{LO} t)
-\end{multline}
-In our case, $E_{LO}(t)$, as a local oscillator (LO), is same as $E_s(t)$ but with reduced power and time delay. After time stretch, the frequency components in $\omega_s$ and $\omega_{LO}$, are mapped into time. That is, electric field detected at time t is one-to-one mapped from frequency domain,
+The intensity envelop is
+\begin{equation} \label{eq:totalIntensity}
+\begin{split}
+I_o(\omega, t_p) &\propto \left| \tilde{E}_{in}(\omega, t_p)\right|^2 \lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 \rbrace ^2 R_m(\omega) \\
+& - 2 [1-T_b(\omega)] R_m(\omega) T_c(x, t_p) T_b(\omega) \left| \tilde{E}_{in}(\omega, t_p)\right|^2 cos[ 2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
+\end{split}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%
+
+
+After time stretch, the frequency components in $\omega_s$ and $\omega_{LO}$, are mapped into time. That is, electric field detected at time t is one-to-one mapped from frequency domain,
 \begin{multline}
 E_{total}(t) = E_s^\prime(t_p,\omega_s) \exp \lbrace i[\omega_s t+\Delta\varphi(x,t)] \rbrace\\
 + E_{LO}(t_p,\omega_{LO}) \exp(i\omega_{LO} t)
@@ -355,40 +388,8 @@ The unwrapping algorithm used in our processing acts when the absolute phase dif
 
 To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells in low frequency components of the spectrum in electrical detection domain. Most cells of interest in clinical or industrial applictaions have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform remains robust in this scenario to separate the two frequency terms for optical loss and phase. 
 
-In addition, two other major effects need to be calibrated since they may alter the quantitative phase extraction based on Hilbert transformation: the unbalanced power split ratio at the beam splitter of the Michaelson Interferometer and the attenuation imbalance of the two arms of the interferometer caused by the microfluidic channel. When taking the unbalanced power distribution at the beam splitter into consideration, the light split into the two arms of the Michaelson interferometer can be expressed as
-\begin{equation}
-\begin{split}
-&\text{Into the sample arm:} \\
-&\quad \tilde{E}_s(\omega, t_p) = \sqrt{T_b} \tilde{E}_in(\omega, t_p)  \\
-&\text{Into the reference arm:} \\
-&\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b} \tilde{E}_{in}(\omega, t_p)
-\end{split}
-\end{equation}
-where $T_b$ is the power transmission ratio of the beam-splitter. Since biological cells are semi-transparent, optical intensity in the sample arm will be altered not only by the absorption and scattering of imaged cells, but also by that of the microfluidic channel. The complex fields of the light waves coming at the beam splitter become
-\begin{equation}
-\begin{split}
-&\text{From the sample arm:}\\
-&\quad \tilde{E}_s(\omega, t_p) = \sqrt{T_s(\omega) T_c(x,t_p) T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_in(\omega, t_p) \exp \lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \rbrace\\
-&\text{From the reference arm:} \\
-&\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L]
-\end{split}
-\end{equation}
-where $T_s$ is transmittance of the surrounding buffer solutions and microfluidic channel, $T_c(x,t)$ is transmittance of cells at location $x$ along the rainbow at time $t$ in the field of view,; $L_0$ is the length of reference arm, and $\Delta L$ is the arm length mismatch between two arms. The total electric field at each wavelength after two arms of the interferometer recombine at the beam splitter becomes
-\begin{equation}
-\begin{split}
-E_o(\omega, t_p) &= \sqrt{T_s(\omega) R_m(\omega)} T_c(x, t_p) T_b(\omega) \tilde{E}_in(\omega, t_p) \exp \lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \rbrace + 
-- [1-T_b(\omega)] \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L] \\
-&= \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp(- i \frac{2\omega L}{c}) \lbrace \sqrt{T_s(\omega)} T_c(x, t_p) T_b(\omega) exp[i(-2\frac{\omega}{c}\Delta L  \\
-&\quad - \Delta\varphi(x,t))] - [1-T_b(\omega)] \rbrace.
-\end{split}
-\end{equation}
-The intensity envelop is
-\begin{equation}
-\begin{split}
-I_o(\omega, t_p) &\propto \left| \tilde{E}_{in}(\omega, t_p)\right|^2 \lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 \rbrace ^2 R_m(\omega) \\
-& - 2 [1-T_b(\omega)] R_m(\omega) T_c(x, t_p) T_b(\omega) \left| \tilde{E}_{in}(\omega, t_p)\right|^2 cos[ 2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
-\end{split}
-\end{equation}
+In addition, two features that are unique to quantitative phase imaging with Michaelson Interferometer need to be calibrated since they may alter the quantitative phase extraction based on Hilbert transformation: the unbalanced power split ratio at the beam splitter of the Michaelson Interferometer and the attenuation imbalance of the two arms of the interferometer caused by the microfluidic channel. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Thus we can clearly get the intensity envelop under two scenarios would be
 \begin{equation}
