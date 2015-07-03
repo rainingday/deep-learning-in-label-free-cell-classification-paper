@@ -277,16 +277,19 @@ Free-space laser pulses were linearly polarized with quarter- and half-wave plat
 \subsection{Coherent Detection and Phase Extraction}
 
 Unlike in conventional heterodyne detection, which uses a narrow band continuous-wave beam as the local oscillator, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband chirped optical pulse \cite{buckley2013coherent, devore2014coherent}. 
-
-The input optical signal 
+%
+Since the wavelength are mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrow-band optical pulse wave. As the envelope of the optical pulse wave varies slowly in time compared to the mismatch period between the reference arm and sample arm, we use slowly varying envelope approximation (SVEA) for the assumption. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, 
+%\begin{equation}
+%E_i = \operatorname{Re} \lbrace \tilde{E}_{in}(t) \exp[i \omega_{in}(t) t] \rbrace
+%\end{equation}
+is split into two arms of the Michaelson interferometer at the beam splitter. Here $\omega$ is the optical frequency of the input signal, which is corresponding to the spatial location being interrogated by the optical pulse at this frequency. The one in sample arm passes through the object,
+%\begin{equation}
+%E_s = \operatorname{Re} \lbrace \tilde{E}_s(t) \exp(i\omega_s(t) t) \rbrace
+%\end{equation}
 \begin{equation}
-E_i = \operatorname{Re} \lbrace \tilde{E}_{in}(t) \exp[i \omega_{in}(t) t] \rbrace
+\tilde{E}_s(\omega, t_p) = \sqrt{T_b} \tilde{E}_in(\omega, t_p)
 \end{equation}
-is split into two arms of the Michaelson interferometer at the beam splitter. Here, $\tilde{E}_{in}(t)$ is the complex envelope of the input electric field, and $\omega_{in}(t)$ is the optical frequency of the input signal, which itself is a function of time due to the input signal chirp. The one in sample arm, 
-\begin{equation}
-E_s = \operatorname{Re} \lbrace \tilde{E}_s(t) \exp(i\omega_s(t) t) \rbrace
-\end{equation}
-passes through the object, and then, is combined with the other one from the reference arm. Here, the optical frequency of the sample field $\omega_s(t) = \omega_{in}(t)$), and the electric field complex envelope of the sample signal is $\tilde{E}_s(t) = \sqrt{T_b} \tilde{E}_{in}(t)$ for a beam splitter with $T_b$ power transmission ratio and $1 - T_b$ power reflection ratio. The portion of the input signal going into the reference arm to act as the local oscillator is
+ and then, is combined with the other one from the reference arm. Here, the electric field complex envelope of the sample signal is $\tilde{E}_s(t) = \sqrt{T_b} \tilde{E}_{in}(t)$ for a beam splitter with $T_b$ power transmission ratio and $1 - T_b$ power reflection ratio. The portion of the input signal going into the reference arm to act as the local oscillator is
 \begin{equation}
 E_{LO} = \operatorname{Re} \lbrace \tilde{E}_{LO}(t) \exp(i\omega_{LO} t) \rbrace
 \end{equation}
@@ -356,38 +359,37 @@ In addition, two other major effects need to be calibrated since they may alter 
 \begin{equation}
 \begin{split}
 &\text{Into the sample arm:} \\
-&\quad \tilde{E}_s(t) = \sqrt{T_b} \tilde{E}_{in}(t) \exp(i\omega_{in}(t) t)  \\
+&\quad \tilde{E}_s(\omega, t_p) = \sqrt{T_b} \tilde{E}_in(\omega, t_p)  \\
 &\text{Into the reference arm:} \\
-&\quad \tilde{E}_r(t) = i \sqrt{1-T_b} \tilde{E}_{in}(t) \exp(i\omega_{in}(t) t) 
+&\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b} \tilde{E}_{in}(\omega, t_p)
 \end{split}
 \end{equation}
 where $T_b$ is the power transmission ratio of the beam-splitter. Since biological cells are semi-transparent, optical intensity in the sample arm will be altered not only by the absorption and scattering of imaged cells, but also by that of the microfluidic channel. The complex fields of the light waves coming at the beam splitter become
 \begin{equation}
 \begin{split}
 &\text{From the sample arm:}\\
-&\quad \tilde{E}_s(t) = \sqrt{T_s T_c(x,t) T_b} E_in(t) \exp \lbrace i[\omega_{in}(t) t + \Delta\varphi(x,t) \\
-&\quad\quad\quad\quad + 2 k(\lambda) (L_0 + \Delta L)] \rbrace\\
+&\quad \tilde{E}_s(\omega, t_p) = \sqrt{T_s(\omega) T_c(x,t_p) T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_in(\omega, t_p) \exp \lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \rbrace\\
 &\text{From the reference arm:} \\
-&\quad \tilde{E}_{LO}(t) = \sqrt{1-T_b} \tilde{E}_{in}(t) \exp[i\omega_{in}(t) t + 2 k(\lambda) L_0]
+&\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L]
 \end{split}
 \end{equation}
-where $T_s$ is transmittance of the surrounding buffer solutions and microfluidic channel, $T_c(x,t)$ is transmittance of cells at location $x$ along the rainbow at time $t$ in the field of view, and $k(\lambda)$ is the wavenumber at wavelength $\lambda$; $L_0$ is the length of reference arm, and $\Delta L$ is the arm length mismatch between two arms. The total electric field at each wavelength after two arms of the interferometer recombine at the beam splitter becomes
+where $T_s$ is transmittance of the surrounding buffer solutions and microfluidic channel, $T_c(x,t)$ is transmittance of cells at location $x$ along the rainbow at time $t$ in the field of view,; $L_0$ is the length of reference arm, and $\Delta L$ is the arm length mismatch between two arms. The total electric field at each wavelength after two arms of the interferometer recombine at the beam splitter becomes
 \begin{equation}
 \begin{split}
-E_{total}(t) &= \sqrt{T_s T_c(x,t)} r E_i(t_p,\omega_s) \exp \lbrace i[\omega_s t + \Delta\varphi(x,t) \\
-&\quad+ 2k(\lambda)L_0] \rbrace + \sqrt{1-r^2} E_i(t_p,\omega_{LO})\\
-&\quad \cdot \exp(i\omega_{LO} t + 2k(\lambda)L_0) \\
-&= E_i(t_p,\omega_{s}) \exp[i\omega_{LO} t 2k(\lambda)L_0] \lbrace \sqrt{1-r^2} \\
-&\quad+ T_s T_c(x,t) r \exp [i\Delta\varphi(x,t)] \rbrace
+E_o(\omega, t_p) &= \sqrt{T_s(\omega) R_m(\omega)} T_c(x, t_p) T_b(\omega) \tilde{E}_in(\omega, t_p) \exp \lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t)] \rbrace + 
+- [1-T_b(\omega)] \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L] \\
+&= \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp(- i \frac{2\omega L}{c}) \lbrace \sqrt{T_s(\omega)} T_c(x, t_p) T_b(\omega) exp[i(-2\frac{\omega}{c}\Delta L  \\
+&\quad - \Delta\varphi(x,t))] - [1-T_b(\omega)] \rbrace.
 \end{split}
 \end{equation}
-assuming $E_{LO}(t_p,\omega_{LO}) \approx E_s(t_p,\omega_s)$ according to equation~\ref{eq:sandLO}. The intensity envelop is
+The intensity envelop is
 \begin{equation}
 \begin{split}
-I_{total}(t) &= E_i^2(t_p,\omega_{s}) \lbrace (1-r^2) + T_s^2 T_c^2(x,t) r^2 \\
-&+ 2r\sqrt{1-r^2} T_s T_c cos[i\Delta\varphi(x,t)] \rbrace
+I_o(\omega, t_p) &\propto \left| \tilde{E}_{in}(\omega, t_p)\right|^2 \lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 \rbrace ^2 R_m(\omega) \\
+& - 2 [1-T_b(\omega)] R_m(\omega) T_c(x, t_p) T_b(\omega) \left| \tilde{E}_{in}(\omega, t_p)\right|^2 cos[ 2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
 \end{split}
 \end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Thus we can clearly get the intensity envelop under two scenarios would be
 \begin{equation}
 I_{env}(t) = \begin{cases}
