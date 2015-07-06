@@ -277,9 +277,9 @@ Free-space laser pulses were linearly polarized with quarter- and half-wave plat
 
 \subsection{Coherent Detection and Phase Extraction}
 
-Unlike in conventional heterodyne detection, which uses a narrow band continuous-wave beam as the local oscillator, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband chirped optical pulse \cite{buckley2013coherent, devore2014coherent}. 
+Unlike in conventional heterodyne detection, which uses a narrowband continuous-wave signal as the local oscillator or reference, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband optical pulse train \cite{buckley2013coherent, devore2014coherent}. 
 
-Since the wavelength are mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrow-band optical pulse wave. As the envelope of the optical pulse wave varies slowly in time compared to the mismatch period between the reference arm and sample arm, we use slowly varying envelope approximation (SVEA) for the assumption. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, is split into two arms of the Michaelson interferometer at the beam splitter. Here, $\omega$ is the optical frequency of the input signal, which is corresponding to the spatial location $x$ being interrogated by the optical pulse at this frequency. This unique feature is called spectral encoding. Each $t_p$ specifies the time of each rainbow flash when it reaches the beam splitter, corresponds to the $p$-th incoming pulse. Note that $\tilde{E}_{in}(\omega,t_p)$ can be simplified as $\tilde{E}_{in}(\omega)$ when pulse shape (magnitude of each wavelength) is stable from pulse to pulse. The light split into the two arms of the Michaelson interferometer can be expressed as
+Since the spectrum is mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrowband optical wave. As the envelope of the optical wave varies slowly in time compared to the period of the optical electromagnetic wave and the time mismatch between the reference arm and the sample arm, we employ slowly varying envelope approximation in our analysis. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, is split into two arms of the Michaelson interferometer at the beam splitter. Here, $\omega$ is the optical frequency of the input signal, which corresponds to the spatial location $x$ being interrogated by the optical wave at this frequency (i.e. spectral encoding of the object image). $t_p$ specifies the time when each rainbow flash reaches the beam splitter, corresponds to the $p$-th incoming pulse. Note that $\tilde{E}_{in}(\omega,t_p)$ can be simplified as $\tilde{E}_{in}(\omega)$ when pulse shape (magnitude of each wavelength) is stable from pulse to pulse. The light split into the two arms of the Michaelson interferometer can be expressed as
 \begin{equation}
 \begin{split}
 &\text{Into the sample arm:} \\
@@ -288,7 +288,7 @@ Since the wavelength are mapped into space by diffraction gratings, the complex 
 &\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b} \tilde{E}_{in}(\omega, t_p)
 \end{split}
 \end{equation}
-where $T_b$ is the power transmission ratio of the beam-splitter. Optical intensity in the sample arm will be altered by the absorption and scattering of imaged cells, as well as that of the microfluidic channel and buffer solution. Not only the electric field amplitude after passing through semitransparent objects will be modulated by the optical absorption and scattering in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t_p)$, inducted by refractive index change from the object along the interrogation beam. The complex fields of the light waves coming back to the beam splitter become
+where $T_b$ is the power transmission ratio of the beam-splitter. Optical intensity in the sample arm will be altered by the absorption and scattering of imaged cells, as well as that of the microfluidic channel and buffer solution. Not only the electric field amplitude after passing through semitransparent objects will be modulated by the optical attenuation in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t_p)$, inducted by refractive index change from the object along the interrogation beam. Thus, the complex fields of the light waves coming back to the beam splitter become
 \begin{equation}
 \begin{split}
 &\text{From the sample arm:}\\
@@ -299,8 +299,9 @@ where $T_b$ is the power transmission ratio of the beam-splitter. Optical intens
 &\quad\quad\quad \cdot \exp(- i \frac{\omega}{c}\cdot 2L)
 \end{split}
 \end{equation}
-where $L_0$ is the length of reference arm, and $\Delta L$ is the arm length mismatch between two arms. $t_d$ is the time delay during which rainbow flash travels from the beam splitter to the cell sample, $t_d = \frac{L_0 + \Delta L}{2}$. $T_s(\omega)$ is power transmittance of the surrounding buffer solutions and microfluidic channel, and $T_c(x,t_p + t_d)$ is spatial power transmittance of cells at location $x$ along the rainbow when being illuminated at time $t_p + t_d$. Both $T_s(\omega)$ and $T_c(x,t_p + t_d)$ have been multiplied twice since each rainbow flash pass through objects twice. As the optical wave meets the requirements of slowly varying envelop approximation, we can approximate $T_c(x,t_p + t_d)$ to be $T_c(x,t_p)$ to synchronize with $\tilde{E}_{in}(\omega, t_p)$ without sacrificing accuracy.
-The total electric field at each wavelength after two arms of the interferometer recombine at the beam splitter becomes
+where $L$ is the length of reference arm, and $\Delta L$ is the arm length mismatch between two arms. $t_d$ is the time delay during which rainbow flash travels from the beam splitter to the sample cell, $t_d = \frac{L_0 + \Delta L}{c}$. $T_s(\omega)$ is power transmittance of the surrounding buffer solution and microfluidic channel, and $T_c(x,t_p + t_d)$ is spatial power transmittance of cells at location $x$ along the rainbow when being illuminated at time $t_p + t_d$. Both $\sqrt{T_s(\omega)}$ and $\sqrt{T_c(x,t_p + t_d)}$ affect the optical field twice as each rainbow flash passes through the cell twice. Since the $t_d$ is much smaller than the time scale of the envelope variations caused by the cell flow, we can approximate $T_c(x,t_p + t_d)$ to be $T_c(x,t_p)$ to synchronize with $\tilde{E}_{in}(\omega, t_p)$ without sacrificing accuracy.
+
+The total electric field at each wavelength or optical frequency after two arms of the interferometer recombine at the beam splitter becomes
 \begin{equation} \label{eq:totalElecField}
 \begin{split}
 \tilde{E}_o(\omega, t_p) &= T_s(\omega) T_c(x, t_p) T_b(\omega) \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
@@ -321,7 +322,7 @@ The intensity envelop then becomes
 \begin{split}
 \tilde{I}_o(\omega, t_p) &\propto \Big\lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 T_s(\omega)^2\Big\rbrace R_m(\omega) \\
 & \cdot \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 - 2 [1-T_b(\omega)] T_c(\omega, t_p) T_b(\omega) R_m(\omega) \\
-& \cdot T_s(\omega) \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
+& \cdot T_s(\omega) \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi(\omega, t_p) ]
 \end{split}
 \end{equation}
 
@@ -331,23 +332,23 @@ The intensity envelop then becomes
 \caption{\label{fig:OSA} }
 \end{figure*}
 
-During time stretch, each frequency component $\omega$, or $\lambda$ will be one-to-one mapped into time domain. Define the relative time delay of $\lambda$ compared to central wavelength $\lambda_c$ as $t_i$, which is usually called intra-pulse time delay. Let us write in terms of $\lambda$, Eq.~\ref{eq:totalIntensity} can be simplified as
+During time stretch, each frequency component $\omega$, or wavelength $\lambda$ will be one-to-one mapped into time domain. We define the relative time delay of $\lambda$ compared to the central wavelength, $\lambda_c$, as $t_i$, which is usually called intrapulse time delay. Written in terms of $\lambda$, Eq.~\ref{eq:totalIntensity} can be simplified as
 \begin{equation} \label{eq:totalIntensitylambda}
-\tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) - I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi_c(\lambda, t_p) ]
+\tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) - I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi(\lambda, t_p) ]
 \end{equation}
-where $I_b (\lambda, t_p)$ is the background / baseband intensity, and $I_i (\lambda, t_p)$ is the interference / intermediate envelop:
+where $I_b (\lambda, t_p)$ is the background or baseband intensity envelope, and $I_i (\lambda, t_p)$ is the interference or intermediate intensity envelope:
 \begin{align} \label{eq:totalIntensityTwoTerms}
 \begin{split}
 I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b(\lambda)^2 T_c(\lambda, t_p)^2 T_s(\lambda)^2\Big\rbrace \\
 &\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}\\
 \begin{split}
-I_i (\lambda, t_p) &= - 2 [1-T_b(\lambda)] T_c(\lambda, t_p) T_b(\lambda) R_m(\lambda)\\
+I_i (\lambda, t_p) &= 2 [1-T_b(\lambda)] T_c(\lambda, t_p) T_b(\lambda) R_m(\lambda)\\
 & \cdot T_s(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}
 \end{align}
 
-Time stretch maps frequency domain into time domain by
+Linear time stretch maps frequency domain into time domain by
 \begin{equation} \label{eq:DCF}
 t_i = D (\lambda - \lambda_c) L_f.
 \end{equation}
