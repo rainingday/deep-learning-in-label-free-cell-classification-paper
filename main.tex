@@ -40,6 +40,8 @@
 \DeclareMathOperator{\hilbert}{\mathcal{H}} % To define additional named operators
 \DeclareMathOperator{\h}{h} % To define additional named operators
 \DeclareMathOperator{\unwrap}{unwrap} % To define additional named operators
+\DeclareMathOperator{\vercat}{cat_\downarrow} % To define additional named operators
+\DeclareMathOperator{\horcat}{cat_\rightarrow} % To define additional named operators
 
 \begin{document}
 
@@ -288,12 +290,12 @@ Since the spectrum is mapped into space by diffraction gratings, the complex fie
 &\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b} \tilde{E}_{in}(\omega, t_p)
 \end{split}
 \end{equation}
-where $T_b$ is the power transmission ratio of the beam-splitter. Optical intensity in the sample arm will be altered by the absorption and scattering of imaged cells, as well as that of the microfluidic channel and buffer solution. Not only the electric field amplitude after passing through semitransparent objects will be modulated by the optical attenuation in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi(x,t_p)$, inducted by refractive index change from the object along the interrogation beam. Thus, the complex fields of the light waves coming back to the beam splitter become
+where $T_b$ is the power transmission ratio of the beam-splitter. Optical intensity in the sample arm will be altered by the absorption and scattering of imaged cells, as well as that of the microfluidic channel and buffer solution. Not only the electric field amplitude after passing through semitransparent objects will be modulated by the optical attenuation in the sample arm, but also the optical path length difference will lead to a phase shift, $\Delta\varphi_c(x,t_p)$, inducted by refractive index change from the object along the interrogation beam. Thus, the complex fields of the light waves coming back to the beam splitter become
 \begin{equation}
 \begin{split}
 &\text{From the sample arm:}\\
 &\quad \tilde{E}_s(\omega, t_p) = T_s(\omega) T_c(x,t_p + t_d) \sqrt{T_b(\omega) R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
-&\quad\quad\quad \cdot \exp \Big\lbrace i\Big[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t_p)\Big] \Big\rbrace\\
+&\quad\quad\quad \cdot \exp \Big\lbrace i\Big[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi_c(x,t_p)\Big] \Big\rbrace\\
 &\text{From the reference arm:} \\
 &\quad \tilde{E}_r(\omega, t_p) = i \sqrt{1-T_b(\omega)} \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
 &\quad\quad\quad \cdot \exp(- i \frac{\omega}{c}\cdot 2L)
@@ -305,36 +307,31 @@ The total electric field at each wavelength or optical frequency after two arms 
 \begin{equation} \label{eq:totalElecField}
 \begin{split}
 \tilde{E}_o(\omega, t_p) &= T_s(\omega) T_c(x, t_p) T_b(\omega) \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \\
-&\quad \cdot \exp \Big\lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi(x,t_p)] \Big\rbrace \\
+&\quad \cdot \exp \Big\lbrace i[-\frac{\omega}{c} \cdot 2(L+\Delta L) - \Delta\varphi_c(x,t_p)] \Big\rbrace \\
 &\quad - [1-T_b(\omega)] \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp[- i \frac{\omega}{c}\cdot 2L] \\
 &= \sqrt{R_m(\omega)} \tilde{E}_{in}(\omega, t_p) \exp(- i \frac{2\omega L}{c}) \\
 &\quad \cdot \Big\lbrace T_s(\omega) T_c(x, t_p) T_b(\omega) exp \lbrace i[-2\frac{\omega}{c}\Delta L  \\
-&\quad - \Delta\varphi(x,t_p)] \rbrace - [1-T_b(\omega)] \Big\rbrace.
+&\quad - \Delta\varphi_c(x,t_p)] \rbrace - [1-T_b(\omega)] \Big\rbrace.
 \end{split}
 \end{equation}
 Based on the spectral encoding setup, we know spatial information has been encoded into spectrum,
 \begin{align}
 T_c(x,t_p + t_d) &\Rightarrow T_c(\omega,t_p + t_d)\\
-\Delta\varphi(x,t_p) &\Rightarrow \Delta\varphi(\omega,t_p)
+\Delta\varphi_c(x,t_p) &\Rightarrow \Delta\varphi_c(\omega,t_p)
 \end{align}
 The intensity envelop then becomes
 \begin{equation} \label{eq:totalIntensity}
 \begin{split}
-\tilde{I}_o(\omega, t_p) &\propto \Big\lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 T_s(\omega)^2\Big\rbrace R_m(\omega) \\
+\tilde{I}_o(\omega, t_p) &\propto \tilde{E}_o^*(\omega, t_p) \tilde{E}_o(\omega, t_p) \\
+&= \Big\lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 T_s(\omega)^2\Big\rbrace R_m(\omega) \\
 & \cdot \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 - 2 [1-T_b(\omega)] T_c(\omega, t_p) T_b(\omega) R_m(\omega) \\
-& \cdot T_s(\omega) \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi(\omega, t_p) ]
+& \cdot T_s(\omega) \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
 \end{split}
 \end{equation}
 
-
-\begin{figure*}
-%\includegraphics[scale=0.2]{FigureOSA.jpg}
-\caption{\label{fig:OSA} }
-\end{figure*}
-
 During time stretch, each frequency component $\omega$, or wavelength $\lambda$ will be one-to-one mapped into time domain. We define the relative time delay of $\lambda$ compared to the central wavelength, $\lambda_c$, as $t_i$, which is usually called intrapulse time delay. Written in terms of $\lambda$, Eq.~\ref{eq:totalIntensity} can be simplified as
 \begin{equation} \label{eq:totalIntensitylambda}
-\tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) - I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi(\lambda, t_p) ]
+\tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) - I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi_c(\lambda, t_p) ]
 \end{equation}
 where $I_b (\lambda, t_p)$ is the background or baseband intensity envelope, and $I_i (\lambda, t_p)$ is the interference or intermediate intensity envelope:
 \begin{align} \label{eq:totalIntensityTwoTerms}
@@ -352,18 +349,18 @@ Linear time stretch maps frequency domain into time domain by
 \begin{equation} \label{eq:DCF}
 t_i = D (\lambda - \lambda_c) L_f.
 \end{equation}
-where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading $\Delta t_i$ per unit bandwidth $\Delta\lambda$ per unit distance travelled. Thus the energy flux absorbed at the photodetector is the vertical concatenation of inter-pulse waveforms:
+where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading, $\Delta t_i$, per unit bandwidth, $\Delta\lambda$, per unit distance traveled. Thus the temporal samples of the energy flux absorbed at the photodetector are the intrapulse concatenation of spectral samples followed by interpulse concatentation of pulse waveforms:
 \begin{equation}
 \begin{split}
-\tilde{I}_{PD}(t) &=\\
-\text{vetcat} &
+\tilde{I}_{PD}(t^{(n,m)}) &=\\
+\horcat\vercat &
 \begin{pmatrix}
 \tilde{I}_{o}(t_i^{(1)}, t_p^{(1)})&	\tilde{I}_{o}(t_i^{(1)}, t_p^{(2)})&	\cdots& \tilde{I}_{o}(t_i^{(1)}, t_p^{(m)})\\
 \tilde{I}_{o}(t_i^{(2)}, t_p^{(1)})&	\tilde{I}_{o}(t_i^{(2)}, t_p^{(2)})&	\cdots& \tilde{I}_{o}(t_i^{(2)}, t_p^{(m)})\\
 \vdots&									\vdots&									\ddots& \vdots								 \\
 \tilde{I}_{o}(t_i^{(n)}, t_p^{(1)})&	\tilde{I}_{o}(t_i^{(n)}, t_p^{(2)})&	\cdots& \tilde{I}_{o}(t_i^{(n)}, t_p^{(m)})\\
 \end{pmatrix} \\
-\rightleftharpoons &\text{vetcat}
+\rightleftharpoons \horcat\vercat &
 \begin{pmatrix}
 \tilde{I}_{o}(\lambda_1, t_p^{(1)})  &\tilde{I}_{o}(\lambda_1, t_p^{(2)})   &\cdots  &\tilde{I}_{o}(\lambda_1, t_p^{(m)})\\
 \tilde{I}_{o}(\lambda_2, t_p^{(1)})  &\tilde{I}_{o}(\lambda_2, t_p^{(2)})   &\cdots  &\tilde{I}_{o}(\lambda_2, t_p^{(m)})\\
@@ -372,8 +369,7 @@ where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive f
 \end{pmatrix} \\
 \end{split}
 \end{equation}
-
-where \text{vetcat} means vertical concatenation. Each $\tilde{I}_{o}(t_i^{(n)}, t_p^{(m)})$ expresses the $n$th spatial pixel at the $m$th line image. Applying Eq.~\ref{eq:DCF} to Eq.~\ref{eq:totalIntensitylambda},
+where $\horcat$ and $\vercat$ mean horizontal and vertical concatenations, respectively. Each $\tilde{I}_{o}(t_i^{(n)}, t_p^{(m)})$ expresses the $n$th spectral (spatial) pixel at the $m$th pulse (line image). Applying Eq.~\ref{eq:DCF} to Eq.~\ref{eq:totalIntensitylambda},
 \begin{equation}\label{eq:afterDCF}
 \begin{split}
 \tilde{I}_{o}(t_i^{(n)}, t_p^{(m)}) & \propto I_b (t_i^{(n)}, t_p^{(m)}) - I_i (t_i^{(n)}, t_p^{(m)}) \\
@@ -381,29 +377,37 @@ where \text{vetcat} means vertical concatenation. Each $\tilde{I}_{o}(t_i^{(n)},
 \end{split}
 \end{equation}
 
-Thus the time stretched temporal waveforms corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}. One is $I_b (t_i^{(n)}, t_p^{(m)})$, a temporal envelope of the time-stretched optical pulse usually at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object as in brightfield microscopy. It provides information about optical loss, i.e. light absorption and scattering caused by surface roughness, granularity, and inner cell organelle complexity. 
+Therefore, the time stretched temporal waveform corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}: One is $I_b (t_i^{(n)}, t_p^{(m)})$, a temporal envelope of the time-stretched optical pulse at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object transmission as in brightfield microscopy. It provides information about optical loss, i.e. light absorption and scattering caused by surface roughness, granularity, and inner cell organelle complexity. 
 
-The second feature in Eq.~\ref{eq:afterDCF}
+The second term in Eq.~\ref{eq:afterDCF} (with cosine component) is a fast oscillating fringe, caused by the spectral interference of the pulses multiplexed between the sample and the reference arms in the Michelson interferometer. This term can be separated by a bandpass filter and normalized (see section \ref{scn:calibration}) in order to extract the object phase shift, $\Delta\varphi_c(x,t_p)$:
 \begin{equation}
-I_i (t_i^{(n)}, t_p^{(m)})cos\Big[\frac{4\pi D L_f\Delta L}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)})\Big]
+I_c (t_i^{(n)}, t_p^{(m)}) = cos\Bigg[ \frac{4\pi\Delta L \cdot D L_f}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)}) \Bigg]
 \end{equation}
-is a fast oscillating fringe, caused by the interference of the linearly chirped pulses multiplexed between the sample and reference arms in the Michelson interferometer. It can be separated by a band-pass filter in order to extract the object phase shift, $\Delta\varphi(x,t_p)$. The instantaneous phase of this feature can be readily retrieved from its analytic representation given by Hilbert transform, $\hilbert$:
+The first term in cosine causes the interferogram fringe pattern and can be approximated as
 \begin{equation}
+\frac{4\pi D L_f \Delta L}{t_i + D \lambda_c L_f} \approxeq - f_i t_i \varphi_{i0}
+\end{equation}
+where $f_i$ is the fringe frequency:
+\begin{equation}
+f_i \approxeq \frac{4\pi \Delta L}{\lambda_c^2 D L_f}
+\end{equation}
+
+The instantaneous phase of $I_c(t_i^{(n)}, t_p^{(m)})$ can be readily retrieved from its analytic representation given by Hilbert transform, $\hilbert$:
+\begin{equation} \label{eqn:angle}
 \begin{split}
-\angle \tilde{I}_{o}(t_i^{(n)}, t_p^{(m)}) &=  \frac{4\pi D L_f\Delta L}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)}) \\
-&= \arg\Big[\tilde{I}_{o}(t_i^{(n)}, t_p^{(m)}) + j \cdot \hilbert \lbrace \tilde{I}_{o}(t_i^{(n)}, t_p^{(m)}) \rbrace\Big]
+\angle I_c(t_i^{(n)}, t_p^{(m)}) &= \arg\Big[I_c(t_i^{(n)}, t_p^{(m)}) + j \cdot \hilbert \lbrace I_c(t_i^{(n)}, t_p^{(m)}) \rbrace\Big] \\
+&=  \frac{4\pi D L_f\Delta L}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)})
 \end{split}
 \end{equation}
 Here $\arg$ means the argument of a complex number. A one-dimensional phase unwrapping algorithm followed by background phase removal gives the object phase shift, 
 \begin{equation}
-\Delta\varphi(x,t_p^{(m)}) = \unwrap \lbrace\angle \tilde{I}_{o}(t_i^{(n)}, t_p^{(m)})\rbrace - \frac{2\pi c}{\lambda_n} t_i^{(n)}
+\Delta\varphi_c(t_i^{(n)}, t_p^{(m)}) = \unwrap \lbrace \angle I_c(t_i^{(n)}, t_p^{(m)}) - \angle I_c(t_i^{(n)}, t_p^{(\text{empty})}) \rbrace
 \end{equation}
-The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$.
+where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in the field of view, i.e. background phase. The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$. 
 
-To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells in low frequency components of the spectrum in electrical detection domain. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, Hilbert transform remains robust in this scenario to separate the two frequency terms for optical loss and phase. 
+To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.2 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
 
-
-\subsection{Calibration in Optical Loss Extraction}
+\subsection{Calibration in Optical Loss Extraction} \label{scn:calibration}
 
 Specifically, there are two features that are unique to quantitative phase imaging with Michaelson Interferometer need to be calibrated since they may alter the quantitative phase extraction based on Hilbert transformation: the unbalanced power split ratio at the beam splitter of the Michaelson Interferometer and the attenuation imbalance of the two arms of the interferometer caused by the microfluidic channel. 
 
@@ -443,7 +447,7 @@ We reconstruct both quantitative brightfield and phase-contrast images simultane
 
 The optical path length difference image can be formed by the phase shift line scans as
 \begin{equation}
-OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi(t_i^{(n)},t_p^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi(t_i^{(n)},t_p^{(m)})
+OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)})
 \end{equation}
 On the other hand, if the axial thickness of the cell at reconstructed image pixel $(x,y)$ is $d(x,y)$,
 \begin{equation} \label{eq:OPD}
