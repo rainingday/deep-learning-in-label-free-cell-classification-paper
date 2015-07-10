@@ -323,7 +323,7 @@ The intensity envelop then becomes
 \begin{equation} \label{eq:totalIntensity}
 \begin{split}
 \tilde{I}_o(\omega, t_p) &\propto \tilde{E}_o^*(\omega, t_p) \tilde{E}_o(\omega, t_p) \\
-&= \Big\lbrace [1-T_b(\omega)]^2 + T_b(\omega)^2 T_c(\omega, t_p)^2 T_s(\omega)^2\Big\rbrace R_m(\omega) \\
+&= \Big\lbrace [1-T_b(\omega)]^2 + T_b^2(\omega) T_c^2(\omega, t_p) T_s^2(\omega) \Big\rbrace R_m(\omega) \\
 & \cdot \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 - 2 [1-T_b(\omega)] T_c(\omega, t_p) T_b(\omega) R_m(\omega) \\
 & \cdot T_s(\omega) \lvert\tilde{E}_{in}(\omega, t_p)\rvert^2 cos[2\omega \Delta L / c + \Delta \varphi_c(\omega, t_p) ]
 \end{split}
@@ -336,7 +336,7 @@ During time stretch, each frequency component $\omega$, or wavelength $\lambda$ 
 where $I_b (\lambda, t_p)$ is the background or baseband intensity envelope, and $I_i (\lambda, t_p)$ is the interference or intermediate intensity envelope:
 \begin{align} \label{eq:totalIntensityTwoTerms}
 \begin{split}
-I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b(\lambda)^2 T_c(\lambda, t_p)^2 T_s(\lambda)^2\Big\rbrace \\
+I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b^2(\lambda) T_c^2(\lambda, t_p) T_s^2(\lambda) \Big\rbrace \\
 &\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}\\
 \begin{split}
@@ -385,7 +385,7 @@ I_c (t_i^{(n)}, t_p^{(m)}) = cos\Bigg[ \frac{4\pi\Delta L \cdot D L_f}{t_i^{(n)}
 \end{equation}
 The first term in cosine causes the interferogram fringe pattern and can be approximated as
 \begin{equation}
-\frac{4\pi D L_f \Delta L}{t_i + D \lambda_c L_f} \approxeq - f_i t_i \varphi_{i0}
+\frac{4\pi D L_f \Delta L}{t_i + D \lambda_c L_f} \approxeq - f_i t_i + \varphi_{i0}
 \end{equation}
 where $f_i$ is the fringe frequency:
 \begin{equation}
