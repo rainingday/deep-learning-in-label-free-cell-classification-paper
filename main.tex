@@ -281,7 +281,7 @@ Free-space laser pulses were linearly polarized with quarter- and half-wave plat
 
 Unlike in conventional heterodyne detection, which uses a narrowband continuous-wave signal as the local oscillator or reference, the coherent detection in our time stretch system uses an unmodulated copy of the original optical input, which is a broadband optical pulse train \cite{buckley2013coherent, devore2014coherent}. 
 
-Since the spectrum is mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrowband optical wave. As the envelope of the optical wave varies slowly in time compared to the period of the optical electromagnetic wave and the time mismatch between the reference arm and the sample arm, we employ slowly varying envelope approximation in our analysis. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, is split into two arms of the Michaelson interferometer at the beam splitter. Here, $\omega$ is the optical frequency of the input signal, which corresponds to the spatial location $x$ being interrogated by the optical wave at this frequency (i.e. spectral encoding of the object image). $t_p$ specifies the time when each rainbow flash reaches the beam splitter, corresponds to the $p$-th incoming pulse. Note that $\tilde{E}_{in}(\omega,t_p)$ can be simplified as $\tilde{E}_{in}(\omega)$ when pulse shape (magnitude of each wavelength) is stable from pulse to pulse. The light split into the two arms of the Michaelson interferometer can be expressed as
+Since the spectrum is mapped into space by diffraction gratings, the complex field at any specific spatial location within the field of view is a narrowband optical wave. As the envelope of the optical wave varies slowly in time compared to the period of the optical electromagnetic wave and the time mismatch between the reference arm and the sample arm, we employ slowly varying envelope approximation in our analysis. The complex envelope of the input electric field, $\tilde{E}_{in}(\omega, t_p)$, is split into two arms of the Michaelson interferometer at the beam splitter. Here, $\omega$ is the optical frequency of the input signal, which corresponds to the spatial location $x$ being interrogated by the optical wave at this frequency (i.e. spectral encoding of the object image). $t_p$ specifies the time when each rainbow flash reaches the beam splitter, corresponds to the $p$-th incoming pulse. Note that $\tilde{E}_{in}(\omega,t_p)$ can be simplified as $\tilde{E}_{in}(\omega)$ when pulse shape is stable from pulse to pulse. The light split into the two arms of the Michaelson interferometer can be expressed as
 \begin{equation}
 \begin{split}
 &\text{Into the sample arm:} \\
@@ -316,7 +316,7 @@ The total electric field at each wavelength or optical frequency after two arms 
 \end{equation}
 Based on the spectral encoding setup, we know spatial information has been encoded into spectrum,
 \begin{align}
-T_c(x,t_p + t_d) &\Rightarrow T_c(\omega,t_p + t_d)\\
+T_c(x,t_p) &\Rightarrow T_c(\omega,t_p)\\
 \Delta\varphi_c(x,t_p) &\Rightarrow \Delta\varphi_c(\omega,t_p)
 \end{align}
 The intensity envelop then becomes
@@ -331,7 +331,7 @@ The intensity envelop then becomes
 
 During time stretch, each frequency component $\omega$, or wavelength $\lambda$ will be one-to-one mapped into time domain. We define the relative time delay of $\lambda$ compared to the central wavelength, $\lambda_c$, as $t_i$, which is usually called intrapulse time delay. Written in terms of $\lambda$, Eq.~\ref{eq:totalIntensity} can be simplified as
 \begin{equation} \label{eq:totalIntensitylambda}
-\tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) - I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi_c(\lambda, t_p) ]
+\tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) + I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi_c(\lambda, t_p) ]
 \end{equation}
 where $I_b (\lambda, t_p)$ is the background or baseband intensity envelope, and $I_i (\lambda, t_p)$ is the interference or intermediate intensity envelope:
 \begin{align} \label{eq:totalIntensityTwoTerms}
@@ -340,7 +340,7 @@ I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b^2(\lambda) T_c^2(\lam
 &\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}\\
 \begin{split}
-I_i (\lambda, t_p) &= 2 [1-T_b(\lambda)] T_c(\lambda, t_p) T_b(\lambda) R_m(\lambda)\\
+I_i (\lambda, t_p) &= - 2 [1-T_b(\lambda)] T_c(\lambda, t_p) T_b(\lambda) R_m(\lambda)\\
 & \cdot T_s(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}
 \end{align}
@@ -352,7 +352,7 @@ t_i = D (\lambda - \lambda_c) L_f.
 where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading, $\Delta t_i$, per unit bandwidth, $\Delta\lambda$, per unit distance traveled. Thus the temporal samples of the energy flux absorbed at the photodetector are the intrapulse concatenation of spectral samples followed by interpulse concatentation of pulse waveforms:
 \begin{equation}
 \begin{split}
-\tilde{I}_{PD}(t^{(n,m)}) &=\\
+\tilde{I}_{PD}(t) = \quad\quad&\quad\\
 \horcat\vercat &
 \begin{pmatrix}
 \tilde{I}_{o}(t_i^{(1)}, t_p^{(1)})&	\tilde{I}_{o}(t_i^{(1)}, t_p^{(2)})&	\cdots& \tilde{I}_{o}(t_i^{(1)}, t_p^{(m)})\\
@@ -372,22 +372,22 @@ where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive f
 where $\horcat$ and $\vercat$ mean horizontal and vertical concatenations, respectively. Each $\tilde{I}_{o}(t_i^{(n)}, t_p^{(m)})$ expresses the $n$th spectral (spatial) pixel at the $m$th pulse (line image). Applying Eq.~\ref{eq:DCF} to Eq.~\ref{eq:totalIntensitylambda},
 \begin{equation}\label{eq:afterDCF}
 \begin{split}
-\tilde{I}_{o}(t_i^{(n)}, t_p^{(m)}) & \propto I_b (t_i^{(n)}, t_p^{(m)}) - I_i (t_i^{(n)}, t_p^{(m)}) \\
+\tilde{I}_{o}(t_i^{(n)}, t_p^{(m)}) & \propto I_b (t_i^{(n)}, t_p^{(m)}) + I_i (t_i^{(n)}, t_p^{(m)}) \\
 & \cdot cos\Bigg[ \frac{4\pi\Delta L \cdot D L_f}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)}) \Bigg]
 \end{split}
 \end{equation}
 
 Therefore, the time stretched temporal waveform corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}: One is $I_b (t_i^{(n)}, t_p^{(m)})$, a temporal envelope of the time-stretched optical pulse at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object transmission as in brightfield microscopy. It provides information about optical loss, i.e. light absorption and scattering caused by surface roughness, granularity, and inner cell organelle complexity. 
 
-The second term in Eq.~\ref{eq:afterDCF} (with cosine component) is a fast oscillating fringe, caused by the spectral interference of the pulses multiplexed between the sample and the reference arms in the Michelson interferometer. This term can be separated by a bandpass filter, and its envelope can be derived by a nonlinear envelope detection technique. Here we used a moving minimum/maximum filter to extract the envelope. After normalization to the envelope, the cosine component is used for calculation of the object phase shift, $\Delta\varphi_c(x,t_p)$:
+The second term in Eq.~\ref{eq:afterDCF} (with cosine component) is a fast oscillating fringe, caused by the spectral interference of the pulses multiplexed between the sample and the reference arms in the Michelson interferometer. This term can be separated by a bandpass filter, and its envelope can be derived by a nonlinear envelope detection technique. Here we used a moving minimum/maximum filter to extract the envelope. After normalization to the envelope, the cosine component 
 \begin{equation}
 I_c (t_i^{(n)}, t_p^{(m)}) = cos\Bigg[ \frac{4\pi\Delta L \cdot D L_f}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)}) \Bigg]
 \end{equation}
-The first term in cosine causes the interferogram fringe pattern and can be approximated as
+is used for calculation of the object phase shift, $\Delta\varphi_c(x,t_p)$. The first term in cosine causes the interferogram fringe pattern. Since $t_i \ll D \lambda_c L_f$, it can be approximated as
 \begin{equation}
 \frac{4\pi D L_f \Delta L}{t_i + D \lambda_c L_f} \approxeq - f_i t_i + \varphi_{i0}
 \end{equation}
-where $f_i$ is the fringe frequency:
+where $\varphi_{i0}$ is an initial phase constant, $f_i$ is the fringe frequency:
 \begin{equation}
 f_i \approxeq \frac{4\pi \Delta L}{\lambda_c^2 D L_f}
 \end{equation}
@@ -401,7 +401,10 @@ The instantaneous phase of $I_c(t_i^{(n)}, t_p^{(m)})$ can be readily retrieved 
 \end{equation}
 Here $\arg$ means the argument of a complex number. A one-dimensional phase unwrapping algorithm followed by background phase removal gives the object phase shift, 
 \begin{equation}
-\Delta\varphi_c(t_i^{(n)}, t_p^{(m)}) = \unwrap \lbrace \angle I_c(t_i^{(n)}, t_p^{(m)}) - \angle I_c(t_i^{(n)}, t_p^{(\text{empty})}) \rbrace
+\begin{split}
+\Delta\varphi_c(t_i^{(n)}, t_p^{(m)}) = \unwrap \lbrace &\angle I_c(t_i^{(n)}, t_p^{(m)}) \\
+&- \angle I_c(t_i^{(n)}, t_p^{(\text{empty})}) \rbrace
+\end{split}
 \end{equation}
 where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in the field of view, i.e. background phase. The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$. 
 
@@ -445,9 +448,9 @@ Since the absorption of cells at 1550 nm is much higher than visible wavelength 
 
 We reconstruct both quantitative brightfield and phase-contrast images simultaneously from single-shot frequency-multiplexed interferometric measurements. The envelope and phase of the time-domain signal $\tilde{I}_o (t_i^{(n)}, t_d^{(m)})$ was firstly mapped into series of spatial information $\tilde{I}_o(x^{(n)},t_p^{(m)})$, forming a line scanning brightfield image and phase contrast image, illuminated by the optical pulse at time $t_p$ (Fig.~\ref{fig:2DImage}b). This is because within each optical pulse, the spatial information is mapped one-to-one into spectral domain, $x^{(n)} \rightarrow \lambda_n$, and spectrum is stretch in time, $\lambda_n \rightarrow t_i^{(n)}$, where $t_i^{(n)}$ is the relative group delay time of each frequency component within a pulse with respect to the central wavelength. These line-scan images based on $\tilde{I}_o(x,t_p^{(1)})$, $\tilde{I}_o (x, t_p^{(2)}$, $\tilde{I}_o(x,t_p^{(3)})$, \ldots were then cascaded into a two dimensional image corresponding to $\tilde{I}_o(x,y)$, where the second dimension $y$ is the spatial mapping of time elapse based on object flow speed. 
 
-The optical path length difference image can be formed by the phase shift line scans as
+The optical path length difference image can be calculated by the phase shift line scans as
 \begin{equation}
-OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)})
+OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)})
 \end{equation}
 On the other hand, if the axial thickness of the cell at reconstructed image pixel $(x,y)$ is $d(x,y)$,
 \begin{equation} \label{eq:OPD}
