@@ -349,10 +349,10 @@ Linear time stretch maps frequency domain into time domain by
 \begin{equation} \label{eq:DCF}
 t_i = D (\lambda - \lambda_c) L_f.
 \end{equation}
-where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading, $\Delta t_i$, per unit bandwidth, $\Delta\lambda$, per unit distance traveled. Thus the temporal samples of the energy flux absorbed at the photodetector are the intrapulse concatenation of spectral samples followed by interpulse concatentation of pulse waveforms:
+where $\lambda_c$ is the central wavelength and $L_f$ the length of dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading, $\Delta t_i$, per unit bandwidth, $\Delta\lambda$, per unit distance traveled. Thus the temporal samples of the energy flux absorbed at the photodetector are the intrapulse concatenation of spectral samples followed by interpulse concatenation of pulse waveforms:
 \begin{equation}
 \begin{split}
-\tilde{I}_{PD}(t) = \quad\quad&\quad\\
+\tilde{I}_{PD}[t] = \quad\quad&\quad\\
 \horcat\vercat &
 \begin{pmatrix}
 \tilde{I}_{o}(t_i^{(1)}, t_p^{(1)})&	\tilde{I}_{o}(t_i^{(1)}, t_p^{(2)})&	\cdots& \tilde{I}_{o}(t_i^{(1)}, t_p^{(m)})\\
@@ -450,7 +450,7 @@ We reconstruct both quantitative brightfield and phase-contrast images simultane
 
 The optical path length difference image can be calculated by the phase shift line scans as
 \begin{equation}
-OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p)}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)})
+OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p^{(m)})}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)})
 \end{equation}
 On the other hand, if the axial thickness of the cell at reconstructed image pixel $(x,y)$ is $d(x,y)$,
 \begin{equation} \label{eq:OPD}
