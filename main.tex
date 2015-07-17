@@ -319,7 +319,7 @@ Based on the spectral encoding setup, we know spatial information has been encod
 T_c(x,t_p) &\Rightarrow T_c(\omega,t_p)\\
 \Delta\varphi_c(x,t_p) &\Rightarrow \Delta\varphi_c(\omega,t_p)
 \end{align}
-The intensity envelop then becomes
+The intensity envelope then becomes
 \begin{equation} \label{eq:totalIntensity}
 \begin{split}
 \tilde{I}_o(\omega, t_p) &\propto \tilde{E}_o^*(\omega, t_p) \tilde{E}_o(\omega, t_p) \\
@@ -334,12 +334,12 @@ During time stretch, each frequency component $\omega$, or wavelength $\lambda$ 
 \tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) + I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi_c(\lambda, t_p) ]
 \end{equation}
 where $I_b (\lambda, t_p)$ is the background or baseband intensity envelope, and $I_i (\lambda, t_p)$ is the interference or intermediate intensity envelope:
-\begin{align} \label{eq:totalIntensityTwoTerms}
-\begin{split}
+\begin{align}
+\begin{split} \label{eq:backgroundIntensity}
 I_b (\lambda, t_p) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b^2(\lambda) T_c^2(\lambda, t_p) T_s^2(\lambda) \Big\rbrace \\
 &\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}\\
-\begin{split}
+\begin{split} \label{eq:interferenceIntensity}
 I_i (\lambda, t_p) &= - 2 [1-T_b(\lambda)] T_c(\lambda, t_p) T_b(\lambda) R_m(\lambda)\\
 & \cdot T_s(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{split}
@@ -410,39 +410,27 @@ where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in th
 
 To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.2 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
 
-\subsection{Calibration in Optical Loss Extraction} \label{scn:calibration}
-
-Specifically, there are two features that are unique to quantitative phase imaging with Michaelson Interferometer need to be calibrated since they may alter the quantitative phase extraction based on Hilbert transformation: the unbalanced power split ratio at the beam splitter of the Michaelson Interferometer and the attenuation imbalance of the two arms of the interferometer caused by the microfluidic channel. 
-
-Take the intensity envelop in Eq.~\ref{eq:totalIntensityTwoTerms} and consider two scenarios:
-\begin{equation}
-I_b(\lambda, t_p) = \begin{cases}
-\begin{split}
-\Big\lbrace [1-T_b(\lambda)]^2 &+ T_b(\lambda)^2 T_s(\lambda)\Big\rbrace \\
-&\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
+\subsection{Cell Transmittance Extraction} \label{scn:transmittance}
+From a set of seperate TS-QPI measurements, the cell transmittance, $T_s$, can be extracted, even when the transmittance of the solution, $T_s$, and the beam-splitter, $T_b$, are unknown. First, consider a measurement when there is no cell in the field of view (field of view is empty). In this case, Eq. \ref{eq:backgroundIntensity} and \ref{eq:interferenceIntensity} become:
+\begin{align}
+\begin{split} \label{eq:backgroundIntensityEmpty}
+I_b (\lambda, t_p^{(empty)}) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b^2(\lambda) T_s^2(\lambda) \Big\rbrace \\
+&\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p^{(empty)})\rvert^2
 \end{split}\\
-\quad\quad \text{empty frames}.\\
-\begin{split}
-\Big\lbrace [1-T_b(\lambda)]^2 &+ T_b(\lambda)^2 T_c(\lambda, t_p)^2 T_s(\lambda)\Big\rbrace \\
-&\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p)\rvert^2
-\end{split}\\
-\quad\quad \text{frames when cell is present}.
-  \end{cases}
-\end{equation}
-
-Define $T_b^\prime = $. Then the ratio of amplitude change caused by interference to that of envelop change caused by cell absorption:
-\begin{equation}
-\begin{split}
-\beta &= \frac{I_i(t_i, t_p)}{I_b(t_i, t_p)} \\
-&= \frac{}{} 
-= \frac{}{}
+\begin{split} \label{eq:interferenceIntensityEmpty}
+I_i (\lambda, t_p^{(empty)}) &= - 2 [1-T_b(\lambda)] T_b(\lambda) R_m(\lambda)\\
+& \cdot T_s(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p^{(empty)})\rvert^2
 \end{split}
+\end{align}
+
+Next, we can block the sample arm and measure the signal that is coming only from the reference arm:
+\begin{equation} \label{eq:referenceIntensity}
+I_r (\lambda, t_p) = [1-T_b(\lambda)]^2 R_m(\lambda) \tilde{E}_{in}(\lambda, t_p^{(empty)})\rvert^2
 \end{equation}
-Thus the absorption by buffer solution and microfluidic channel does not influence the measurement of cell absorption in our quantitative phase imaging. 
-
-Since the absorption of cells at 1550 nm is much higher than visible wavelength \cite{roggan1999optical}, the relative amplitude ratio of the cell-induced intensity variation to that in interference is much higher than phase microscopy working in visible wavelength. This fact facilitates us to obtain high signal-to-noise ratio quantitative absorption mapping while doing phase imaging for semi-transparent cells. 
-
-
+Combining, Eq. \ref{eq:backgroundIntensity}, \ref{eq:backgroundIntensityEmpty}, \ref{eq:interferenceIntensityEmpty}, and \ref{eq:referenceIntensity}, the cell transmittance can be derived as
+\begin{equation}
+T_c(\lambda) = \frac{-2\sqrt{I_r (\lambda, t_p) \cdot (I_b (\lambda, t_p) - I_r (\lambda, t_p))}}{I_i (\lambda, t_p^{(empty)})}
+\end{equation}
 
 \subsection{Image Reconstruction}
 
@@ -466,7 +454,7 @@ where $\iint_{cell} t(x,y) dx dy$ is the volume of the cell obtained from its di
 
 The coefficient of  from each cell corresponding to the intensity  
 
-The unit net change of intensity envelop variations induced by the cell is obtained from the amplitude of the slowly varying envelope feature of the interferogram as
+The unit net change of intensity envelope variations induced by the cell is obtained from the amplitude of the slowly varying envelope feature of the interferogram as
 \begin{equation}
 \Delta I_b(\lambda, t_p) = \frac{T_b(\lambda)^2 (1 - T_c(\lambda, t_p))}{[1-T_b(\lambda)]^2 + T_b(\lambda)^2 T_s(\lambda)}
 \end{equation}
