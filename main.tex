@@ -260,7 +260,7 @@ To test our apparatus for its ability to separate high and low-lipid containing 
 Fig.~\ref{fig:AlgaeScatter}a shows the 3D scatter plot showing the three principle physical features for the two algae populations. Also shown is the scatter plot obtained using a conventional flow cytometer. It is readily apparent that the TS-QPI capture much more information about individual cells and is better suited for differentiation of low- and high-lipid content algae species. In Fig.~\ref{fig:AlgaeScatter}b, we show ROC curves for binary classification of these populations. Blue curve shows the classifier performance using all 16 physical features extracted from the time-stretch QPI images. Red, green, and orange curves show the classifier decision made using only the three major biophysical features: diameter for morphology (Diameter-RB in Table~\ref{tbl:Features}), optical path length difference for optical phase (OPD-1 in Table~\ref{tbl:Features}), and absorption for optical loss (Absorption-2 in Table~\ref{tbl:Features}). We observe that while biophysical parameters, in particular cell diameter, is an effective feature for classification, hyperdimensional classification using all 16 parameters offers the best accuracy. 
 
 \begin{figure*}
-\includegraphics[scale=0.2]{FigureAlgae.jpg}
+\includegraphics[scale=0.6]{FigureAlgae.jpg}
 \caption{\label{fig:AlgaeScatter} Classification of algae cells (Chlamydomonas reinhardtii) based on their lipid content by TS-QPI; (a) Three-dimensional scatter plot based on size, protein concentration, and attenuation of the cells measured by TS-QPI, with 2D projections for every combination of two parameters. Inset: Conventional label-free flow cytometry using forward scattering and side scattering is not enough to distinguish the difference between high-lipid content and low-lipid content algae cells. Time-stretch QPI is much more effective in separating the two algae populations. (b) ROC curves for binary classification of normal and lipid-rich algae species using ten-fold cross validation; blue curve shows the classifier performance using all 16 biophysical features extracted from the TS-QPI quantitative images. Red, green, and orange curves show the classifier decision performance using only the best biophysical feature in each category: morphology (Diameter-RB in Table~\ref{tbl:Features}), optical phase (OPD-1 in Table~\ref{tbl:Features}), and optical loss (Absorption-2 in Table~\ref{tbl:Features}), respectively. Additionally, we show ROC curves in purple for classification based on the first principal components in PCA space. The diagonal line shows results of random guess classification. Clearly, the label-free cell classification performance improves as more biophysical features are employed.}
 \end{figure*}
 
@@ -411,26 +411,23 @@ where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in th
 To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.2 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
 
 \subsection{Cell Transmittance Extraction} \label{scn:transmittance}
-From a set of seperate TS-QPI measurements, the cell transmittance, $T_s$, can be extracted, even when the transmittance of the solution, $T_s$, and the beam-splitter, $T_b$, are unknown. First, consider a measurement when there is no cell in the field of view (field of view is empty). In this case, Eq. \ref{eq:backgroundIntensity} and \ref{eq:interferenceIntensity} become:
+From a set of seperate TS-QPI measurements, the cell transmittance, $T_s(\lambda)$, can be extracted, even when the transmittance of the solution, $T_s(\lambda)$, and the beam-splitter, $T_b(\lambda)$, are unknown. First, consider a measurement when there is no cell in the field of view (field of view is empty). In this case, Eq. \ref{eq:interferenceIntensity} becomes
 \begin{align}
-\begin{split} \label{eq:backgroundIntensityEmpty}
-I_b (\lambda, t_p^{(empty)}) &= \Big\lbrace [1-T_b(\lambda)]^2 + T_b^2(\lambda) T_s^2(\lambda) \Big\rbrace \\
-&\cdot R_m(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p^{(empty)})\rvert^2
-\end{split}\\
 \begin{split} \label{eq:interferenceIntensityEmpty}
 I_i (\lambda, t_p^{(empty)}) &= - 2 [1-T_b(\lambda)] T_b(\lambda) R_m(\lambda)\\
 & \cdot T_s(\lambda) \lvert \tilde{E}_{in}(\lambda, t_p^{(empty)})\rvert^2
 \end{split}
 \end{align}
 
-Next, we can block the sample arm and measure the signal that is coming only from the reference arm:
+Next, one can block the sample arm and measure the signal coming back from only the reference arm:
 \begin{equation} \label{eq:referenceIntensity}
-I_r (\lambda, t_p) = [1-T_b(\lambda)]^2 R_m(\lambda) \tilde{E}_{in}(\lambda, t_p^{(empty)})\rvert^2
+I_r (\lambda, t_p) = [1-T_b(\lambda)]^2 R_m(\lambda) \lvert\tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{equation}
-Combining, Eq. \ref{eq:backgroundIntensity}, \ref{eq:backgroundIntensityEmpty}, \ref{eq:interferenceIntensityEmpty}, and \ref{eq:referenceIntensity}, the cell transmittance can be derived as
+Combining Eq. \ref{eq:backgroundIntensity}, \ref{eq:interferenceIntensityEmpty}, and \ref{eq:referenceIntensity}, and assuming that the input electric field pulse shape, $\lvert \tilde{E}_{in}(\lambda, t_p) \rvert$, is the same from pulse to pulse, the cell transmittance can be derived as
 \begin{equation}
 T_c(\lambda) = \frac{-2\sqrt{I_r (\lambda, t_p) \cdot (I_b (\lambda, t_p) - I_r (\lambda, t_p))}}{I_i (\lambda, t_p^{(empty)})}
 \end{equation}
+Please note that the values of $I_r (\lambda, t_p)$, $I_b (\lambda, t_p)$, and $I_i (\lambda, t_p^{(empty)})$ are directly measured by TS-QPI, and no prior knowledge of $T_b(\lambda)$, $T_s(\lambda)$, $R_m(\lambda)$, and $\lvert \tilde{E}_{in}(\lambda, t_p)\rvert$ is needed to calculate the cell transmittance.
 
 \subsection{Image Reconstruction}
 
