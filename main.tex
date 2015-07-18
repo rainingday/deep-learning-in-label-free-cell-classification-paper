@@ -411,7 +411,7 @@ where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in th
 To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.2 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
 
 \subsection{Cell Transmittance Extraction} \label{scn:transmittance}
-One of the greatest advantage of TS-QPI is its ability to extract the cell transmittance, $T_s(\lambda)$, without prior knowledge of the transmittance of the solution, $T_s(\lambda)$, that of the beam-splitter, $T_b(\lambda)$, and the reflectance of substrate of the microfluidic channel. During measurements when there is no cell in the field of view (empty frames), Eq. \ref{eq:interferenceIntensity} becomes
+One of the greatest advantage of TS-QPI is its ability to extract the cell transmittance, $T_s(\lambda)$, without prior knowledge of the transmittance of the solution, $T_s(\lambda)$, that of the beam-splitter, $T_b(\lambda)$, and the reflectance of substrate of the microfluidic channel, $R_m(\lambda)$. During measurements when there is no cell in the field of view (empty frames), Eq. \ref{eq:interferenceIntensity} becomes
 \begin{align}
 \begin{split} \label{eq:interferenceIntensityEmpty}
 I_i (\lambda, t_p^{(empty)}) &= - 2 [1-T_b(\lambda)] T_b(\lambda) R_m(\lambda)\\
@@ -423,7 +423,7 @@ In addition, the signal from only the reference arm can be recorded by blocking 
 \begin{equation} \label{eq:referenceIntensity}
 I_r (\lambda, t_p) = [1-T_b(\lambda)]^2 R_m(\lambda) \lvert\tilde{E}_{in}(\lambda, t_p)\rvert^2
 \end{equation}
-Combining Eq. \ref{eq:backgroundIntensity}, \ref{eq:interferenceIntensityEmpty}, and \ref{eq:referenceIntensity}, the cell transmittance can be derived as
+Combining Eq. \ref{eq:backgroundIntensity}, \ref{eq:interferenceIntensityEmpty}, and \ref{eq:referenceIntensity}, and assuming that the input electric field pulse shape, $\lvert \tilde{E}_{in}(\lambda, t_p) \rvert$, is invariant to $t_p$, the cell transmittance can be derived as
 \begin{equation}
 T_c(\lambda) = \frac{-2\sqrt{I_r (\lambda, t_p) \cdot (I_b (\lambda, t_p) - I_r (\lambda, t_p))}}{I_i (\lambda, t_p^{(empty)})}
 \end{equation}
