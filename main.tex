@@ -20,7 +20,7 @@
 %  Add 'draft' option to mark overfull boxes with black boxes
 %  Add 'showpacs' option to make PACS codes appear
 %  Add 'showkeys' option to make keywords appear
-\documentclass[aps,pra,preprint,superscriptaddress,endfloats*]{revtex4-1}
+\documentclass[aps,pra,reprint,superscriptaddress]{revtex4-1}
 %\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
 %\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
 
@@ -153,7 +153,7 @@ We have developed a feature extraction tool that performs segmentation, object d
 
 Among different features, size measurement is particularly important as it is used as a fundamental parameter by itself in many technologies \cite{adams2008highly, nagrath2007isolation, vona2000isolation, gossett2010label}, but also used to extract the refractive index (and hence protein level) from measured optical path length here. Size measurement is performed along both the lateral (rainbow flashes) and flow directions. The measurement along the rainbow direction is used for protein concentration estimation since it helps to eliminate measurement inaccuracies caused by fluctuations of flow speed. We also measure the aspect ratio, perimeter, and median radius as well as a host of other parameters listed in Table~\ref{tbl:Features}. To calibrate the system, we used \SI{5}{\micro\meter} polystyrene beads (from Polysciences, Inc.) with a narrow and known NIST traceable size distribution.
 
-\begin{table*}
+\begin{table*}[H]
 \caption{\label{tbl:Features} List of extracted features}
 \begin{tabular}{|p{0.13\textwidth}|p{0.6\textwidth}|p{0.11\textwidth}|}
 \hline
@@ -277,10 +277,10 @@ Broadband optical pulses from a mode-locked laser (center wavelength = 1565 nm, 
 
 Free-space laser pulses were linearly polarized with quarter- and half-wave plates, and then spatially dispersed with a pair of reflection diffraction gratings, so that each wavelength component of the collimated beam was positioned at a different lateral point similar to a line flash rainbow. A beam reducer shrank the rainbow beam 6 times with a pair of 90 degree off-axis parabolic gold-coated mirrors with reflected focal lengths as 152.4 mm and 25.4 mm, respectively. Next, a 15 degree off-axis parabolic gold-coated mirror with 635 mm reflected focal length and a long working-distance objective lens with 0.4 numerical aperture further shrank the rainbow to about \SI{130}{\micro\meter} in width, i.e. field of view. Reflective optics with parabolic gold-coated mirrors is used in our experimental demonstration to minimize loss, aberration, and polarization sensitivity. The rainbow flashes were then split into the two arms of a Michelson interferometer by a beam splitter. In the sample arm, the rainbow pulses pass through the cells and are reflected by the reflective substrate of the microfluidic device. In the reference arm, a dielectric mirror reflected the rainbow with a length mismatch with the sample arm causing spectral interference fringes (Fig.~\ref{fig:OSA}a). Cells are hydrodynamically focused at the center of the channel flow at a velocity of 1.3 m/s. The reflected pulses from reference and sample arms were recombined at the beam splitter, compressed by the two diffraction gratings and coupled back into the fiber. These return pulses were spectrally encoded by the spatial information of the interrogation field of view. Then they were redirected by the optical circulator to a Raman-amplified time-stretch dispersive Fourier Transform (TS-DFT) system followed by a 10 Gb/s photodetector (Discovery Semiconductors DSC-402APD). An analog-to-digital converter (Tektronix DPO72004C) with a sampling rate of 50 GS/s and 20 GHz bandwidth is used to acquire the output signal of the photodetector, which is a series of spectral interferogram mapped into time (Fig.~\ref{fig:OSA}b). 
 
-\begin{figure}
+\begin{figure*}
 \includegraphics[scale=0.15]{FigureOSA.jpg}
 \caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
-\end{figure}
+\end{figure*}
 
 \subsection{Coherent Detection and Phase Extraction}
 
@@ -468,7 +468,7 @@ It gives the temporal and spatial information of the combined effects from absor
 
 Lateral resolution of time stretch camera is decided by the limiting factor among Abbe diffraction limit of the objective lens, spectral resolvability of the diffraction grating pairs, spectral resolution in amplified dispersive Fourier transform, the photodetector rise-time and bandwidth, and the sampling rate of the back-end digitizer. Details of the limiting factors of lateral resolution and evaluation of these factors for our TS-QPI system can be found in Table~\ref{tbl:Resolution}. Field of view (FOV) is the area covered by the interrogation rainbow when the rainbow pulses hit the imaging plane. The rainbow pulses width is decided by the optical bandwidth selected from the laser source, $\Delta\lambda$, the magnification factor of the objective lens as well as the focal length of the other lens and parabolic mirrors, and the dimensions and blaze angles of the diffraction gratings.
 
-\begin{table*}
+\begin{table*}[H]
 \caption{\label{tbl:Resolution} Resolution Limiting Factors in TS-QPI}
 \begin{tabular}{|m{0.16\textwidth}|m{0.15\textwidth}|m{0.45\textwidth}|m{0.10\textwidth}|}
  \hline
@@ -524,10 +524,10 @@ The Polydimethylsiloxane (PDMS) microfluidic channel is custom-designed so that 
 The PDMS microfluidic channel (Fig.~\ref{fig:Channel}) is fabricated using standard soft lithography. The mask was designed in AutoCAD and printed with a resolution down to 1 um. Then a 4-inch silicon wafer was spin-coated with 75um thickness of a negative photoresist (SU-8 from MicroChem) and was exposured under the mask using an aligner. After post-exposure baking, the wafer was developed at room temperature, rinsed with isopropyl alcohol (IPA), and placed in a petri dish.  A PDMS mixture (Sylgard 184 Silicone Elastomer, Dow Corning) was poured onto the patterned wafer, degassed in a vacuum chamber for 30 min and cured at \SI{80}{\degreeCelsius} for one hour. Once cured, the PDMS channel was cut out and peeled off from the master wafer. We used 1.25 um diameter hollow needle to punch the inlet and outlet holes. 
 The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M), treated with oxygen plasma (Enercon Dyne-A-Mite 3D Treater) for 2 min, and bonded to a 2-inch broadband dielectric mirror (Thorlabs BB2-E04) for obtaining high reflectance from channel substrate at near infrared spectral window. Finally microtubes (PE-50 tubing, .023x.038in) with steel catheter couplers (Instech, 22 ga x 15 mm) are connected to the inlet and outlet punctures.
 
-\begin{figure}
+\begin{figure*}
 \includegraphics[scale=0.2]{FigureChannel.jpg}
 \caption{\label{fig:Channel} PDMS microfluidic channel mounted on a highly reflective surface with near-infrared dielectric coating; The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. (a) Sample solution with suspended cells is fed into the channel through the sample inlet, and deionized water as the sheath flow is sent through sheath inlet. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. (b) The pattern of the mask used to imprint microfluidic channel design on silicon wafer with photoresist. The circles are inlet and outlet reservoirs.}
-\end{figure}
+\end{figure*}
 
 \subsection{Preparation of algae cell lines}
 
@@ -561,18 +561,18 @@ Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with argini
 % Use the figure* environment if the figure should span across the
 % entire page. There is no need to do explicit centering.
 
-% \begin{figure}
+% \begin{figure*}
 % \includegraphics{}%
 % \caption{\label{}}
-% \end{figure}
+% \end{figure*}
 
 % Surround figure environment with turnpage environment for landscape
 % figure
 % \begin{turnpage}
-% \begin{figure}
+% \begin{figure*}
 % \includegraphics{}%
 % \caption{\label{}}
-% \end{figure}
+% \end{figure*}
 % \end{turnpage}
 
 % tables should appear as floats within the text
@@ -626,7 +626,7 @@ Video 2: video of \textit{SW-480} colon cancer epithelial cells flowing in a mic
 
 % If you have acknowledgments, this puts in the proper section head.
 \begin{acknowledgments}
-This work was partially supported by NantWorks, LLC, Culver City, California. Ian K. Blaby was supported by the Office of Science (Biological and Environmental Research), U.S. Department of Energy (grant no. DE–FC02–02ER63421) to Sabeeha Merchant.
+This work was partially supported by NantWorks, LLC, Culver City, California. Ian K. Blaby was supported by the Office of Science (Biological and Environmental Research), U.S. Department of Energy (grant no. DE-FC02-02ER63421) to Sabeeha Merchant.
 \end{acknowledgments}
 
 \section*{Author contributions statement}
