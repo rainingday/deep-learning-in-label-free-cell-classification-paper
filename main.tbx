@@ -1,0 +1,42 @@
+\begin {table*}
+\caption {\label {tbl:Features} List of extracted features}
+\begin {tabular}{|p{0.13\textwidth }|p{0.6\textwidth }|p{0.11\textwidth }|}
+\hline 
+Feature Name &Description &Category\\ \hline 
+Diameter-RB &Diameter along the interrogation rainbow. It is insensitive to flow rate fluctuation. For higher accuracy, it is calibrated by the spatial nonuniform distribution of rainbow wavelengths. &Morphology\\ \hline 
+Diameter-FL &Diameter along the flow direction. It is sensitive to flow rate fluctuation, but can be a candidate parameter for monitoring flow speed and channel condition. &Morphology\\ \hline 
+Tight Area &Total number of pixels in the segmented region in the phase image &Morphology\\ \hline 
+Perimeter &Total number of pixels around the boundary of each segmented region &Morphology\\ \hline 
+Circularity &$4\pi \text {Area} / \text {Perimeter}^2$ &Morphology\\ \hline 
+Major Axis &Considering the cell as elliptical in lateral imaging plane, the length of the major axis of the ellipse with a normalized second central moment same as the cell. &Morphology\\ \hline 
+Orientation &Angle between the flow direction and the major axis of the cell elliptical shape &Morphology\\ \hline 
+Loose Area &Total number of pixels in the expanded segmented region for measurement of the pixel intensities &Morphology\\ \hline 
+Median Radius &The median distance of any pixel in the object to the closest pixel outside of the object. &Morphology\\ \hline 
+OPD-1 &Integrated optical path length difference within the entire segmented area (cell), calibrated by the power distribution within different wavelength components of the incident laser pulses. &Optical Phase\\ \hline 
+OPD-2 &Integrated optical path length difference within the entire segmented area (cell). In addition to the calibration of OPD-1, it is calibrated by the pulse-to-pulse fluctuations within a \SI {1}{\micro \second } detection window. &Optical Phase\\ \hline 
+Refractive index &The mean refractive index difference between the object and the surrounding liquid (buffer solution), which is calculated based on OPD-2 and size measurement (see detail in Section \ref {scn:Methods}). Refractive index difference for cells is proportional to their protein concentration. &Optical Phase\\ \hline 
+Absorption-1 &Mean absorption coefficient within the entire segmented area (cell). It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI {1}{\micro \second } detection window. This parameter corresponds to an absorption-dominant model for the cell. &Optical Loss\\ \hline 
+Absorption-2 &Mean absolute absorption coefficient within the entire segmented area (cell). It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI {1}{\micro \second } detection window. This parameter corresponds to an absorption-dominant model for the cell. &Optical Loss\\ \hline 
+Scattering-1 &Mean optical loss within the entire segmented area (cell). It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI {1}{\micro \second } detection window. This parameter corresponds to a scattering-dominant model for the cell. &Optical Loss\\ \hline 
+Scattering-2 &Mean absolute optical loss within the entire segmented area (cell). It is calibrated by the power distribution within different wavelength components of the incident laser pulses and by the pulse-to-pulse fluctuations within a \SI {1}{\micro \second } detection window. This parameter corresponds to a scattering-dominant model for the cell. &Optical Loss\\
+\hline 
+\end {tabular}
+\end {table*}
+\begin {table*}
+\caption {\label {tbl:Resolution} Resolution Limiting Factors in TS-QPI}
+\begin {tabular}{|m{0.16\textwidth }|m{0.15\textwidth }|m{0.45\textwidth }|m{0.10\textwidth }|}
+\hline 
+System catagory &Component &Number of resolvable points &Lateral resolution \\ \hline 
+\multicolumn {1}{ |m{0.16\textwidth } }{\multirow {2}{*}{Free-space optics} } &
+\multicolumn {1}{ |m{0.15\textwidth }| }{Diffraction gratings} & \begin {equation} N_{grating} = \frac {\Delta \lambda }{\delta \lambda _{grating}} =\Delta \lambda /(\lambda \cdot \frac {d}{m\cdot 2w_0})\end {equation} where $\Delta \lambda $ is the optical bandwidth, $\lambda $ is the central wavelength, m is the order of diffraction, $w_0$ is the beam waist, and $d$ is the groove spacing. &$\SI {3.09}{\micro \meter }$ \\ \cline {2-4}
+\multicolumn {1}{ |m{0.15\textwidth } }{} &
+\multicolumn {1}{ |m{0.15\textwidth }| }{Lenses and mirrors} & \begin {equation} N_{Abbe} = \frac {FOV}{\delta x_{diffraction}} =\frac {FOV}{(\frac {\lambda + \Delta \lambda /2}{2 \cdot NA})} \end {equation} where $FOV$ is field of view, $NA$ is numerical aperture of the objective lens. &$\SI {2.00}{\micro \meter }$ \\ \cline {1-4}
+\multicolumn {1}{ |m{0.16\textwidth } }{\multirow {1}{*}{Time Stretch} } &
+\multicolumn {1}{ |m{0.15\textwidth }| }{Group delay dispersion} &\begin {equation}N_{DFT}=\frac {\Delta \lambda }{\delta \lambda }=\frac {\Delta \lambda }{\lambda \cdot \sqrt {\frac {2}{DL_f\cdot c}}}\end {equation} where $D$ is the group velocity dispersion, $L_f$ is the dispersive fiber length. &$\SI {0.73}{\micro \meter }$ \\ \cline {1-4}
+\multicolumn {1}{ |m{0.16\textwidth } }{\multirow {2}{*}{Electronic back-end} } &
+\multicolumn {1}{ |m{0.15\textwidth }| }{Photodetector bandwidth} &\begin {equation}N_{PD}=\frac {\Delta t}{\delta t}=\frac {DL_f\Delta \lambda }{0.35/B}\end {equation} where $B$ is the bandwidth of the photodetector. &$\SI {0.28}{\micro \meter }$ \\ \cline {2-4}
+\multicolumn {1}{ |m{0.15\textwidth } }{} &
+\multicolumn {1}{ |m{0.15\textwidth }| }{ADC sampling rate} &\begin {equation}N_{ADC}=DL_f\Delta \lambda f_{ADC}\end {equation} where $f_{ADC}$ is the sampling rate of digitizer. &$\SI {0.10}{\micro \meter }$ \\
+\cline {1-4}
+\end {tabular}
+\end {table*}

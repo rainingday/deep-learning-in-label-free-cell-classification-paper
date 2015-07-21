@@ -20,7 +20,7 @@
 %  Add 'draft' option to mark overfull boxes with black boxes
 %  Add 'showpacs' option to make PACS codes appear
 %  Add 'showkeys' option to make keywords appear
-\documentclass[aps,pra,reprint,superscriptaddress]{revtex4-1}
+\documentclass[aps,pra,preprint,superscriptaddress,endfloats*]{revtex4-1}
 %\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
 %\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
 
@@ -136,7 +136,7 @@ High speed phase contrast imaging was achieved with high sensitivity using an am
 
 \begin{figure*}
 \includegraphics[scale=0.2]{Figure2DImage.jpg}
-\caption{\label{fig:2DImage} Quantitative phase and optical loss images of \textit{OT-II} (blue) and \textit{SW-480} (green box) cells. The optical loss images of the cells are affected by the attenuation of multiplexed wavelength components passing through the cells. The attenuation itself is governed by the absorption of the light in cells as well as the scattering from the surface of the cells and from the internal cell organelles. The optical loss image is derived from the low frequency features of the pulse interferograms. The optical phase image is extracted from the analytic form of the high frequency features of the pulse interferograms using Hilbert Transformation, followed by a phase unwrapping algorithm. Details of these derivations can be found in Section \ref{scn:Methods}. Also, Videos 1 and 2 show measurements of cell-induced optical path length difference by TS-QPI at four different points along the rainbow for \textit{OT-II} and \textit{SW-480}, respectively.}
+\caption{\label{fig:2DImage} Quantitative phase and optical loss images of \textit{OT-II} (blue) and \textit{SW-480} (green box) cells; The optical loss images of the cells are affected by the attenuation of multiplexed wavelength components passing through the cells. The attenuation itself is governed by the absorption of the light in cells as well as the scattering from the surface of the cells and from the internal cell organelles. The optical loss image is derived from the low frequency features of the pulse interferograms. The optical phase image is extracted from the analytic form of the high frequency features of the pulse interferograms using Hilbert Transformation, followed by a phase unwrapping algorithm. Details of these derivations can be found in Section \ref{scn:Methods}. Also, Videos 1 and 2 show measurements of cell-induced optical path length difference by TS-QPI at four different points along the rainbow for \textit{OT-II} and \textit{SW-480}, respectively.}
 \end{figure*}
 
 The time stretched temporal waveforms corresponding to each line scan consists of two features. One is a fast oscillating fringe (carrier), caused by the interference of the linearly chirped pulses arriving from the reference and signal arms in the Michelson interferometer. Acting as a radio-frequency (RF) carrier whose frequency is set by the user adjusted arm length mismatch, the fringe frequency is modulated when the optical path length in the sample arm is changed by the arrival of a cell. This frequency shift and the accompanying phase change are used to measure the optical path length of the cell. The second feature in the waveform is a lower frequency envelope corresponding to temporal shape of the optical pulse. The amplitude of this envelope provides information about optical loss caused by surface roughness and inner organelle complexity (Fig.~\ref{fig:2DImage}). 
@@ -275,11 +275,11 @@ Our system opens up a new path to data-driven genotype-trained phenotypic diagno
 
 Broadband optical pulses from a mode-locked laser (center wavelength = 1565 nm, repetition rate = 36.128 MHz, pulse width ~ 100 fs) are further broadened using a highly nonlinear fiber to approximately 100 nm with a spectral range up to 1605 nm. These broadband pulses are then linearly chirped to 1.2 ns pulse width by a short dispersion compensating fiber (DCF) of 60 ps/nm, so that an erbium doped fiber amplifier (EDFA) can amplify them with minimal distortion. A coarse wavelength division multiplexer (WDM) filters the pulses from 1581 nm to 1601 nm, where the spectrum is reasonably flat. Therefore, the total bandwidth of the pulses interrogating the cells in our setup is less than 20 nm centered at 1591 nm, giving a negligible fractional bandwidth of 1.3\%. These filtered pulses then pass through an optical circulator and are coupled to free-space with a fiber collimator.
 
-Free-space laser pulses were linearly polarized with quarter- and half-wave plates, and then spatially dispersed with a pair of reflection diffraction gratings, so that each wavelength component of the collimated beam was positioned at a different lateral point similar to a line flash rainbow. A beam reducer shrank the rainbow beam 6 times with a pair of 90 degree off-axis parabolic gold-coated mirrors with reflected focal lengths as 152.4 mm and 25.4 mm, respectively. Next, a 15 degree off-axis parabolic gold-coated mirror with 635 mm reflected focal length and a long working-distance objective lens with 0.4 numerical aperture further shrank the rainbow to about \SI{130}{\micro\meter} in width, i.e. field of view. Reflective optics with parabolic gold-coated mirrors is used in our experimental demonstration to minimize loss, aberration, and polarization sensitivity. The rainbow flashes were then split into the two arms of a Michelson interferometer by a beam splitter. In the sample arm, the rainbow pulses pass through the cells and are reflected by the reflective substrate of the microfluidic device. In the reference arm, a dielectric mirror reflected the rainbow with a length mismatch with the sample arm causing 5 GHz interference fringes (Fig.~\ref{fig:OSA}a). Cells are hydrodynamically focused at the center of the channel flow at a velocity of 1.3 m/s. The reflected pulses from reference and sample arms were recombined at the beam splitter, compressed by the two diffraction gratings and coupled back into the fiber. These return pulses were spectrally encoded by the spatial information of the interrogation field of view. Then they were redirected by the optical circulator to a Raman-amplified time-stretch dispersive Fourier Transform (TS-DFT) system followed by a 10 Gb/s photodetector (Discovery Semiconductors DSC-402APD). An analog-to-digital converter (Tektronix DPO72004C) with a sampling rate of 50 GS/s and 20 GHz bandwidth is used to acquire the output signal of the photodetector (Fig.~\ref{fig:OSA}b).
+Free-space laser pulses were linearly polarized with quarter- and half-wave plates, and then spatially dispersed with a pair of reflection diffraction gratings, so that each wavelength component of the collimated beam was positioned at a different lateral point similar to a line flash rainbow. A beam reducer shrank the rainbow beam 6 times with a pair of 90 degree off-axis parabolic gold-coated mirrors with reflected focal lengths as 152.4 mm and 25.4 mm, respectively. Next, a 15 degree off-axis parabolic gold-coated mirror with 635 mm reflected focal length and a long working-distance objective lens with 0.4 numerical aperture further shrank the rainbow to about \SI{130}{\micro\meter} in width, i.e. field of view. Reflective optics with parabolic gold-coated mirrors is used in our experimental demonstration to minimize loss, aberration, and polarization sensitivity. The rainbow flashes were then split into the two arms of a Michelson interferometer by a beam splitter. In the sample arm, the rainbow pulses pass through the cells and are reflected by the reflective substrate of the microfluidic device. In the reference arm, a dielectric mirror reflected the rainbow with a length mismatch with the sample arm causing spectral interference fringes (Fig.~\ref{fig:OSA}a). Cells are hydrodynamically focused at the center of the channel flow at a velocity of 1.3 m/s. The reflected pulses from reference and sample arms were recombined at the beam splitter, compressed by the two diffraction gratings and coupled back into the fiber. These return pulses were spectrally encoded by the spatial information of the interrogation field of view. Then they were redirected by the optical circulator to a Raman-amplified time-stretch dispersive Fourier Transform (TS-DFT) system followed by a 10 Gb/s photodetector (Discovery Semiconductors DSC-402APD). An analog-to-digital converter (Tektronix DPO72004C) with a sampling rate of 50 GS/s and 20 GHz bandwidth is used to acquire the output signal of the photodetector, which is a series of spectral interferogram mapped into time (Fig.~\ref{fig:OSA}b). 
 
 \begin{figure}
 \includegraphics[scale=0.15]{FigureOSA.jpg}
-\caption{\label{fig:OSA} (a) Optical spectrum of the interference pattern after the signal passing the free space optics and being re-coupled into the optical fiber. The interference pattern in spectrum domain is measured by optical spectrum analyzer, showing the $cos$ term in $\tilde{I}_o(\omega, t_p)$. (b) With time stretch, the interference patter in spectrum domain is linearly mapped into time. The baseband intensity envelop carries the wavelength-dependent gain profile by the Raman amplifier within dispersive fiber.}
+\caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
 \end{figure}
 
 \subsection{Coherent Detection and Phase Extraction}
@@ -396,6 +396,7 @@ where $\varphi_{i0}$ is an initial phase constant, $f_i$ is the fringe frequency
 \begin{equation}
 f_i \approxeq \frac{4\pi \Delta L}{\lambda_c^2 D L_f}
 \end{equation}
+As seen in Fig.~\ref{fig:OSA}b, the fringe frequency, $f_i$, in our setup is about 4.7 GHz determined by the optical path length mismatch between the interferometer arms.
 
 The instantaneous phase of $I_c(t_i^{(n)}, t_p^{(m)})$ can be readily retrieved from its analytic representation given by Hilbert transform, $\hilbert$:
 \begin{equation} \label{eqn:angle}
@@ -413,7 +414,7 @@ Here $\arg$ means the argument of a complex number. A one-dimensional phase unwr
 \end{equation}
 where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in the field of view, i.e. background phase. The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$. 
 
-To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 5 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.2 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
+To perform combined quantitative phase and intensity imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.2 GHz. Compared to the higher frequency components at 4.7 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.2 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
 
 \subsection{Cell Transmittance Extraction} \label{scn:transmittance}
 One of the greatest advantage of TS-QPI is its ability to extract the cell transmittance, $T_s(\lambda)$, without prior knowledge of the transmittance of the solution, $T_s(\lambda)$, that of the beam-splitter, $T_b(\lambda)$, and the reflectance of substrate of the microfluidic channel, $R_m(\lambda)$. During measurements when there is no cell in the field of view (empty frames), Eq. \ref{eq:interferenceIntensity} becomes
@@ -471,7 +472,7 @@ Lateral resolution of time stretch camera is decided by the limiting factor amon
 \caption{\label{tbl:Resolution} Resolution Limiting Factors in TS-QPI}
 \begin{tabular}{|m{0.16\textwidth}|m{0.15\textwidth}|m{0.45\textwidth}|m{0.10\textwidth}|}
  \hline
- System catagory   &Component  &Number of resovable points &Lateral resolution    \\  \hline
+ System catagory   &Component  &Number of resolvable points &Lateral resolution    \\  \hline
 \multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{2}{*}{Free-space optics} } &
 \multicolumn{1}{ |m{0.15\textwidth}| }{Diffraction gratings} & \begin{equation} N_{grating} = \frac{\Delta\lambda}{\delta\lambda_{grating}} =\Delta\lambda /(\lambda \cdot \frac{d}{m\cdot2w_0})\end{equation} where $\Delta\lambda$ is the optical bandwidth, $\lambda$ is the central wavelength, m is the order of diffraction, $w_0$ is the beam waist, and $d$ is the groove spacing. &$\SI{3.09}{\micro\meter}$ \\ \cline{2-4}
 \multicolumn{1}{ |m{0.15\textwidth}  }{}         &
@@ -525,7 +526,7 @@ The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M),
 
 \begin{figure}
 \includegraphics[scale=0.2]{FigureChannel.jpg}
-\caption{\label{fig:Channel} PDMS microfluidic channel mounted on a highly reflective surface with near-infrared dielectric coating. The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. (a) Sample solution with suspended cells is fed into the channel through the sample inlet, and deionized water as the sheath flow is sent through sheath inlet. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. (b) The pattern of the mask used to imprint microfluidic channel design on silicon wafer with photoresist. The circles are inlet and outlet reservoirs.}
+\caption{\label{fig:Channel} PDMS microfluidic channel mounted on a highly reflective surface with near-infrared dielectric coating; The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. (a) Sample solution with suspended cells is fed into the channel through the sample inlet, and deionized water as the sheath flow is sent through sheath inlet. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. (b) The pattern of the mask used to imprint microfluidic channel design on silicon wafer with photoresist. The circles are inlet and outlet reservoirs.}
 \end{figure}
 
 \subsection{Preparation of algae cell lines}
@@ -614,13 +615,28 @@ Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with argini
 %\appendix
 %\section{}
 
+% Create the reference section using BibTeX:
+\bibliography{main}
+
+
+\section*{supplymentary}
+Video 1: video of \textit{OT-II} hybridoma T-lymphocytes flowing in a microfluidic channel; The cells are aligned at the center of the channel by hydrodynamic focusing. Optical path difference measured at four of the interrogation points on the rainbow flash is shown as a function of time in the right panels.
+
+Video 2: video of \textit{SW-480} colon cancer epithelial cells flowing in a microfluidic channel; The cells are aligned at the center of the channel by hydrodynamic focusing. Optical path difference measured at four of the interrogation points on the rainbow flash is shown as a function of time in the right panels.
+
 % If you have acknowledgments, this puts in the proper section head.
 \begin{acknowledgments}
 This work was partially supported by NantWorks, LLC, Culver City, California. Ian K. Blaby was supported by the Office of Science (Biological and Environmental Research), U.S. Department of Energy (grant no. DE–FC02–02ER63421) to Sabeeha Merchant.
 \end{acknowledgments}
 
-% Create the reference section using BibTeX:
-\bibliography{main}
+\section*{Author contributions statement}
+
+C.L.C and A.M. conceived the classification method; A.M. and C.L.C. designed TS-QPI system and performed experiments; C.L.C.and A.M. collected the data, processed the signals, and analyzed the results;  A.M., L.C.T. and A.H. designed and fabricated the microfluidic channels. I.K.B. provided algal cell samples; K.R.N. provided \textit{SW-480} and \textit{OT-II} cell samples; C.L.C., A.M., B.J., I.K.B., and K.R.N. prepared the manuscript. 
+
+\section*{Additional information}
+
+The authors declare no competing financial interests.
+
 
 \end{document}
 %
