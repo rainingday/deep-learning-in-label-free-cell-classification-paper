@@ -35,13 +35,17 @@
 \usepackage{siunitx}
 \usepackage{multirow}
 \usepackage{verbatim}
-\DeclareSIUnit\cells{cells}
+\usepackage{newfloat}
+\usepackage{xr}
 
+\DeclareSIUnit\cells{cells}
 \DeclareMathOperator{\hilbert}{\mathcal{H}} % To define additional named operators
 \DeclareMathOperator{\h}{h} % To define additional named operators
 \DeclareMathOperator{\unwrap}{unwrap} % To define additional named operators
 \DeclareMathOperator{\vercat}{cat_\downarrow} % To define additional named operators
 \DeclareMathOperator{\horcat}{cat_\rightarrow} % To define additional named operators
+% \DeclareFloatingEnvironment[name={Supplementary Figure}]{suppfigure}
+\externaldocument{supp}
 
 \begin{document}
 
@@ -277,10 +281,11 @@ Broadband optical pulses from a mode-locked laser (center wavelength = 1565 nm, 
 
 Free-space laser pulses were linearly polarized with quarter- and half-wave plates, and then spatially dispersed with a pair of reflection diffraction gratings, so that each wavelength component of the collimated beam was positioned at a different lateral point similar to a line flash rainbow. A beam reducer shrank the rainbow beam 6 times with a pair of 90 degree off-axis parabolic gold-coated mirrors with reflected focal lengths as 152.4 mm and 25.4 mm, respectively. Next, a 15 degree off-axis parabolic gold-coated mirror with 635 mm reflected focal length and a long working-distance objective lens with 0.4 numerical aperture further shrank the rainbow to about \SI{130}{\micro\meter} in width, i.e. field of view. Reflective optics with parabolic gold-coated mirrors is used in our experimental demonstration to minimize loss, aberration, and polarization sensitivity. The rainbow flashes were then split into the two arms of a Michelson interferometer by a beam splitter. In the sample arm, the rainbow pulses pass through the cells and are reflected by the reflective substrate of the microfluidic device. In the reference arm, a dielectric mirror reflected the rainbow with a length mismatch with the sample arm causing spectral interference fringes (Fig.~\ref{fig:OSA}a). Cells are hydrodynamically focused at the center of the channel flow at a velocity of 1.3 m/s. The reflected pulses from reference and sample arms were recombined at the beam splitter, compressed by the two diffraction gratings and coupled back into the fiber. These return pulses were spectrally encoded by the spatial information of the interrogation field of view. Then they were redirected by the optical circulator to a Raman-amplified time-stretch dispersive Fourier Transform (TS-DFT) system followed by a 10 Gb/s photodetector (Discovery Semiconductors DSC-402APD). An analog-to-digital converter (Tektronix DPO72004C) with a sampling rate of 50 GS/s and 20 GHz bandwidth is used to acquire the output signal of the photodetector, which is a series of spectral interferogram mapped into time (Fig.~\ref{fig:OSA}b). 
 
-\begin{figure*}
-\includegraphics[scale=0.15]{FigureOSA.jpg}
+
+\begin{figure}
+\includegraphics[scale=0.12]{FigureOSA.jpg}
 \caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
-\end{figure*}
+\end{figure}
 
 \subsection{Coherent Detection and Phase Extraction}
 
@@ -464,36 +469,6 @@ The unit net change of intensity envelope variations induced by the cell is obta
 It gives the temporal and spatial information of the combined effects from absorption and scattering. 
 
 
-\subsection{System performance and resolvable points}
-
-Lateral resolution of time stretch camera is decided by the limiting factor among Abbe diffraction limit of the objective lens, spectral resolvability of the diffraction grating pairs, spectral resolution in amplified dispersive Fourier transform, the photodetector rise-time and bandwidth, and the sampling rate of the back-end digitizer. Details of the limiting factors of lateral resolution and evaluation of these factors for our TS-QPI system can be found in Table~\ref{tbl:Resolution}. Field of view (FOV) is the area covered by the interrogation rainbow when the rainbow pulses hit the imaging plane. The rainbow pulses width is decided by the optical bandwidth selected from the laser source, $\Delta\lambda$, the magnification factor of the objective lens as well as the focal length of the other lens and parabolic mirrors, and the dimensions and blaze angles of the diffraction gratings.
-
-\begin{table*}[H]
-\caption{\label{tbl:Resolution} Resolution Limiting Factors in TS-QPI}
-\begin{tabular}{|m{0.16\textwidth}|m{0.15\textwidth}|m{0.45\textwidth}|m{0.10\textwidth}|}
- \hline
- System catagory   &Component  &Number of resolvable points &Lateral resolution    \\  \hline
-\multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{2}{*}{Free-space optics} } &
-\multicolumn{1}{ |m{0.15\textwidth}| }{Diffraction gratings} & \begin{equation} N_{grating} = \frac{\Delta\lambda}{\delta\lambda_{grating}} =\Delta\lambda /(\lambda \cdot \frac{d}{m\cdot2w_0})\end{equation} where $\Delta\lambda$ is the optical bandwidth, $\lambda$ is the central wavelength, m is the order of diffraction, $w_0$ is the beam waist, and $d$ is the groove spacing. &$\SI{3.09}{\micro\meter}$ \\ \cline{2-4}
-\multicolumn{1}{ |m{0.15\textwidth}  }{}         &
-\multicolumn{1}{ |m{0.15\textwidth}| }{Lenses and mirrors} & \begin{equation} N_{Abbe} = \frac{FOV}{\delta x_{diffraction}} =\frac{FOV}{(\frac{\lambda + \Delta \lambda/2}{2 \cdot NA})} \end{equation} where $FOV$ is field of view, $NA$ is numerical aperture of the objective lens. &$\SI{2.00}{\micro\meter}$   \\ \cline{1-4}
-\multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{1}{*}{Time Stretch} } &
-\multicolumn{1}{ |m{0.15\textwidth}| }{Group delay dispersion} &\begin{equation}N_{DFT}=\frac{\Delta\lambda}{\delta\lambda}=\frac{\Delta\lambda}{\lambda\cdot\sqrt{\frac{2}{DL_f\cdot c}}}\end{equation} where $D$ is the group velocity dispersion, $L_f$ is the dispersive fiber length. &$\SI{0.73}{\micro\meter}$ \\ \cline{1-4}
-\multicolumn{1}{ |m{0.16\textwidth}  }{\multirow{2}{*}{Electronic back-end} } &
-\multicolumn{1}{ |m{0.15\textwidth}| }{Photodetector bandwidth} &\begin{equation}N_{PD}=\frac{\Delta t}{\delta t}=\frac{DL_f\Delta\lambda}{0.35/B}\end{equation} where $B$ is the bandwidth of the photodetector. &$\SI{0.28}{\micro\meter}$ \\ \cline{2-4}
-\multicolumn{1}{ |m{0.15\textwidth}  }{} &
-\multicolumn{1}{ |m{0.15\textwidth}| }{ADC sampling rate} &\begin{equation}N_{ADC}=DL_f\Delta\lambda f_{ADC}\end{equation} where $f_{ADC}$ is the sampling rate of digitizer. &$\SI{0.10}{\micro\meter}$ \\
-\cline{1-4}
-\end{tabular}
-\end{table*}
-
-The resolution of phase measurement along axial direction is determined by the effective number of bits (ENOB) of the digitizer and affected by the noise of laser source. Since pulse to pulse intensity and phase fluctuations are small, noise from laser source is not the limiting factor in our phase measurements. Supposing the ENOB of the digitizer is $N$, the minimum detectable optical path length difference, $\Delta L$ can be estimated as
-\begin{equation}
-\frac{1}{2}sin\left(\frac{4\pi \Delta L}{\lambda + \Delta \lambda/2}\right)=2^{-N}
-\end{equation}
-where $\lambda$ is the central wavelength of light, and $\Delta\lambda$ is the optical bandwidth. In our system, ENOB of the analog-to-digital converter is $5$. Thus, OPD resolution along the axial direction is about $\SI{8.0}{\nano\meter}$, corresponding to refractive index difference down to the order of $0.001$ for cellular level measurements.
-
-
 \subsection{Big data analytics pipeline}
 
 The high-content image analysis and cell screening pipeline is implemented by combining multiple informatics tools, namely CellProfiler for image processing \cite{carpenter2006cellprofiler,kamentsky2011improved}, MySQL/MangoDB for database, Matlab for machine learning, and Javascript for interactive visualization. 
@@ -507,6 +482,7 @@ The intensity variations caused by cell absorption and scattering can be extract
 
 To calculate the refractive index, the axial diameter along the interrogation optical beam is assumed to be equal to the lateral diameter along the rainbow direction, since cells in suspension relax to a spherical shape due to surface tension.
 
+
 \subsection{Calibration of size measurement}
 
 To calibrate the imaging system and image processing pipelines for size measurement, \SI{5}{\micro\meter} polystyrene beads (from Polysciences, Inc.) with NIST traceable particle size standards were analyzed. Size measurement of the polystyrene beads had a distribution with \SI{5.06}{\micro\meter} expected mean and \SI{0.5}{\micro\meter} standard deviation. The broadened standard deviation was within the range of optical resolution limit and was caused mainly by performing object recognition on resolution limited images.
@@ -516,24 +492,6 @@ In comparison, phase shift images are robust and insensitive to axial defocusing
 \subsection{Data cleaning}
 
 Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is calculated and top 2\% of the extreme data was set as outliers due to experimental errors or object recognition errors. Secondly, debris discrimination is performed; any data point with negative phase shift was considered as either air bubble, flow turbulence, or object recognition errors.
-
-\subsection{Microfluidic channel design and fabrication}
-
-The Polydimethylsiloxane (PDMS) microfluidic channel is custom-designed so that it could fit into the reflective optics design. Cells are hydrodynamically focused \cite{knight1998hydrodynamic,lee2006hydrodynamic} at the center of the channel flowing at a velocity of 1.3 m/s. The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. The dimension of the channel was chosen as \SI{200}{\micro\meter} (width) $\times$ \SI{25}{\micro\meter} (height) so that the cells will be imaged within depth of view with a narrow lateral distribution. The size of the entire PDMS channel is optimized for fitting on a 2 inch diameter dielectric mirror with sufficient space at the edges to achieve strong bonding. The thickness of the channel top layer is optimized for stabilizing peek tubes performance reliability while accommodate the working distance of the objective lens. 
-
-The PDMS microfluidic channel (Fig.~\ref{fig:Channel}) is fabricated using standard soft lithography. The mask was designed in AutoCAD and printed with a resolution down to 1 um. Then a 4-inch silicon wafer was spin-coated with 75um thickness of a negative photoresist (SU-8 from MicroChem) and was exposured under the mask using an aligner. After post-exposure baking, the wafer was developed at room temperature, rinsed with isopropyl alcohol (IPA), and placed in a petri dish.  A PDMS mixture (Sylgard 184 Silicone Elastomer, Dow Corning) was poured onto the patterned wafer, degassed in a vacuum chamber for 30 min and cured at \SI{80}{\degreeCelsius} for one hour. Once cured, the PDMS channel was cut out and peeled off from the master wafer. We used 1.25 um diameter hollow needle to punch the inlet and outlet holes. 
-The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M), treated with oxygen plasma (Enercon Dyne-A-Mite 3D Treater) for 2 min, and bonded to a 2-inch broadband dielectric mirror (Thorlabs BB2-E04) for obtaining high reflectance from channel substrate at near infrared spectral window. Finally microtubes (PE-50 tubing, .023x.038in) with steel catheter couplers (Instech, 22 ga x 15 mm) are connected to the inlet and outlet punctures.
-
-\begin{figure*}
-\includegraphics[scale=0.2]{FigureChannel.jpg}
-\caption{\label{fig:Channel} PDMS microfluidic channel mounted on a highly reflective surface with near-infrared dielectric coating; The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. (a) Sample solution with suspended cells is fed into the channel through the sample inlet, and deionized water as the sheath flow is sent through sheath inlet. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. (b) The pattern of the mask used to imprint microfluidic channel design on silicon wafer with photoresist. The circles are inlet and outlet reservoirs.}
-\end{figure*}
-
-\subsection{Preparation of algae cell lines}
-
-\textit{Chlamydomonas reinhardtii} strains used were \textit{cw15} (\textit{nit1 NIT2 mt$^{+-}$}) and \textit{sta6} (\textit{cw15 nit1 NIT2 arg7-7 sta6-1::ARG7 mt$^+$}), available as CC-4568, CC-4348 respectively from the Chlamydomonas resource center (CRC)\cite{minnesota2015chlamydomonas}.
-
-Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with arginine (\SI{100}{\micro\gram\per\milli\liter}). Cultures were grown in Innova incubators (New Brunswick Scientific, Edison, NJ) at \SI{24}{\degreeCelsius}, agitated at 180 rpm with continuous light (\SI{95}{\micro\mole\per\square\meter\per\second}, 6 cool white fluorescent bulbs at \SI{4100}{\kelvin} and 3 warm white fluorescent bulbs at \SI{3000}{\kelvin} per incubator). To induce lipid production, cells were cultured to mid-log phase in regular TAP prior to deprivation of N by transfer to ammonium-free (i.e. nitrogen-free) TAP medium, as described previously \cite{blaby2013systems}. Briefly, cells subjected to nitrogen deprivation were grown to \SI{4e6}{\cells\per\milli\liter} and collected by centrifugation at 1006 xg for 5 min at room temperature. The supernatant was discarded, and the cells were washed in nitrogen-free TAP. Cells were then resuspended in nitrogen-free TAP to a final cell count of \SI{2e6}{\cells\per\milli\liter}. Cell densities were determined using a hemocytometer.
 
 
 
@@ -619,7 +577,11 @@ Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with argini
 \bibliography{main}
 
 
-\section*{supplymentary}
+\section*{supplementary}
+Supplementary methods.
+
+Supplementary movies:
+
 Video 1: video of \textit{OT-II} hybridoma T-lymphocytes flowing in a microfluidic channel; The cells are aligned at the center of the channel by hydrodynamic focusing. Optical path difference measured at four of the interrogation points on the rainbow flash is shown as a function of time in the right panels.
 
 Video 2: video of \textit{SW-480} colon cancer epithelial cells flowing in a microfluidic channel; The cells are aligned at the center of the channel by hydrodynamic focusing. Optical path difference measured at four of the interrogation points on the rainbow flash is shown as a function of time in the right panels.
