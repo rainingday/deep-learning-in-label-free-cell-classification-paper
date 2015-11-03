@@ -42,6 +42,8 @@
 \DeclareSIUnit\cells{cells}
 \DeclareMathOperator{\hilbert}{\mathcal{H}} % To define additional named operators
 \DeclareMathOperator{\h}{h} % To define additional named operators
+\DeclareMathOperator{\AUC}{AUC} % To define additional named operators
+\DeclareMathOperator{\cost}{cost} % To define additional named operators
 \DeclareMathOperator{\unwrap}{unwrap} % To define additional named operators
 \DeclareMathOperator{\vercat}{cat_\downarrow} % To define additional named operators
 \DeclareMathOperator{\horcat}{cat_\rightarrow} % To define additional named operators
@@ -211,13 +213,22 @@ Neural networks are a flexible and powerful bioinspired learning model, which pe
 The network is composed of multiple hidden layers, which automatically learn representations of the data at different levels of abstraction, and thus, is considered a form of deep learning \cite{lecun2015deep, schmidhuber2015deep}. Each layer performs a linear combination on its inputs from the previous layer and operates a nonlinear function on the weighted sums. The output of the node $j$ in layer $l+1$, denoted by $z_j^{(l+1)}$ is generated from inputs $x_1$, $x_2$, \ldots, $x_N$ as
 \begin{equation}
 \begin{split}
-& z_j^{(l+1)} = \h(a_j^{(l+1)}) = \h(\sum_{i=1}^{N_l} \omega_{ji}^{(l)} x_i^{(l)}+x_0^{l})\\
+& z_j^{(l+1)} = \h(a_j^{(l+1)}) = \h(\sum_{i=1}^{N_l} \omega_{ji}^{(l)} x_i^{(l)}+x_0^{(l)})\\
 & i =1,\cdots,N_l;\quad j=1,\cdots,N_{l+1};\quad l=0,\cdots,L
 \end{split}
 \end{equation}
 Here $a_j^{(l+1)}$ is the linear combination of inputs, and $\omega_{ji}^{(l)}$ are the weights of the linear combination. The summation runs over $N_l$, the total number of nodes in the layer $l$, and $L$ is the total number of hidden layers. The constant term in the summation, $x_0^{(l)}$, is the bias node in layer $l$. Some popular choices for the nonlinear activation function $\h(\cdot)$ include logistic sigmoid function $\h(a)=1/(1+\exp(-a))$, hyperbolic tangent function $\tanh(a)$, and commonly used in deep learning, rectified linear unit (ReLU) $\h(a) = \max(0,a)$. In our learning model, we use ReLU, which typically speeds up the supervised learning process of deep neural network by inducing sparsity and preventing gradient vanishing problem. 
 
 For a trained classifier in hyperspace, receiver operating characteristics (ROC) curve describes the sensitivity and specificity of a classifier collection that includes nonlinear classifiers scaled in the direction of their normal vector field. In a deep learning network, this is equivalent to shifting the value of the bias node in the last hidden layer. ROC highlights the trade-off between sensitivity and specificity (Fig.~\ref{fig:NeuralNet}), and the area under ROC (AUC) provides a quantitative robust measure of classifier performance \cite{hanley1982meaning, ling2003auc, cortes2004auc, liu2008roc}. Choosing a large value for the bias node results in high sensitivity, however this sacrifices the specificity leading to large number of false positives. As a way to visualize the impact of the threshold on classification accuracy, a classifier that accurately separates the classes will have an ROC curve that approaches the upper left corner. Conversely, a random guess, corresponding to accuracy of 50\% in binary classification will have an ROC that is a diagonal line. The AUC parameter serves as an effective analysis metric for finding the best classifier collection and has been proven to be advantageous to the mean square error for evaluating learning algorithms \cite{verrelst1998use}. 
+
+To prevent overfitting in our deep learning model, we added a regularization term to the AUC-based cost function. Our regularization term is defined as mean square of all the network weights, excluding the bias nodes. Therefore, the overall cost function, $\cost(\omega)$, that is minimized by the genetic algorithm is
+\begin{equation}
+\begin{split}
+\cost(\omega) = & (1 - \AUC(\omega)) \\
+& + \lambda \frac{\sum_{l=0}^{L} \sum_{j=1}^{N_{l+1}} \sum_{i=1}^{N_l} (\omega_{ji}^{(l)})^2}{\sum_{l=0}^{L} \sum_{j=1}^{N_{l+1}} \sum_{i=1}^{N_l} 1}
+\end{split}
+\end{equation}
+where $\lambda$ is the regularization parameter, which controls the trade off between overfitting (variance) and underfitting (bias).
 
 \subsection{Demonstration in Classification of \textit{OT-II} and \textit{SW-480} Cells}
 
