@@ -52,16 +52,8 @@
 
 
 \begin{document}
-
-% Use the \preprint command to place your local institutional report
-% number in the upper righthand corner of the title page in preprint mode.
-% Multiple \preprint commands are allowed.
-% Use the 'preprintnumbers' class option to override journal defaults
-% to display numbers if necessary
-%\preprint{}
-
 %Title of paper
-\title{High-throughput label-free cell classification using machine learning}
+\title{Deep learning for high-throughput label-free cell classification}
 
 % repeat the \author .. \affiliation  etc. as needed
 % \email, \thanks, \homepage, \altaffiliation all apply to the current
@@ -91,8 +83,6 @@
 %\noaffiliation
 
 \date{\today}
-
-
 % insert suggested PACS numbers in braces on next line
 %\pacs{}
 % insert suggested keywords - APS authors don't need to do this
@@ -104,33 +94,36 @@
 % References should be done using the \cite, \ref, and \label commands
 \section*{Supplementary methods}
 
-\section{PCA}
-[]PCA
-To speed up the computation for high dimensionality analysis, we employ PCA. We have performed PCA on the 16 dimensional data set acquired by our time stretch QPI system. This maps the data from the physical feature space to the PCA space. Fig.~\ref{fig:PCA} shows the percent of the variance in data explained by each component (lower chart). The key observation is that most of the variance can be accounted for by the first two principle components. The upper portion of the plot shows the AUC for binary classification using each of the principle components. Interestingly, the first component with the highest explained variance is not necessarily the most important component for classification. This is not surprising since PCA components are optimized to the variance of data but not to the data labels. Therefore, apriori intuition about the physical significance of the features in the case here, is superior to PCA in eliminating dimensions that do not provide high value in classification. Nevertheless, in situations where physical intuition about meaning of features does not exist, PCA is a valuable tool. A second observation is that principle components that have low explained variance do have some value in classification. By revealing the structure in data that best explains the variance, PCA achieves data compression via dimensionality reduction.
+\section{Principal component analysis (PCA)}
 
-[]
-As shown in Fig.~\ref{fig:FeaturesCorrRank}a and Fig.~\ref{fig:FeaturesCorrRank}b, many of the 16 parameters are correlated and not all measured features in the data set produced by the time stretch quantitative phase imaging have the same amount of information. That result suggests that it may be possible to reduce the 16 dimensional data set to a smaller set of uncorrelated orthogonal dimensions without significantly compromising the classification accuracy. In that spirit, we have used principle component analysis (PCA) for dimensionality reduction. The PCA algorithm finds an alternative lower dimension space such that variance of data projected onto this subspace is maximized along subspace dimensions. By revealing the structure in data that best explains the variance, PCA achieves data compression via dimensionality reduction. 
+As shown in Fig.~\ref{fig:FeaturesCorrRank}a and Fig.~\ref{fig:FeaturesCorrRank}b, many of the 16 features are correlated and not all measured features in the data set produced by the time stretch quantitative phase imaging have the same amount of information. That result suggests that it may be possible to reduce the 16 dimensional data set to a smaller set of uncorrelated orthogonal dimensions without significantly compromising the classification accuracy. In that spirit, we have used principle component analysis (PCA) for dimensionality reduction and computation speed-up. The PCA algorithm finds an alternative lower dimension space such that variance of data projected onto this subspace is maximized along subspace dimensions. Fig.~\ref{fig:PCA}a shows the percent of the variance in data explained by each component (lower chart). The key observation is that most of the variance can be accounted for by the first two principle components. The upper portion of the plot shows the accuracy for binary classification using each of the principle components. Interestingly, the first component with the highest explained variance is not necessarily the most important component for classification. Therefore, apriori intuition about the physical significance of the features in the case here, is superior to PCA in eliminating dimensions that do not provide high value in classification. By revealing the structure in data that best explains the variance, PCA achieves data compression via dimensionality reduction. 
+
+PCA components acts as the input features for the classification algorithm. As number of PCA components retained increases, the classification accuracy improves while computational time increases (Fig.~\ref{fig:PCA}b). Since accuracy is the main concern here, we employ all 16 biophyscial features, rather than dimensionality-reduced PCA compoents.
 
 \begin{figure*}
 \includegraphics[scale=0.18]{FigurePCA.jpg}
-\caption{\label{fig:PCA} Principal component analysis (PCA); Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification.}
+\caption{\label{fig:PCA} 
+Principal component analysis (PCA) on the multivariate data set produed by time stretch quantitative phase imaging. (a) Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification.}
+% (a) Principal component analysis (PCA). The percentage of the total variance explained by each principal component.
+% (b) Accuracy as increasig PCA components.
+% (c) Running time as decreasing dimensions.
 \end{figure*}
 
-\subsection{Regularization}
+\subsection{Cross validation}
 
-[] Regularization
-[] Cross validation
+The k-fold cross-validation implemented here splits data points into training, validation, and test subsets (Fig.~\ref{CrossVaidationRegularization}a). For each interation, one fold is used as test data, one for validation while the other folds are used during training process. After innitially trained, the performance of the network is analyzed by the validation data to fine tune the neural network architecture and regularization parameter. Fig.~\ref{CrossVaidationRegularization}b shows that either a too small or a too large regularization parameter, $\lambda$, increases network error due to overfitting or underfitting, respectively. Therefore, there is a suitable range of regularization parameter for each learning model.
 
+Once the network architecture and regularization parameter are chosen and optimized based on the validation data, the learning model performance is finally verified by the test fold, which has never been used before in this interation. The process of training in each iterations is independent, so each iteration has no prior knowledge about the chosen learning models in other iterations. The final reported results are aggregate of the performance for different test datasets.
 
-
-[] 
-\begin{figure}
-\includegraphics[scale=0.5]{FigureOSA.jpg}
-\caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
-\end{figure}
+% \begin{figure*}
+% % \includegraphics[scale=0.18]{FigureCrossVaidationRegularization.jpg}
+% \caption{\label{fig:CrossVaidationRegularization} 
+% (a) The k-fold cross-validation implemented here splits data points into training, validation, and test subsets. The final reported results are aggregate of the performance for different test datasets. (b) Either a too small or a too large regularization parameter, $\lambda$, increases network error due to overfitting or underfitting, respectively. There is a suitable range of regularization parameter for each learning model.
+% \end{figure*}
 
 \subsection{System performance and resolvable points}
-Lateral resolution of time stretch camera is decided by the limiting factor among Abbe diffraction limit of the objective lens, spectral resolvability of the diffraction grating pairs, spectral resolution in amplified dispersive Fourier transform, the photodetector rise-time and bandwidth, and the sampling rate of the back-end digitizer. Details of the limiting factors of lateral resolution and evaluation of these factors for our TS-QPI system can be found in Table~\ref{tbl:Resolution}. Field of view (FOV) is the area covered by the interrogation rainbow when the rainbow pulses hit the imaging plane. The rainbow pulses width is decided by the optical bandwidth selected from the laser source, $\Delta\lambda$, the magnification factor of the objective lens as well as the focal length of the other lens and parabolic mirrors, and the dimensions and blaze angles of the diffraction gratings.
+
+Lateral resolution of time stretch camera is decided by the limiting factor among Abbe diffraction limit of the objective lens, spectral resolvability of the diffraction grating pairs, spectral resolution in amplified dispersive Fourier transform, the photodetector rise-time and bandwidth, and the sampling rate of the back-end digitizer. Details of the limiting factors of lateral resolution and evaluation of these factors for our TS-QPI system can be found in Table~\ref{tbl:Resolution}. Field of view (FOV) is the area covered by the interrogation rainbow when the rainbow pulses hit the imaging plane. The rainbow pulse width is decided by the optical bandwidth selected from the laser source, $\Delta\lambda$, the magnification factor of the objective lens, the focal length of the other lenses and parabolic mirrors, as well as the dimensions and blaze angles of the diffraction gratings.
 
 \begin{table*}
 \caption{\label{tbl:Resolution} Resolution Limiting Factors in TS-QPI}
@@ -151,26 +144,23 @@ Lateral resolution of time stretch camera is decided by the limiting factor amon
 \end{tabular}
 \end{table*}
 
-The resolution of phase measurement along axial direction is determined by the effective number of bits (ENOB) of the digitizer and affected by the noise of laser source. Since pulse to pulse intensity and phase fluctuations are small, noise from laser source is not the limiting factor in our phase measurements. Supposing the ENOB of the digitizer is $N$, the minimum detectable optical path length difference, $\Delta L$ can be estimated as
+The resolution of phase measurement along axial direction is determined by the effective number of bits (ENOB) of the digitizer and affected by the noise of laser source. Since pulse-to-pulse intensity and phase fluctuations are small, noise from laser source is not the limiting factor in our phase measurements. Supposing the ENOB of the digitizer is $N$, the minimum detectable optical path length difference, $\Delta L$ can be estimated as
 \begin{equation}
 \frac{1}{2}sin\left(\frac{4\pi \Delta L}{\lambda + \Delta \lambda/2}\right)=2^{-N}
 \end{equation}
-where $\lambda$ is the central wavelength of light, and $\Delta\lambda$ is the optical bandwidth. In our system, ENOB of the analog-to-digital converter is $5$. Thus, OPD resolution along the axial direction is about $\SI{8.0}{\nano\meter}$, corresponding to refractive index difference down to the order of $0.001$ for cellular level measurements.
-
-
+where $\lambda$ is the central wavelength of light, and $\Delta\lambda$ is the optical bandwidth. In our system, ENOB of the analog-to-digital converter is $5$. Thus, the OPD resolution along the axial direction is about $\SI{8.0}{\nano\meter}$, corresponding to refractive index difference down to the order of $0.001$ for cellular level measurements.
 
 \subsection{Microfluidic channel design and fabrication}
 
-The Polydimethylsiloxane (PDMS) microfluidic channel is custom-designed so that it could fit into the reflective optics design. Cells are hydrodynamically focused \cite{knight1998hydrodynamic,lee2006hydrodynamic} at the center of the channel flowing at a velocity of 1.3 m/s. The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. The dimension of the channel was chosen as \SI{200}{\micro\meter} (width) $\times$ \SI{25}{\micro\meter} (height) so that the cells will be imaged within depth of view with a narrow lateral distribution. The size of the entire PDMS channel is optimized for fitting on a 2 inch diameter dielectric mirror with sufficient space at the edges to achieve strong bonding. The thickness of the channel top layer is optimized for stabilizing peek tubes performance reliability while accommodate the working distance of the objective lens. 
+The Polydimethylsiloxane (PDMS) microfluidic channel is custom-designed so that it could fit into the reflective optics design. Cells are hydrodynamically focused \cite{knight1998hydrodynamic,lee2006hydrodynamic} at the center of the channel flowing at a velocity of 1.3 m/s. The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. The dimension of the channel was chosen as \SI{200}{\micro\meter} (width) $\times$ \SI{25}{\micro\meter} (height) so that the cells will be imaged within depth of focus with a narrow lateral distribution. The size of the entire PDMS channel is optimized for fitting on a 2 inch diameter dielectric mirror with sufficient space at the edges to achieve strong bonding. The thickness of the channel top layer is optimized for stabilizing peek tubes performance reliability while accommodating the working distance of the objective lens. 
 
 \begin{figure}[p]
 \includegraphics[scale=0.2]{FigureChannel.jpg}
 \caption{\label{fig:Channel} PDMS microfluidic channel mounted on a highly reflective surface with near-infrared dielectric coating; The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. (a) Sample solution with suspended cells is fed into the channel through the sample inlet, and deionized water as the sheath flow is sent through sheath inlet. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. (b) The pattern of the mask used to imprint microfluidic channel design on silicon wafer with photoresist. The circles are inlet and outlet reservoirs.}
 \end{figure}
 
-
-The PDMS microfluidic channel (Fig.~\ref{fig:Channel}) is fabricated using standard soft lithography. The mask was designed in AutoCAD and printed with a resolution down to 1 um. Then a 4-inch silicon wafer was spin-coated with 75um thickness of a negative photoresist (SU-8 from MicroChem) and was exposured under the mask using an aligner. After post-exposure baking, the wafer was developed at room temperature, rinsed with isopropyl alcohol (IPA), and placed in a petri dish.  A PDMS mixture (Sylgard 184 Silicone Elastomer, Dow Corning) was poured onto the patterned wafer, degassed in a vacuum chamber for 30 min and cured at \SI{80}{\degreeCelsius} for one hour. Once cured, the PDMS channel was cut out and peeled off from the master wafer. We used 1.25 um diameter hollow needle to punch the inlet and outlet holes. 
-The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M), treated with oxygen plasma (Enercon Dyne-A-Mite 3D Treater) for 2 min, and bonded to a 2-inch broadband dielectric mirror (Thorlabs BB2-E04) for obtaining high reflectance from channel substrate at near infrared spectral window. Finally microtubes (PE-50 tubing, .023x.038in) with steel catheter couplers (Instech, 22 ga x 15 mm) are connected to the inlet and outlet punctures.
+The PDMS microfluidic channel (Fig.~\ref{fig:Channel}) is fabricated using standard soft lithography. The mask was designed in AutoCAD and printed with a resolution down to \SI{1}{\micro\meter}. Then a 4-inch silicon wafer was spin-coated with \SI{75}{\micro\meter} thickness of a negative photoresist (SU-8 from MicroChem) and was exposured under the mask using an aligner. After post-exposure baking, the wafer was developed at room temperature, rinsed with isopropyl alcohol (IPA), and placed in a petri dish. A PDMS mixture (Sylgard 184 Silicone Elastomer, Dow Corning) was poured onto the patterned wafer, degassed in a vacuum chamber for 30 min and cured at \SI{80}{\degreeCelsius} for one hour. Once cured, the PDMS channel was cut out and peeled off from the master wafer. We used \SI{1.25}{\micro\meter} diameter hollow needle to punch the inlet and outlet holes. 
+The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M), treated with oxygen plasma (Enercon Dyne-A-Mite 3D Treater) for 2 min, and bonded to a 2-inch diameter broadband dielectric mirror (Thorlabs BB2-E04) for obtaining high reflectance from channel substrate at near infrared spectral window. Finally microtubes (PE-50 tubing, $.023 \times .038$ in) with steel catheter couplers (Instech, 22 ga $\times 15$ mm) are connected to the inlet and outlet punctures.
 
 
 \subsection{Preparation of algae cell lines}
@@ -178,6 +168,12 @@ The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M),
 \textit{Chlamydomonas reinhardtii} strains used were \textit{cw15} (\textit{nit1 NIT2 mt$^{+-}$}) and \textit{sta6} (\textit{cw15 nit1 NIT2 arg7-7 sta6-1::ARG7 mt$^+$}), available as CC-4568, CC-4348 respectively from the Chlamydomonas resource center (CRC)\cite{minnesota2015chlamydomonas}.
 
 Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with arginine (\SI{100}{\micro\gram\per\milli\liter}). Cultures were grown in Innova incubators (New Brunswick Scientific, Edison, NJ) at \SI{24}{\degreeCelsius}, agitated at 180 rpm with continuous light (\SI{95}{\micro\mole\per\square\meter\per\second}, 6 cool white fluorescent bulbs at \SI{4100}{\kelvin} and 3 warm white fluorescent bulbs at \SI{3000}{\kelvin} per incubator). To induce lipid production, cells were cultured to mid-log phase in regular TAP prior to deprivation of N by transfer to ammonium-free (i.e. nitrogen-free) TAP medium, as described previously \cite{blaby2013systems}. Briefly, cells subjected to nitrogen deprivation were grown to \SI{4e6}{\cells\per\milli\liter} and collected by centrifugation at 1006 xg for 5 min at room temperature. The supernatant was discarded, and the cells were washed in nitrogen-free TAP. Cells were then resuspended in nitrogen-free TAP to a final cell count of \SI{2e6}{\cells\per\milli\liter}. Cell densities were determined using a hemocytometer.
+
+
+\begin{figure}
+\includegraphics[scale=0.5]{FigureOSA.jpg}
+\caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
+\end{figure}
 
 
 % Create the reference section using BibTeX:
