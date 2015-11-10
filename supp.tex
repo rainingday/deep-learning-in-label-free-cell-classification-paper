@@ -95,7 +95,7 @@
 \section*{Supplementary methods}
 
 \begin{figure*}
-\includegraphics[scale=0.5]{FigureOSA.jpg}
+\includegraphics[scale=0.7]{FigureOSA.jpg}
 \caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{M-fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{M-fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
 \end{figure*}
 
@@ -113,7 +113,7 @@ Principal component analysis (PCA) on the multivariate data set produed by time 
 
 \section{\label{scn:CrossValidation}Cross validation} 
 
-The k-fold cross-validation implemented here splits data points into training, validation, and test subsets (Fig.~\ref{fig:CrossVaidationRegularization}a). For each interation, one fold is used as test data, one for validation while the other folds are used during training process. After innitially trained, the performance of the network is analyzed by the validation data to fine tune the neural network architecture and regularization parameter. Fig.~\ref{fig:CrossVaidationRegularization}b shows that either a too small or a too large regularization parameter, $\lambda$, increases network error due to overfitting or underfitting, respectively. Therefore, there is a suitable range of regularization parameter for each learning model.
+The k-fold cross-validation implemented here splits data points into training, validation, and test subsets (Fig.~\ref{fig:CrossValidationRegularization}a). For each interation, one fold is used as test data, one for validation while the other folds are used during training process. After innitially trained, the performance of the network is analyzed by the validation data to fine tune the neural network architecture and regularization parameter. Fig.~\ref{fig:CrossValidationRegularization}b shows that either a too small or a too large regularization parameter, $\lambda$, increases network error due to overfitting or underfitting, respectively. Therefore, there is a suitable range of regularization parameter for each learning model.
 
 Once the network architecture and regularization parameter are chosen and optimized based on the validation data, the learning model performance is finally verified by the test fold, which has never been used before in this interation. The process of training in each iterations is independent, so each iteration has no prior knowledge about the chosen learning models in other iterations. The final reported results are aggregate of the performance for different test datasets.
 
