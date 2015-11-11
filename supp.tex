@@ -95,7 +95,7 @@
 \section*{Supplementary methods}
 
 \begin{figure*}
-\includegraphics[scale=0.7]{FigureOSA.jpg}
+\includegraphics[scale=0.9]{FigureOSA.jpg}
 \caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{M-fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{M-fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
 \end{figure*}
 
@@ -106,7 +106,7 @@ As shown in Fig.~\ref{M-fig:FeaturesCorrRank}a and Fig.~\ref{M-fig:FeaturesCorrR
 PCA components acts as the input features for the classification algorithm. As number of PCA components retained increases, the classification accuracy improves while computation time increases (Fig.~\ref{fig:PCA}b). Since accuracy is the main concern here, we employ all 16 biophyscial features, rather than dimensionality-reduced PCA compoents.
 
 \begin{figure*}
-\includegraphics[scale=0.18]{FigurePCA.jpg}
+\includegraphics[scale=0.1]{FigurePCA.jpg}
 \caption{\label{fig:PCA} 
 Principal component analysis (PCA) on the multivariate data set produed by time stretch quantitative phase imaging. (a) Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification. (b) In order to reduce the number of input features and decrease computation time, a subset of the PCA components are used for classification. The classification accuracy improves as the the total variance retained in the subset of PCA components goes up. The value at each data point coresponds to the number of PCA components retained in order to achieve that total explained variance. The small deviation among accuracies of data points with the same number of PCA components are due to variations in random data partitioning.}
 \end{figure*}
