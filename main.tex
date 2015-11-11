@@ -213,7 +213,7 @@ Neural networks are a flexible and powerful bioinspired learning model, which pe
 The network is composed of multiple hidden layers, which automatically learn representations of the data at different levels of abstraction, and thus, is considered a form of deep learning \cite{lecun2015deep, schmidhuber2015deep}. Each layer performs a linear combination on its inputs from the previous layer and operates a nonlinear function on the weighted sums. The output of the node $j$ in layer $l+1$, denoted by $z_j^{(l+1)}$ is generated from inputs $x_1$, $x_2$, \ldots, $x_N$ as
 \begin{equation}
 \begin{split}
-& z_j^{(l+1)} = \h(a_j^{(l+1)}) = \h(\sum_{i=1}^{N_l} \omega_{ji}^{(l)} x_i^{(l)}+x_0^{(l)})\\
+& z_j^{(l+1)} = \h(a_j^{(l+1)}) = \h(\sum_{i=0}^{N_l} \omega_{ji}^{(l)} x_i^{(l)})\\
 & l=0,\cdots,L;\quad j=1,\cdots,N_{l+1}
 \end{split}
 \end{equation}
