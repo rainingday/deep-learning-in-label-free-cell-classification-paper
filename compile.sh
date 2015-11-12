@@ -7,3 +7,5 @@ pdflatex main.tex
 pdflatex supp.tex
 pdflatex main.tex
 pdflatex supp.tex
+open supp.pdf
+open main.pdf
