@@ -75,11 +75,9 @@
 \author{Claire Lifan Chen}
 \altaffiliation{These authors contributed equally}
 \affiliation{Department of Electrical Engineering, University of California, Los Angeles, California 90095, USA}
-\affiliation{California NanoSystems Institute, Los Angeles, California 90095, USA}
 \email[Email: ]{l.chen@ucla.edu}
+\affiliation{California NanoSystems Institute, Los Angeles, California 90095, USA}
 % \thanks{These two authors contributed equally}
-%\homepage[]{Your web page}
-%\thanks{}
 \author{Ata Mahjoubfar}
 \altaffiliation{These authors contributed equally}
 \affiliation{Department of Electrical Engineering, University of California, Los Angeles, California 90095, USA}
@@ -271,7 +269,7 @@ To show the effect of the training dataset size in the performance of the learni
 Multiple machine learning techniques for multivariate label-free cell classification are compared using our TS-QPI tumor cell detection dataset (Fig.~\ref{fig:LearningCurve}b). The mean accuracies of all learning models are beyond 85\%, reflecting the advantages of simultaneous hyperdimensional biophysical features that TS-QPI provides for label-free cell classification. Furthermore, the standard deviation of the balanced accuracy (shown with error bars) is the smallest for the regularized AUC-based deep learning model, which confirms its consistency and repeatability are the best among learning methods.
 
 \begin{figure*}
-\includegraphics[scale=0.1]{FigureLearningCurve.jpg}
+\includegraphics[scale=0.08]{FigureLearningCurve.jpg}
 \caption{\label{fig:LearningCurve} (a) The learning curves of the training and test datasets in the tumor cell detection. Larger number of training data points decreases the cross entropy of the test dataset, which means the classifier is performing more accurately. However, the trend is opposite for the training dataset because with a larger number of training data points fitting error accumulates. The discrepancy of the training and test errors, i.e. generalization error, decreases up to N = 850, which is the necessary training data size for achieving final performance in our TS-QPI demonstration with deep learning neural network. (b) Comparison of multiple machine learning classification techniques based on the biophysical features extracted from the label-free cell images captured by TS-QPI. Our AUC-based deep learning model (DNN + AUC) has both the highest accuracy and consistency against support vector machine (SVM) with Gaussian kernel, logistic regression (LR), naive Bayes, and conventional deep neural network trained by cross entropy and backpropagation (DNN).}
 \end{figure*}
 
