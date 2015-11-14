@@ -275,7 +275,7 @@ Multiple machine learning techniques for multivariate label-free cell classifica
 
 \section{Conclusion}
 
-Time-stretch quantitative phase imaging (TS-QPI) is capable of capturing images of flowing cells with minimal motion distortion at unprecedented rates of 100,000 cells/s. TS-QPI relies on spectral multiplexing to capture simultaneously both phase and intensity quantitative images in a single measurement, generating a wealth of information of each individual cell eliminating the need for labeling with undesirable biomarkers. Here, we summarized the information content of these images in a set of 16 features for each cell, and performed classification in the hyperdimensional space composed of these features. We demonstrated application of various learning algorithms including deep neural networks, logistic regression, naive Bayes, as well as a new traning method based on area under the ROC curve. The results from two experimental demonstrations, one on detection of cancerous cells among white blood cells, and another one on identification of lipid-rich algae, show that classification accuracy by using the TS-QPI hyperdimensional space is more than [] 17\% better than the conventional size-based techniques. Our system paves the way to cellular phenotypic analysis as well as data-driven diagnostics, and thus, is a valuable tool for high-throughput label-free cell screening in medical, biotechnological, and research applications.
+Time-stretch quantitative phase imaging (TS-QPI) is capable of capturing images of flowing cells with minimal motion distortion at unprecedented rates of 100,000 cells/s. TS-QPI relies on spectral multiplexing to capture simultaneously both phase and intensity quantitative images in a single measurement, generating a wealth of information of each individual cell eliminating the need for labeling with undesirable biomarkers. Here, we summarized the information content of these images in a set of 16 features for each cell, and performed classification in the hyperdimensional space composed of these features. We demonstrated application of various learning algorithms including deep neural networks, logistic regression, naive Bayes, as well as a new training method based on area under the ROC curve. The results from two experimental demonstrations, one on detection of cancerous cells among white blood cells, and another one on identification of lipid-rich algae, show that classification accuracy by using the TS-QPI hyperdimensional space is more than [] 17\% better than the conventional size-based techniques. Our system paves the way to cellular phenotypic analysis as well as data-driven diagnostics, and thus, is a valuable tool for high-throughput label-free cell screening in medical, biotechnological, and research applications.
 
 \section{\label{scn:Methods} Methods}
 
@@ -337,7 +337,7 @@ The intensity envelope then becomes
 \end{split}
 \end{equation}
 
-During time stretch, each frequency component $\omega$, or wavelength $\lambda$ will be one-to-one mapped into time domain. We define the relative time delay of $\lambda$ compared to the central wavelength, $\lambda_c$, as $t_i$, which is usually called intrapulse time delay. Written in terms of $\lambda$, Eq.~\ref{eq:totalIntensity} can be simplified as
+During time stretch, each frequency component $\omega$, or wavelength $\lambda$ will be one-to-one mapped into time domain. We define the relative time delay of $\lambda$ compared to the central wavelength, $\lambda_c$, as $t_i$, which is usually called intra-pulse time delay. Written in terms of $\lambda$, Eq.~\ref{eq:totalIntensity} can be simplified as
 \begin{equation} \label{eq:totalIntensitylambda}
 \tilde{I}_o(\lambda, t_p) \propto I_b (\lambda, t_p) + I_i (\lambda, t_p) cos[ \frac{4\pi\Delta L}{\lambda} + \Delta \varphi_c(\lambda, t_p) ]
 \end{equation}
@@ -357,7 +357,7 @@ Linear time stretch maps frequency domain into time domain by
 \begin{equation} \label{eq:DCF}
 t_i = D (\lambda - \lambda_c) L_f.
 \end{equation}
-where $\lambda_c$ is the central wavelength and $L_f$ the length of the dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading, $\Delta t_i$, per unit bandwidth, $\Delta\lambda$, per unit distance traveled. Thus the temporal samples of the energy flux absorbed at the photodetector are the intrapulse concatenation of spectral samples followed by interpulse concatenation of pulse waveforms:
+where $\lambda_c$ is the central wavelength and $L_f$ the length of the dispersive fiber. $D$ is the group velocity dispersion, that is, the temporal pulse spreading, $\Delta t_i$, per unit bandwidth, $\Delta\lambda$, per unit distance traveled. Thus the temporal samples of the energy flux absorbed at the photodetector are the intra-pulse concatenation of spectral samples followed by inter-pulse concatenation of pulse waveforms:
 \begin{equation}
 \begin{split}
 \tilde{I}_{PD}[t] = \quad\quad&\quad\\
