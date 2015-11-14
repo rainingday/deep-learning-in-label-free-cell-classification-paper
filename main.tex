@@ -454,7 +454,7 @@ in which $n_{cell}$ and $n_{solution}$ are the refractive indices of the cell an
 
 If we integrate Eq.~\ref{eq:OPD} over the area of the cell, we can derive an average refractive index contrast for the cell, which corresponds to the average protein concentration of the cell:
 \begin{equation}
-\overline{\Delta n_{cell}} = \overline{n_{cell} - n_{solution}} = \frac{\iint_{cell} OPD(x,y) dx dy}{2 V}
+\overline{\Delta n_{cell}} = \overline{n_{cell} - n_{solution}} = \frac{\iint_{cell} OPD(x,y) dx dy}{2 \iint_{cell} t(x,y) dx dy}
 \end{equation}
 where $\iint_{cell} t(x,y) dx dy$ is the volume of the cell obtained from its diameter, $d$, as $V \approx \pi d^3/6$. 
 
