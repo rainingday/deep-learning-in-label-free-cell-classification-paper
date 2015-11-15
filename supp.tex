@@ -108,7 +108,7 @@ PCA components acts as the input features for the classification algorithm. As n
 \begin{figure*}
 \includegraphics[scale=0.1]{FigurePCA.jpg}
 \caption{\label{fig:PCA} 
-Principal component analysis (PCA) on the multivariate data set produced by time stretch quantitative phase imaging. (a) Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification. (b) Cumulative accuracy. The value at each data point corresponds to the number of PCA components retained in order to achieve that total explained variance. In order to reduce the number of input features and decrease computation time, a subset of the PCA components can be used for classification. The classification accuracy improves as the the total variance retained in the subset of PCA components goes up. Nearly 90\% accuracy can be achieve with the first three PCA components. The small deviation among accuracies of data points with the same number of PCA components are due to variations in random data partitioning.}
+Principal component analysis (PCA) on the multivariate data set produced by time stretch quantitative phase imaging. (a) Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification. (b) Cumulative accuracy. The value at each data point corresponds to the number of PCA components retained in order to achieve that total explained variance. In order to reduce the number of input features and decrease computation time, a subset of the PCA components can be used for classification. The classification accuracy improves as the total variance retained in the subset of PCA components goes up. Nearly 90\% accuracy can be achieve with the first three PCA components. The small deviation among accuracies of data points with the same number of PCA components are due to variations in random data partitioning.}
 \end{figure*}
 
 \section{\label{scn:CrossValidation}Cross validation} 
@@ -122,6 +122,26 @@ Once the network architecture and regularization parameter are chosen and optimi
 \caption{\label{fig:CrossValidationRegularization} 
 (a) The implementation of the k-fold cross-validation here splits data points into training, validation, and test subsets. In each iteration, one fold is used for fine tuning the learning model (validation dataset) and another fold is used for evaluation of the final results (test dataset), while rest of the data points are used for training (training dataset). The final reported results are aggregate of the outcomes from the test datasets. (b) A suitable regularization parameter, $\lambda$, balances the trade-off between overfitting (variance) and underfitting (bias) and minimizes the cross entropy of the validation dataset.}
 \end{figure*}
+
+\section{Computation time}
+
+Our deep learning technique uses AUC as the cost function and performs training via genetic algorithm. Since AUC is calculated based on the entire dataset, the genetic algorithm is employed as a global optimization method. Thus, our technique has inherently higher accuracy and repeatability compared to conventional deep learning and other classification algorithms studied here. However, the global optimization in our algorithm sacrifices the computation time. The performance of balanced accuracy and computation time of different classification algorithms are compared in Table~\ref{tbl:RunningTime}.
+
+\begin{table*}
+\caption{\label{tbl:RunningTime} Performance comparison of different classification algorithms}
+\begin{tabular}{ c | c | c | c }
+ \hline
+  Algorithm & Averaged & Standard deviation of & Computation time\\
+   & balanced accuracy & balanced accuracy & (second)\\
+  \hline
+  Deep neural network trained by AUC & 95.5\% & 0.9\% & 365.6\\
+  Deep neural network trained by cross entropy & 94.4\% & 2.1\% & 4.7\\
+  Logistic regression & 93.5\% & 0.9\% & 0.8\\
+  Support vector machine & 93.4\% & 1.0\% & 1.7\\
+  Naive Bayes & 88.7\% & 1.6\% & 2.8\\
+  \hline
+\end{tabular}
+\end{table*}
 
 \section{System performance and resolvable points}
 
