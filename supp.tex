@@ -99,7 +99,7 @@
 \caption{\label{fig:OSA} Comparison of the interferograms measured by optical spectrum analyzer and time-stretch dispersive Fourier Transform; (a) Optical spectrum of the signal after quantitative phase imaging (box 1 in Fig.~\ref{M-fig:Setup}) and before it enters the amplified time-stretch system (box 2 in Fig.~\ref{M-fig:Setup}). The interference pattern in spectral domain is measured by an optical spectrum analyzer. (b) With time stretch, the interference pattern in spectral domain is linearly mapped into time. The baseband intensity envelope is slightly modified by the wavelength-dependent gain profile of the Raman amplifier. The inserts in panels a and b show the zoomed-in spectrum and waveform in the dashed black boxes, respectively. Clearly, the single-shot interferogram measured by Raman-amplified time-stretch dispersive Fourier Transform has a higher signal-to-noise ratio compared to that captured by optical spectrum analyzer.}
 \end{figure*}
 
-\section{Principal component analysis (PCA)}
+\section*{Principal component analysis (PCA)}
 
 As shown in Fig.~\ref{M-fig:FeaturesCorrRank}a and Fig.~\ref{M-fig:FeaturesCorrRank}b, many of the 16 features are correlated and not all measured features in the data set produced by the time stretch quantitative phase imaging have the same amount of information. That result suggests that it may be possible to reduce the 16 dimensional data set to a smaller set of uncorrelated orthogonal dimensions without significantly compromising the classification accuracy. In that spirit, we have used principle component analysis (PCA) for dimensionality reduction and computation speed-up. The PCA algorithm finds an alternative lower dimension space such that variance of data projected onto this subspace is maximized along subspace dimensions. Fig.~\ref{fig:PCA}a shows the percent of the variance in data explained by each component (lower chart). The key observation is that most of the variance can be accounted for by the first two principle components. The upper portion of the plot shows the accuracy for binary classification using each of the principle components. Interestingly, the first component with the highest explained variance is not necessarily the most important component for classification. Therefore, apriori intuition about the physical significance of the features in the case here, is superior to PCA in eliminating dimensions that do not provide high value in classification. By revealing the structure in data that best explains the variance, PCA achieves data compression via dimensionality reduction. 
 
@@ -111,7 +111,7 @@ PCA components acts as the input features for the classification algorithm. As n
 Principal component analysis (PCA) on the multivariate data set produced by time stretch quantitative phase imaging. (a) Upper bar chart shows accuracy of classification by each individual principal component, and lower bar chart shows the percentage of the total variance explained by each principal component, accounting for the variability expressed in the data. As expected, principal components with larger variability do not necessarily give high accuracy in classification. (b) Cumulative accuracy. The value at each data point corresponds to the number of PCA components retained in order to achieve that total explained variance. In order to reduce the number of input features and decrease computation time, a subset of the PCA components can be used for classification. The classification accuracy improves as the total variance retained in the subset of PCA components goes up. Nearly 90\% accuracy can be achieve with the first three PCA components. The small deviation among accuracies of data points with the same number of PCA components are due to variations in random data partitioning.}
 \end{figure*}
 
-\section{\label{scn:CrossValidation}Cross validation} 
+\section*{\label{scn:CrossValidation}Cross validation} 
 
 The k-fold cross-validation implemented here splits data points into training, validation, and test subsets (Fig.~\ref{fig:CrossValidationRegularization}a). For each iteration, one fold is used as test data, one for validation while the other folds are used during training process. After initially trained, the performance of the network is analyzed by the validation data to fine tune the neural network architecture and regularization parameter. Fig.~\ref{fig:CrossValidationRegularization}b shows that either a too small or a too large regularization parameter, $\lambda$, increases network error due to overfitting or underfitting, respectively. Therefore, there is a suitable range of regularization parameter for each learning model.
 
@@ -123,7 +123,7 @@ Once the network architecture and regularization parameter are chosen and optimi
 (a) The implementation of the k-fold cross-validation here splits data points into training, validation, and test subsets. In each iteration, one fold is used for fine tuning the learning model (validation dataset) and another fold is used for evaluation of the final results (test dataset), while rest of the data points are used for training (training dataset). The final reported results are aggregate of the outcomes from the test datasets. (b) A suitable regularization parameter, $\lambda$, balances the trade-off between overfitting (variance) and underfitting (bias) and minimizes the cross entropy of the validation dataset.}
 \end{figure*}
 
-\section{Computation time}
+\section*{Computation time}
 
 Our deep learning technique uses AUC as the cost function and performs training via genetic algorithm. Since AUC is calculated based on the entire dataset, the genetic algorithm is employed as a global optimization method. Thus, our technique has inherently higher accuracy and repeatability compared to conventional deep learning and other classification algorithms studied here. However, the global optimization in our algorithm sacrifices the computation time. The performance of balanced accuracy and computation time of different classification algorithms are compared in Table~\ref{tbl:RunningTime}.
 
@@ -143,7 +143,7 @@ Our deep learning technique uses AUC as the cost function and performs training 
 \end{tabular}
 \end{table*}
 
-\section{System performance and resolvable points}
+\section*{System performance and resolvable points}
 
 Lateral resolution of time stretch camera is decided by the limiting factor among Abbe diffraction limit of the objective lens, spectral resolvability of the diffraction grating pairs, spectral resolution in amplified dispersive Fourier transform, the photodetector rise-time and bandwidth, and the sampling rate of the back-end digitizer. Details of the limiting factors of lateral resolution and evaluation of these factors for our TS-QPI system can be found in Table~\ref{tbl:Resolution}. Field of view (FOV) is the area covered by the interrogation rainbow when the rainbow pulses hit the imaging plane. The rainbow pulse width is decided by the optical bandwidth selected from the laser source, $\Delta\lambda$, the magnification factor of the objective lens, the focal length of the other lenses and parabolic mirrors, as well as the dimensions and blaze angles of the diffraction gratings.
 
@@ -172,7 +172,7 @@ The resolution of phase measurement along axial direction is determined by the e
 \end{equation}
 where $\lambda$ is the central wavelength of light, and $\Delta\lambda$ is the optical bandwidth. In our system, ENOB of the analog-to-digital converter is $5$. Thus, the OPD resolution along the axial direction is about $\SI{8.0}{\nano\meter}$, corresponding to refractive index difference down to the order of $0.001$ for cellular level measurements.
 
-\section{Microfluidic channel design and fabrication}
+\section*{Microfluidic channel design and fabrication}
 
 The Polydimethylsiloxane (PDMS) microfluidic channel is custom-designed so that it could fit into the reflective optics design. Cells are hydrodynamically focused \cite{knight1998hydrodynamic,lee2006hydrodynamic} at the center of the channel flowing at a velocity of 1.3 m/s. The microfluidic device consists of a hydrodynamic focusing region and an imaging region targeted by the interrogation rainbow flashes in TS-QPI system. At the hydrodynamic focusing region, the sheath pressure focused the sample at the center of the channel by narrowing its flow width from \SI{200}{\micro\meter} to about \SI{40}{\micro\meter} with a sheath to sample volume ratio of 3:1. The dimension of the channel was chosen as \SI{200}{\micro\meter} (width) $\times$ \SI{25}{\micro\meter} (height) so that the cells will be imaged within depth of focus with a narrow lateral distribution. The size of the entire PDMS channel is optimized for fitting on a 2 inch diameter dielectric mirror with sufficient space at the edges to achieve strong bonding. The thickness of the channel top layer is optimized for stabilizing peek tubes performance reliability while accommodating the working distance of the objective lens. 
 
@@ -185,134 +185,15 @@ The PDMS microfluidic channel (Fig.~\ref{fig:Channel}) is fabricated using stand
 The punched PDMS channel was then cleaned with nitrogen gun and magic tape (3M), treated with oxygen plasma (Enercon Dyne-A-Mite 3D Treater) for 2 min, and bonded to a 2-inch diameter broadband dielectric mirror (Thorlabs BB2-E04) for obtaining high reflectance from channel substrate at near infrared spectral window. Finally microtubes (PE-50 tubing, $.023 \times .038$ in) with steel catheter couplers (Instech, 22 ga $\times 15$ mm) are connected to the inlet and outlet punctures.
 
 
-\section{Preparation of algae cell lines}
+\section*{Preparation of algae cell lines}
 
 \textit{Chlamydomonas reinhardtii} strains used were \textit{cw15} (\textit{nit1 NIT2 mt$^{+-}$}) and \textit{sta6} (\textit{cw15 nit1 NIT2 arg7-7 sta6-1::ARG7 mt$^+$}), available as CC-4568, CC-4348 respectively from the Chlamydomonas resource center (CRC)\cite{minnesota2015chlamydomonas}.
 
 Cells were grown in tris-acetate-phosphate (TAP) medium supplemented with arginine (\SI{100}{\micro\gram\per\milli\liter}). Cultures were grown in Innova incubators (New Brunswick Scientific, Edison, NJ) at \SI{24}{\degreeCelsius}, agitated at 180 rpm with continuous light (\SI{95}{\micro\mole\per\square\meter\per\second}, 6 cool white fluorescent bulbs at \SI{4100}{\kelvin} and 3 warm white fluorescent bulbs at \SI{3000}{\kelvin} per incubator). To induce lipid production, cells were cultured to mid-log phase in regular TAP prior to deprivation of N by transfer to ammonium-free (i.e. nitrogen-free) TAP medium, as described previously \cite{blaby2013systems}. Briefly, cells subjected to nitrogen deprivation were grown to \SI{4e6}{\cells\per\milli\liter} and collected by centrifugation at 1006 xg for 5 min at room temperature. The supernatant was discarded, and the cells were washed in nitrogen-free TAP. Cells were then resuspended in nitrogen-free TAP to a final cell count of \SI{2e6}{\cells\per\milli\liter}. Cell densities were determined using a hemocytometer.
 
 
-% Create the reference section using BibTeX:
-%merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
-%Control: key (0)
-%Control: author (0) dotless jnrlst
-%Control: editor formatted (1) identically to author
-%Control: production of article title (0) allowed
-%Control: page (1) range
-%Control: year (0) verbatim
-%Control: production of eprint (0) enabled
-% \bibliography{main}
-%merlin.mbs apsrev4-1.bst 2010-07-25 4.21a (PWD, AO, DPC) hacked
-%Control: key (0)
-%Control: author (0) dotless jnrlst
-%Control: editor formatted (1) identically to author
-%Control: production of article title (0) allowed
-%Control: page (1) range
-%Control: year (0) verbatim
-%Control: production of eprint (0) enabled
-\begin{thebibliography}{4}%
-\makeatletter
-\providecommand \@ifxundefined [1]{%
- \@ifx{#1\undefined}
-}%
-\providecommand \@ifnum [1]{%
- \ifnum #1\expandafter \@firstoftwo
- \else \expandafter \@secondoftwo
- \fi
-}%
-\providecommand \@ifx [1]{%
- \ifx #1\expandafter \@firstoftwo
- \else \expandafter \@secondoftwo
- \fi
-}%
-\providecommand \natexlab [1]{#1}%
-\providecommand \enquote  [1]{``#1''}%
-\providecommand \bibnamefont  [1]{#1}%
-\providecommand \bibfnamefont [1]{#1}%
-\providecommand \citenamefont [1]{#1}%
-\providecommand \href@noop [0]{\@secondoftwo}%
-\providecommand \href [0]{\begingroup \@sanitize@url \@href}%
-\providecommand \@href[1]{\@@startlink{#1}\@@href}%
-\providecommand \@@href[1]{\endgroup#1\@@endlink}%
-\providecommand \@sanitize@url [0]{\catcode `\\12\catcode `\$12\catcode
-  `\&12\catcode `\#12\catcode `\^12\catcode `\_12\catcode `\%12\relax}%
-\providecommand \@@startlink[1]{}%
-\providecommand \@@endlink[0]{}%
-\providecommand \url  [0]{\begingroup\@sanitize@url \@url }%
-\providecommand \@url [1]{\endgroup\@href {#1}{\urlprefix }}%
-\providecommand \urlprefix  [0]{URL }%
-\providecommand \Eprint [0]{\href }%
-\providecommand \doibase [0]{http://dx.doi.org/}%
-\providecommand \selectlanguage [0]{\@gobble}%
-\providecommand \bibinfo  [0]{\@secondoftwo}%
-\providecommand \bibfield  [0]{\@secondoftwo}%
-\providecommand \translation [1]{[#1]}%
-\providecommand \BibitemOpen [0]{}%
-\providecommand \bibitemStop [0]{}%
-\providecommand \bibitemNoStop [0]{.\EOS\space}%
-\providecommand \EOS [0]{\spacefactor3000\relax}%
-\providecommand \BibitemShut  [1]{\csname bibitem#1\endcsname}%
-\let\auto@bib@innerbib\@empty
-%</preamble>
-\bibitem [{\citenamefont {Knight}\ \emph {et~al.}(1998)\citenamefont {Knight},
-  \citenamefont {Vishwanath}, \citenamefont {Brody},\ and\ \citenamefont
-  {Austin}}]{knight1998hydrodynamic}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {James~B}\ \bibnamefont
-  {Knight}}, \bibinfo {author} {\bibfnamefont {Ashvin}\ \bibnamefont
-  {Vishwanath}}, \bibinfo {author} {\bibfnamefont {James~P}\ \bibnamefont
-  {Brody}}, \ and\ \bibinfo {author} {\bibfnamefont {Robert~H}\ \bibnamefont
-  {Austin}},\ }\bibfield  {title} {\enquote {\bibinfo {title} {Hydrodynamic
-  focusing on a silicon chip: mixing nanoliters in microseconds},}\ }\href@noop
-  {} {\bibfield  {journal} {\bibinfo  {journal} {Physical Review Letters}\
-  }\textbf {\bibinfo {volume} {80}},\ \bibinfo {pages} {3863} (\bibinfo {year}
-  {1998})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Lee}\ \emph {et~al.}(2006)\citenamefont {Lee},
-  \citenamefont {Chang}, \citenamefont {Huang},\ and\ \citenamefont
-  {Yang}}]{lee2006hydrodynamic}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Gwo-Bin}\ \bibnamefont
-  {Lee}}, \bibinfo {author} {\bibfnamefont {Chih-Chang}\ \bibnamefont {Chang}},
-  \bibinfo {author} {\bibfnamefont {Sung-Bin}\ \bibnamefont {Huang}}, \ and\
-  \bibinfo {author} {\bibfnamefont {Ruey-Jen}\ \bibnamefont {Yang}},\
-  }\bibfield  {title} {\enquote {\bibinfo {title} {The hydrodynamic focusing
-  effect inside rectangular microchannels},}\ }\href@noop {} {\bibfield
-  {journal} {\bibinfo  {journal} {Journal of Micromechanics and
-  Microengineering}\ }\textbf {\bibinfo {volume} {16}},\ \bibinfo {pages}
-  {1024} (\bibinfo {year} {2006})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Laudon}(Data of
-  access:20/07/2015)}]{minnesota2015chlamydomonas}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Matt}\ \bibnamefont
-  {Laudon}},\ }\href@noop {} {\enquote {\bibinfo {title} {Chlamydomonas
-  resource center, university of minnesota},}\ }\bibinfo {howpublished}
-  {\url{http://chlamycollection.org/}} (\bibinfo {year} {Data of
-  access:20/07/2015}),\ \bibinfo {note} {online}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Blaby}\ \emph {et~al.}(2013)\citenamefont {Blaby},
-  \citenamefont {Glaesener}, \citenamefont {Mettler}, \citenamefont
-  {Fitz-Gibbon}, \citenamefont {Gallaher}, \citenamefont {Liu}, \citenamefont
-  {Boyle}, \citenamefont {Kropat}, \citenamefont {Stitt}, \citenamefont
-  {Johnson} \emph {et~al.}}]{blaby2013systems}%
-  \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {Ian~K}\ \bibnamefont
-  {Blaby}}, \bibinfo {author} {\bibfnamefont {Anne~G}\ \bibnamefont
-  {Glaesener}}, \bibinfo {author} {\bibfnamefont {Tabea}\ \bibnamefont
-  {Mettler}}, \bibinfo {author} {\bibfnamefont {Sorel~T}\ \bibnamefont
-  {Fitz-Gibbon}}, \bibinfo {author} {\bibfnamefont {Sean~D}\ \bibnamefont
-  {Gallaher}}, \bibinfo {author} {\bibfnamefont {Bensheng}\ \bibnamefont
-  {Liu}}, \bibinfo {author} {\bibfnamefont {Nanette~R}\ \bibnamefont {Boyle}},
-  \bibinfo {author} {\bibfnamefont {Janette}\ \bibnamefont {Kropat}}, \bibinfo
-  {author} {\bibfnamefont {Mark}\ \bibnamefont {Stitt}}, \bibinfo {author}
-  {\bibfnamefont {Shannon}\ \bibnamefont {Johnson}},  \emph {et~al.},\
-  }\bibfield  {title} {\enquote {\bibinfo {title} {Systems-level analysis of
-  nitrogen starvation--induced modifications of carbon metabolism in a
-  chlamydomonas reinhardtii starchless mutant},}\ }\href@noop {} {\bibfield
-  {journal} {\bibinfo  {journal} {The Plant Cell Online}\ }\textbf {\bibinfo
-  {volume} {25}},\ \bibinfo {pages} {4305--4323} (\bibinfo {year}
-  {2013})}\BibitemShut {NoStop}%
-\end{thebibliography}%
-
-
+\bibliography{main}
+\bibliographystyle{naturemag}
 
 \end{document}
 %
