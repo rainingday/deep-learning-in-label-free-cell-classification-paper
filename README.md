@@ -4,3 +4,9 @@ www.nature.com/articles/srep21471
 
 A set of videos summarizing the paper are available at:
 https://youtu.be/VdcUAwkAcR4?list=PLj--iTBXPaTUBSYCuhaeRwijaKeeymj-M
+
+To generate the output pdf files from the source files run this bash script in macOS terminal in the repository directory:
+```Bash
+chmod +x BUILD.sh
+./BUILD.sh
+```
