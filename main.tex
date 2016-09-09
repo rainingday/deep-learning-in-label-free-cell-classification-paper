@@ -381,13 +381,13 @@ where $\horcat$ and $\vercat$ mean horizontal and vertical concatenations, respe
 \end{split}
 \end{equation}
 
-Therefore, the time stretched temporal waveform corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}: One is $I_b (t_i^{(n)}, t_p^{(m)})$, a temporal envelope of the time-stretched optical pulse at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object transmission as in brightfield microscopy. It provides information about optical loss, i.e. light absorption and scattering caused by surface roughness, granularity, and inner cell organelle complexity. 
+Therefore, the time stretched temporal waveform corresponding to each line scan image consists of two features \cite{mahjoubfar2014label}. One is $I_b (t_i^{(n)}, t_p^{(m)})$, a temporal envelope of the time-stretched optical pulse at baseband frequencies. The amplitude of this envelope corresponds to the temporal shape of the optical pulse and its deviations caused by the object transmission as in brightfield microscopy. It provides information about optical loss, i.e. light absorption and scattering caused by surface roughness, granularity, and inner cell organelle complexity. 
 
-The second term in Eq.~\ref{eq:afterDCF} (with cosine component) is a fast oscillating fringe, caused by the spectral interference of the pulses multiplexed between the sample and the reference arms in the Michelson interferometer. This term can be separated by a bandpass filter, and its envelope can be derived by a nonlinear envelope detection technique. Here we used a moving minimum/maximum filter to extract the envelope. After normalization to the envelope, the cosine component 
+The second term in Eq.~\ref{eq:afterDCF} (with cosine component) is a fast oscillating fringe, caused by the spectral interference of the recombined pulses from the sample and the reference arms in the Michelson interferometer. This term can be separated by a bandpass filter, and its envelope can be derived by a nonlinear envelope detection technique. Here we used a moving minimum/maximum filter to extract the envelope. After normalization to the envelope, the cosine component 
 \begin{equation}
 I_c (t_i^{(n)}, t_p^{(m)}) = cos\Bigg[ \frac{4\pi\Delta L \cdot D L_f}{t_i^{(n)} + D\lambda_c L_f} + \Delta \varphi_c(t_i^{(n)}, t_p^{(m)}) \Bigg]
 \end{equation}
-is used for calculation of the object phase shift, $\Delta\varphi_c(x,t_p)$. The first term in cosine causes the interferogram fringe pattern. Since $t_i \ll D \lambda_c L_f$, it can be approximated as
+is used for the calculation of the object phase shift, $\Delta\varphi_c(x,t_p)$. The first term in cosine causes the interferogram fringe pattern. Since $t_i \ll D \lambda_c L_f$, it can be approximated as
 \begin{equation}
 \frac{4\pi D L_f \Delta L}{t_i + D \lambda_c L_f} \approxeq - f_i t_i + \varphi_{i0}
 \end{equation}
@@ -407,8 +407,8 @@ The instantaneous phase of $I_c(t_i^{(n)}, t_p^{(m)})$ can be readily retrieved 
 Here $\arg$ means the argument of a complex number. A one-dimensional phase unwrapping algorithm followed by background phase removal gives the object phase shift, 
 \begin{equation}
 \begin{split}
-\Delta\varphi_c(t_i^{(n)}, t_p^{(m)}) = \unwrap \lbrace &\angle I_c(t_i^{(n)}, t_p^{(m)}) \\
-&- \angle I_c(t_i^{(n)}, t_p^{(\text{empty})}) \rbrace
+\Delta\varphi_c(t_i^{(n)}, t_p^{(m)}) = &\unwrap \lbrace \angle I_c(t_i^{(n)}, t_p^{(m)}) \rbrace \\
+&- \unwrap \lbrace \angle I_c(t_i^{(n)}, t_p^{(\text{empty})}) \rbrace
 \end{split}
 \end{equation}
 where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in the field of view, i.e. background phase. The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$. 
