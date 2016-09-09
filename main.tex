@@ -411,12 +411,12 @@ Here $\arg$ means the argument of a complex number. A one-dimensional phase unwr
 &- \unwrap \lbrace \angle I_c(t_i^{(n)}, t_p^{(\text{empty})}) \rbrace
 \end{split}
 \end{equation}
-where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in the field of view, i.e. background phase. The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive samples phase difference in the acceptable range of $-\pi$ to $\pi$. 
+where $t_p^{(\text{empty})}$ corresponds to an empty pulse when no cell is in the field of view, i.e. background phase. The unwrapping algorithm used in our processing acts when the absolute phase difference between two consecutive samples of the signal is greater than or equal to $\pi$ radians, and adds multiples of $2\pi$ to the following samples in order to bring the consecutive sample phase differences in the acceptable range of $-\pi$ to $\pi$. 
 
-To perform combined quantitative phase and loss imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will bring in frequency components up to about 1.6 GHz. Compared to the higher frequency components at 4.7 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.6 GHz), and in this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
+To perform combined quantitative phase and loss imaging, the phase derived by Hilbert transformation should be corrected to eliminate the artifacts caused by the intensity variations induced by the passing cells. Most cells of interest in clinical or industrial applications have a diameter 3--\SI{40}{\micro\meter}, when suspended in fluid. Given the field of view and the period of the interrogation rainbow pulses are \SI{130}{\micro\meter} and \SI{27}{\nano\second}, respectively, the time duration of the instantaneous intensity change induced by the single cells in each laser pulse is about 0.6--\SI{8.3}{\nano\second}, which will generate baseband frequency components up to about 1.6 GHz. Compared to the higher frequency components at 4.7 GHz corresponding to the interference fringes, the frequency of intensity variations is small ($<$1.6 GHz). In this scenario, our method remains robust to separate the two electrical spectral components for optical loss and phase.
 
 \subsection*{Cell Transmittance Extraction} \label{scn:transmittance}
-One of the greatest advantage of TS-QPI is its ability to extract the cell transmittance, $T_s(\lambda)$, without prior knowledge of the transmittance of the solution, $T_s(\lambda)$, that of the beam-splitter, $T_b(\lambda)$, and the reflectance of substrate of the microfluidic channel, $R_m(\lambda)$. During measurements when there is no cell in the field of view (empty frames), Eq. \ref{eq:interferenceIntensity} becomes
+One of the advantages of TS-QPI is its ability to extract the cell transmittance, $T_c(\lambda)$, without prior knowledge of the transmittance of the solution, $T_s(\lambda)$, that of the beam-splitter, $T_b(\lambda)$, and the reflectance of substrate of the microfluidic channel, $R_m(\lambda)$. During measurements when there is no cell in the field of view (empty frames), Eq. \ref{eq:interferenceIntensity} becomes
 \begin{align}
 \begin{split} \label{eq:interferenceIntensityEmpty}
 I_i (\lambda, t_p^{(empty)}) &= - 2 [1-T_b(\lambda)] T_b(\lambda) R_m(\lambda)\\
@@ -430,21 +430,21 @@ I_r (\lambda, t_p) = [1-T_b(\lambda)]^2 R_m(\lambda) \lvert\tilde{E}_{in}(\lambd
 \end{equation}
 Combining Eq. \ref{eq:backgroundIntensity}, \ref{eq:interferenceIntensityEmpty}, and \ref{eq:referenceIntensity}, and assuming that the input electric field pulse shape, $\lvert \tilde{E}_{in}(\lambda, t_p) \rvert$, is invariant to $t_p$, the cell transmittance can be derived as
 \begin{equation}
-T_c(\lambda) = \frac{-2\sqrt{I_r (\lambda, t_p) \cdot (I_b (\lambda, t_p) - I_r (\lambda, t_p))}}{I_i (\lambda, t_p^{(empty)})}
+T_c(x) = T_c(\lambda) = \frac{-2\sqrt{I_r (\lambda, t_p) \cdot (I_b (\lambda, t_p) - I_r (\lambda, t_p))}}{I_i (\lambda, t_p^{(empty)})}
 \end{equation}
 Please note that the values of $I_r (\lambda, t_p)$, $I_b (\lambda, t_p)$, and $I_i (\lambda, t_p^{(empty)})$ are directly measured by TS-QPI, and no prior knowledge of $T_b(\lambda)$, $T_s(\lambda)$, $R_m(\lambda)$, and $\lvert \tilde{E}_{in}(\lambda, t_p)\rvert$ is needed to calculate the cell transmittance.
 
 \subsection*{Image Reconstruction}
 
-We reconstruct both quantitative brightfield and phase-contrast images simultaneously from single-shot frequency-multiplexed interferometric measurements. The envelope and phase of the time-domain signal $\tilde{I}_o (t_i^{(n)}, t_p^{(m)})$ was firstly mapped into series of spatial information $\tilde{I}_o(x^{(n)},t_p^{(m)})$, forming a line scanning brightfield image and phase contrast image, illuminated by the optical pulse at time $t_p$. This is because within each optical pulse, the spatial information is mapped one-to-one into spectral domain, $x^{(n)} \rightarrow \lambda_n$, and spectrum is stretch in time, $\lambda_n \rightarrow t_i^{(n)}$, where $t_i^{(n)}$ is the relative group delay time of each frequency component within a pulse with respect to the central wavelength. These line-scan images based on $\tilde{I}_o(x,t_p^{(1)})$, $\tilde{I}_o (x, t_p^{(2)})$, $\tilde{I}_o(x,t_p^{(3)})$, \ldots were then cascaded into a two dimensional image corresponding to $\tilde{I}_o(x,y)$, where the second dimension $y$ is the spatial mapping of time lapse based on object flow speed. 
+We reconstruct both quantitative brightfield and phase-contrast images simultaneously from single-shot frequency-multiplexed interferometric measurements. The envelope and phase of the time-domain signal $\tilde{I}_o (t_i^{(n)}, t_p^{(m)})$ was firstly mapped into series of spatial information $\tilde{I}_o(x^{(n)},t_p^{(m)})$, forming line scanning brightfield and phase contrast images, illuminated by the optical pulse at time $t_p$. This is because within each optical pulse, the spatial information is mapped into spectral domain, $x^{(n)} \rightarrow \lambda_n$, and spectrum is stretched in time, $\lambda_n \rightarrow t_i^{(n)}$, where $t_i^{(n)}$ is the relative group delay time of each frequency component within a pulse with respect to the central wavelength. These line-scan images based on $\tilde{I}_o(x,t_p^{(1)})$, $\tilde{I}_o (x, t_p^{(2)})$, $\tilde{I}_o(x,t_p^{(3)})$, \ldots were then cascaded into a two dimensional image corresponding to $\tilde{I}_o(x,y)$, where the second dimension $y$ is the spatial mapping of time lapse based on object flow speed. 
 
 The optical path length difference image can be calculated by the phase shift line scans as
 \begin{equation}
 OPD(x^{(n)},y^{(m)}) = \frac{\lambda(t_i^{(n)},t_p^{(m)})}{2\pi} \Delta\varphi_c(t_i^{(n)},t_p^{(m)})
 \end{equation}
-On the other hand, if the axial thickness of the cell at reconstructed image pixel $(x,y)$ is $d(x,y)$,
+On the other hand, if the axial thickness of the cell at reconstructed image pixel $(x,y)$ is $t(x,y)$,
 \begin{equation} \label{eq:OPD}
-OPD(x,y) = 2 [n_{cell}(x,y) - n_{solution}(x,y)] \cdot d(x,y)
+OPD(x,y) = 2 [n_{cell}(x,y) - n_{solution}(x,y)] \cdot t(x,y)
 \end{equation}
 in which $n_{cell}$ and $n_{solution}$ are the refractive indices of the cell and the surrounding buffer solution, respectively. The factor 2 is to account for the fact that each wavelength component passes the cell twice in Michelson interferometer. 
 
@@ -454,7 +454,7 @@ If we integrate Eq.~\ref{eq:OPD} over the area of the cell, we can derive an ave
 \end{equation}
 where $\iint_{cell} t(x,y) dx dy$ is the volume of the cell obtained from its lateral diameter, $d$, as $V \approx \pi d^3/6$. 
 
-The unit net change of intensity envelope variations induced by the cell is obtained from the amplitude of the slowly varying envelope feature of the interferogram as
+The relative net change of intensity envelope variations induced by the cell is obtained from the amplitude of the baseband intensity envelope of the interferogram as
 \begin{equation}
 \Delta I_b(\lambda, t_p) = \frac{T_b^2(\lambda) T_s^2(\lambda) (1 - T_c^2(\lambda, t_p))}{[1-T_b(\lambda)]^2 + T_b^2(\lambda) T_s^2(\lambda)}
 \end{equation}
@@ -465,15 +465,15 @@ I_{loss}(x^{(n)}, y^{(m)}) = \Delta I_b(\lambda_n, t_p^{(m)})
 
 \subsection*{Big Data Analytics Pipeline}
 
-The high-content image analysis and cell screening pipeline is implemented by combining multiple informatics tools, namely CellProfiler for image processing \cite{carpenter2006cellprofiler,kamentsky2011improved}, MySQL/MangoDB for database, Matlab for machine learning, and Javascript for interactive visualization. First of all, image noise reduction and smoothing have been performed, which can remove artifacts that are smaller than optical resolution limit. For object segmentation, we use the Otsu's thresholding method. Once objects are identified in the image, morphology of each single cell can be described by area, diameter, uniformity, aspect ratio, perimeter, number of surrounding clumped cells, etc.
+The high-content image analysis and cell screening pipeline is implemented by combining multiple informatics tools, namely CellProfiler for image processing \cite{carpenter2006cellprofiler,kamentsky2011improved}, MySQL and MangoDB for database, Matlab for machine learning, and Javascript for interactive visualization. First of all, image noise reduction and smoothing is performed, which can remove artifacts that are smaller than the optical resolution limit. For object segmentation, we use the Otsu's thresholding method. Once objects are identified in the image, morphology of each single cell can be described by area, diameter, uniformity, aspect ratio, perimeter, number of surrounding clumped cells, etc.
 
-The capability to identify clumped cells from single large cells greatly reduces the misclassification rate in imaging flow cytometry compared to traditional flow cytometry. Intensity peaks of pixel brightness within each object are used to distinguish clumped objects. The object centers are defined as local intensity maxima in the smoothed image. Retaining outlines of the identified objects helps validate and visualize the algorithm. In the next step, we discard the objects touching the borders of the image, i.e., the edges of the field of view and data acquisition time window. However, the chance of cells showing up at the edges is very low due to hydrodynamic focusing. We are also capable of excluding dust, noise, and debris by neglecting the objects that are too small or their aspect ratio is too extreme to be a cell.
+The capability to identify clumped cells from single large cells greatly reduces the misclassification rate in imaging flow cytometry compared to traditional flow cytometry. Intensity peaks of pixel brightness within each object are used to distinguish clumped objects. The object centers are defined as local intensity maxima in the smoothed image. Retaining outlines of the identified objects helps validate and visualize the algorithm. In the next step, we discard the objects touching the borders of the image, i.e., the edges of the field of view and data acquisition time window. However, the chance of cells showing up at the edges is very low due to hydrodynamic focusing. We are also capable of excluding dust, noise, and debris by neglecting the objects that are too small or have extreme aspect ratios.
 
-To calibrate the imaging system and image processing pipelines for size measurement, \SI{5}{\micro\meter} polystyrene beads (from Polysciences, Inc.) with NIST traceable particle size standards were analyzed. Size measurement of the polystyrene beads had a distribution with \SI{5.06}{\micro\meter} expected mean and \SI{0.5}{\micro\meter} standard deviation. The broadened standard deviation was within the range of optical resolution limit and was caused mainly by performing object recognition on resolution limited images. Due to limited optical resolution of the setup, the edges of bead or cell are blurred, generating distribution of point spread functions in optical phase and loss images outside of the cell boundaries. In order to maximize the accuracy in morphological, phase, and loss measurements, after object segmentation we expanded the object boundaries by \SI{2.5}{\micro\meter} (optical resolution of the setup measured by knife-edge method), which serve as loose boundaries, indicating the area within which the pixel intensities are measured and integrated in phase and loss images.
+To calibrate the imaging system and image processing pipelines for size measurement, \SI{5}{\micro\meter} polystyrene beads (from Polysciences, Inc.) with National Institute of Standards and Technology (NIST) traceable particle size standards were analyzed. Size measurement of the polystyrene beads had a distribution with \SI{5.06}{\micro\meter} expected mean and \SI{0.5}{\micro\meter} standard deviation. The broadened standard deviation was within the range of the optical resolution limit and was caused mainly by performing object recognition on the resolution limited images. Due to the limited optical resolution of the setup, the edges of the beads or the cells get blurred, causing distribution of point spread functions in the optical phase and loss images outside of the cell boundaries. In order to maximize the accuracy in morphological, phase, and loss measurements, after object segmentation, we expanded the object boundaries by \SI{2.5}{\micro\meter} (optical resolution of the setup measured by knife-edge method), which serve as loose boundaries, indicating the area within which the pixel intensities are measured and integrated in phase and loss images.
 
 \subsection*{Data Cleaning}
 
-Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is calculated and the top 2\% of the extreme data was set as outliers due to experimental or object recognition errors. Secondly, debris discrimination is performed; any data point with negative phase shift was considered as either air bubble, flow turbulence, or object recognition errors.
+Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution was calculated and the top 2\% of the extreme data was set as outliers due to experimental or object recognition errors. Secondly, debris discrimination was performed; any data point with negative phase shift was considered as either air bubble, flow turbulence, or object recognition error.
 
 % Put \label in argument of \section for cross-referencing
 %\section{\label{}}
@@ -1036,7 +1036,7 @@ Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is
 \bibinfo{author}{Merchant, S.~S.}, \bibinfo{author}{Kropat, J.},
   \bibinfo{author}{Liu, B.}, \bibinfo{author}{Shaw, J.} \&
   \bibinfo{author}{Warakanont, J.}
-\newblock \bibinfo{title}{Tag, you’re it! chlamydomonas as a reference
+\newblock \bibinfo{title}{Tag, you’re it! \textit{chlamydomonas} as a reference
   organism for understanding algal triacylglycerol accumulation}.
 \newblock \emph{\bibinfo{journal}{Current opinion in biotechnology}}
   \textbf{\bibinfo{volume}{23}}, \bibinfo{pages}{352--363}
@@ -1044,7 +1044,7 @@ Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is
 
 \bibitem{zabawinski2001starchless}
 \bibinfo{author}{Zabawinski, C.} \emph{et~al.}
-\newblock \bibinfo{title}{Starchless mutants of chlamydomonas reinhardtii lack
+\newblock \bibinfo{title}{Starchless mutants of \textit{chlamydomonas reinhardtii} lack
   the small subunit of a heterotetrameric adp-glucose pyrophosphorylase}.
 \newblock \emph{\bibinfo{journal}{Journal of Bacteriology}}
   \textbf{\bibinfo{volume}{183}}, \bibinfo{pages}{1069--1077}
@@ -1052,8 +1052,8 @@ Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is
 
 \bibitem{work2010increased}
 \bibinfo{author}{Work, V.~H.} \emph{et~al.}
-\newblock \bibinfo{title}{Increased lipid accumulation in the chlamydomonas
-  reinhardtii sta7-10 starchless isoamylase mutant and increased carbohydrate
+\newblock \bibinfo{title}{Increased lipid accumulation in the \textit{chlamydomonas
+  reinhardtii sta7-10} starchless isoamylase mutant and increased carbohydrate
   synthesis in complemented strains}.
 \newblock \emph{\bibinfo{journal}{Eukaryotic Cell}}
   \textbf{\bibinfo{volume}{9}}, \bibinfo{pages}{1251--1261}
@@ -1061,7 +1061,7 @@ Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is
 
 \bibitem{li2010chlamydomonas}
 \bibinfo{author}{Li, Y.} \emph{et~al.}
-\newblock \bibinfo{title}{Chlamydomonas starchless mutant defective in
+\newblock \bibinfo{title}{\textit{Chlamydomonas} starchless mutant defective in
   adp-glucose pyrophosphorylase hyper-accumulates triacylglycerol}.
 \newblock \emph{\bibinfo{journal}{Metabolic engineering}}
   \textbf{\bibinfo{volume}{12}}, \bibinfo{pages}{387--391}
@@ -1069,8 +1069,8 @@ Data cleaning includes two steps. Firstly, Hotelling's T-squared distribution is
 
 \bibitem{goodenough2014path}
 \bibinfo{author}{Goodenough, U.} \emph{et~al.}
-\newblock \bibinfo{title}{The path to triacylglyceride obesity in the sta6
-  strain of chlamydomonas reinhardtii}.
+\newblock \bibinfo{title}{The path to triacylglyceride obesity in the \textit{sta6}
+  strain of \textit{chlamydomonas reinhardtii}}.
 \newblock \emph{\bibinfo{journal}{Eukaryotic cell}} \bibinfo{pages}{EC--00013}
   (\bibinfo{year}{2014}).
 
@@ -1125,7 +1125,7 @@ Video 2: video of \textit{SW-480} colon cancer epithelial cells flowing in a mic
 
 % If you have acknowledgments, this puts in the proper section head.
 \begin{acknowledgments}
-This work was partially supported by NantWorks, LLC, Culver City, California. Ian K. Blaby was supported by the Office of Science (Biological and Environmental Research), U.S. Department of Energy (grant no. DE-FC02-02ER63421) to Sabeeha Merchant.
+This work was partially supported by the Office of Naval Research (ONR) Multidisciplinary University Research Initiative (MURI) program on Optical Computing and NantWorks, LLC, Culver City, California. Ian K. Blaby was supported by the U.S. Department of Energy (grant no. DE-FC02-02ER63421) to Sabeeha Merchant.
 \end{acknowledgments}
 
 \section*{Author contributions statement}
